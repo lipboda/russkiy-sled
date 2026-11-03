@@ -1,0 +1,14 @@
+[
+  {
+    "url": "https://www.cnrtl.fr/etymologie/samovar",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://www.ahdictionary.com/word/search.html?q=samovar",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://language.sci.am/sites/default/files/book/eritasard_lezvabanner.pdf",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]
