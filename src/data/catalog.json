@@ -1,0 +1,3827 @@
+{
+  "words": [
+    {
+      "id": "WORD-33df6fc3d1",
+      "slug": "word-33df6fc3d1",
+      "russianLemma": "ГУЛАГ",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["gulag"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["goulag"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-a08e0202aa",
+      "slug": "word-a08e0202aa",
+      "russianLemma": "агитпроп",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-d176459bd3",
+      "slug": "balalaika",
+      "russianLemma": "балалайка",
+      "originKind": "unknown",
+      "themes": ["Искусство"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [
+            "balalaika",
+            "balalaica — вариант без отдельной проверяемой атрибуции"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": [
+            "research/original_pdfs/reports/balalaika_current.md",
+            "research/original_pdfs/reports/balalaika_earlier.md"
+          ],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["balalaïka", "balalaika — статус требует словаря"],
+          "attestationStatus": "pending",
+          "sourceIds": [
+            "research/original_pdfs/reports/balalaika_current.md",
+            "research/original_pdfs/reports/balalaika_earlier.md"
+          ],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "բալալայկա",
+            "наличие формы заявлено через Wiktionary; академические страницы не приложены"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": [
+            "research/original_pdfs/reports/balalaika_current.md",
+            "research/original_pdfs/reports/balalaika_earlier.md"
+          ],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ]
+        }
+      ],
+      "sourceIds": [
+        "research/original_pdfs/reports/balalaika_current.md",
+        "research/original_pdfs/reports/balalaika_earlier.md"
+      ],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Две версии обсуждают славянскую/звукоподражательную и тюркскую этимологию, но не дают проверяемой доказательной цепочки для выбора. Вопрос глубокой этимологии надо отделить от предполагаемого русского донорства в иностранных языках.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "Отчёты называют общий инструментальный смысл и произвольно обобщают отсутствие иных значений. Current отрицает переносные значения, earlier приводит «пустозвон»; предметная семантика и метафоры требуют отдельной проверки.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "Содержатся конкурирующие и приблизительные IPA, а также противоречивые утверждения об ударении. Точные en/fr/hy транскрипции из этих отчётов не переносить. «Три слога (ба-ла-лай-ка)» в current внутренне противоречиво.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "Кандидаты balalaika/balalaïka/բալալայկա можно использовать только как поисковые формы. Ссылки вида 【73†L123-L128】 не являются URL. Передача ï требует точной словарной статьи, а не общего рассуждения.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "Current одновременно называет русское слово несклоняемым и первого склонения, а прилагательные — неизменяемыми. Обе версии приписывают армянскому женский род/неизменяемость/отсутствие множественного без доказательства; импорт блокировать. Английское plural balalaikas противоречит широким заявлениям об отсутствии изменений.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "13 июня 1688 earlier / 23 июня 1688 current; разница может быть календарной, но без первоисточника это лишь гипотеза. Свадьба Зотова 1715/1714 — ещё один конфликт. Иностранные первые даты не установлены. Дата русской поэмы 1771 не дата армянского перевода.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста\nНазваны Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют\nreconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "Current называет грамматику армянского женской и тут же оговаривает отсутствие рода; отвергнуть поле, не исправлять исходник.\nEarlier частотная таблица ~3500/~1200/>5000/~200 не имеет воспроизводимых выгрузок; «NSCORPUS (Yale)» не идентифицирован. Не подтверждено как научное измерение.\nEarlier заявляет отсутствие balalaïka в TLFi, current — наличие, но без URL; обе версии сохранить.\nБиблиография называет В. Майкова / И. В. Майкова; ссылки на авторов и названия требуют проверки, не нормализовать догадкой.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_current.md",
+              "pages": []
+            },
+            {
+              "sourceId": "research/original_pdfs/reports/balalaika_earlier.md",
+              "pages": []
+            }
+          ],
+          "bibliography": [
+            "research/original_pdfs/reports/balalaika_current.md и balalaika_earlier.md — два зависимых, противоречивых исследовательских текста",
+            "Названы Даль, AHD, Larousse, Wikipedia/Wiktionary, Брокгауз—Ефрон, Пересада, Махан, Галахов, Майков, но множество библиографических деталей/инициалов расходятся; прямые постатейные URL отсутствуют",
+            "reconstructed_50_candidates_NOT_VERIFIED.xlsx, Главный реестр!C2:I2; Языковые свидетельства!B2:J4 — кандидаты, не независимые источники"
+          ]
+        }
+      ],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-ad2de6554e",
+      "slug": "word-ad2de6554e",
+      "russianLemma": "большевик",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["Bolshevik"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-d4dcca0e1d",
+      "slug": "word-d4dcca0e1d",
+      "russianLemma": "борщ",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["borscht"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-4aa3118501",
+      "slug": "word-4aa3118501",
+      "russianLemma": "будка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["բուդկա"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-ede04f58dc",
+      "slug": "word-ede04f58dc",
+      "russianLemma": "ведро",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["վեդրո"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-3075580f22",
+      "slug": "word-3075580f22",
+      "russianLemma": "водка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["vodka"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-fd7af7fbcf",
+      "slug": "word-fd7af7fbcf",
+      "russianLemma": "воевода",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-a93a3b0924",
+      "slug": "word-a93a3b0924",
+      "russianLemma": "гласность",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["glasnost"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["glasnost"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-940b1bcdc1",
+      "slug": "dacha",
+      "russianLemma": "дача",
+      "originKind": "unknown",
+      "themes": ["Быт и культура"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [
+            "dacha",
+            "datcha — исторический вариант; dachi не нормативное основное plural"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/dacha_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [4, 5, 6, 7, 8]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["datcha"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/dacha_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [4, 5, 6, 7, 8]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "դաչա",
+            "ամառանոց — собственный эквивалент, не русизм"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/dacha_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [4, 5, 6, 7, 8]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/dacha_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Славянская связь с дать — русская предыстория; предметом проекта остаётся экспорт позднего жилищного значения. В досье en/fr/de/it выводятся из русского, испанская линия — через французский; hy русский донор приписан диалектной словарной помете ռուս.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [3, 4, 8]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "Сужение от русских «давание/пожалование/земельное владение» к загородному дому и культурной реалии. Обобщение на любой country house не подтверждено. Hy речь о летнем доме в диалектно-контактном материале, не доказанная нейтральная общелитературная норма.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [3, 4, 5, 6, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "US /ˈdɑːtʃə/ — Oxford/Dictionary.com по досье; fr [datʃa] — Larousse scolaire; [datʃɑ] Usito нельзя автоматически переносить с Канады на Францию. Hy IPA академически не установлена.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [4, 5, 6, 7, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "ч → en ch, fr tch, hy չ, de tsch, it ci. Это различия записи, не доказанный посредник для всех языков.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "В досье en dachas; fr женский род, datchas; de Datschas/Datschen. Форма Դաչնիկներն относится к производному «дачник», не подтверждает парадигму самой դաչա; полное hy склонение отсутствует.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [5, 6, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "Русская семантическая стадия: словарь 1790/Даль 1880, не первая дата леммы. Fr 1843 — словарная датировка через Usito/Rey, первичный текст не найден. En 1895–1900 — общеанглийская словарная дата, не US. NYPL Datcha 1880 — русско-французский объект; современное LOC-описание альбома 1899–1909 не историческая цитата. Hy текст Hetq 2012 и диалектный словарь 2021 — не первая дата. Es datcha 1889/dacha 1896 — приписано DHLE.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [3, 5, 6, 8, 9, 11, 12]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it\nВ. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи\nHetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [1, 2, 3, 13, 14]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "Вводная таблица источников PDF с.1–3 обрезана справа; часть URL восстанавливается лишь из аннотаций/концевых ссылок.\nСсылка каталога словаря не равна проверке конкретной статьи; канадское произношение/дата не автоматически fr-FR.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/dacha_dossier.pdf",
+              "pages": [1, 2, 5, 6, 7, 8]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история; S7–S11 — en; S12–S15 — fr; S16–S19 — hy; S20–S22 — de/es/it",
+            "В. Кատվальян, Բայազետի բարբառի բառարան — академический диалектный источник, с локализацией; Հայագիտական հանդես №4(53), 2021 — нужно установить автора/страницы релевантной статьи",
+            "Hetq https://hetq.am/hy/article/16444; RAE DHLE dacha; AHD dacha; Larousse datcha"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-ec82a93047",
+      "slug": "word-ec82a93047",
+      "russianLemma": "дедовщина",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-b2a6a745e2",
+      "slug": "word-b2a6a745e2",
+      "russianLemma": "земство",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-092140ada2",
+      "slug": "word-092140ada2",
+      "russianLemma": "изба",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-de5c68d721",
+      "slug": "word-de5c68d721",
+      "russianLemma": "икона",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-b318468e17",
+      "slug": "intelligentsia",
+      "russianLemma": "интеллигенция",
+      "originKind": "unknown",
+      "themes": ["История и общество"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["intelligentsia"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/intelligentsia_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [
+            "intelligentsia",
+            "intelligentzia — вариант по TLFi"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/intelligentsia_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "ինտելիգենցիա",
+            "մտավորականություն — отдельный армянский эквивалент"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/intelligentsia_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [7, 8, 9]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/intelligentsia_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Для проекта релевантно русское посредничество в en/fr, а не объявление латинской основы исконно русской. Польская социальная inteligencja (Либельт 1844) и возможное немецкое понятийное влияние — предыстория русской семантики. Общая похожесть не позволяет включить польский в прямые русизмы.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [1, 2, 4, 5, 6, 18]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "En/fr расширение от русской социальной/идеологической реалии к интеллектуальной элите вообще — по словарям, цитируемым досье. Hy употребление и этико-социальная семантика сообщены историческими текстами; непосредственный русский донор пока аналитическая гипотеза, не армянская этимологическая статья.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [7, 8, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "Досье сообщает en варианты /dʒ/ и /g/ и несколько fr реализаций, но не даёт самостоятельной сверенной IPA-карточки. Hy академической IPA нет. Не добавлять точные транскрипции от себя.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [7, 8, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "en/fr -tsia/-tzia и hy армянская графика; польское -cja — не вариант транслитерации русского слова без исторического анализа.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [7, 8, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "По досье en collective noun, fr женский род; hy грамматического рода нет и полная парадигма не проверена. Сочетания с армянскими определениями показывают синтаксическое употребление, не сами по себе всю морфологию.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [7, 8, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "Боборыкин 1866 не может автоматически считаться создателем: досье приводит более ранние употребления, в том числе Аксаков 1861 через вторичную работу. En даты 1905–1910 / 1914 / 1920 относятся к разным словарям; книга Baring 1914 общеанглийская, не US. Fr 1902 требует проверки, 1918 L’Illustration — вторичная цитата, 1930 TLFi — словарная дата. Hy запись Мուրճ 1889–1907 — период журнала, не точная дата статьи; цитата 21.08.1909 опосредована исследованием 2023.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [1, 5, 6, 7, 8, 9, 11, 14]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract\nS8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы\nS15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [1, 2, 3, 13, 18, 19, 20]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "Ранняя польская/латинская история относится к предыстории, не должна подменять направление русский → en/fr.\nЗаявление о русском доноре hy слабее утверждения о наличии формы.\nИтоговые таблицы с.15–17 обрезаны справа. «Вероятен» в тексте нельзя превратить в «подтверждён» при импорте.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/intelligentsia_dossier.pdf",
+              "pages": [6, 9, 11, 15, 16, 17]
+            }
+          ],
+          "bibliography": [
+            "PDF S1 Виноградов; S2/S6 Шанский; S3 Либельт; S4 WSJP; S7 Richard Pipes, Slavic Review 30/3 (1971), 615–618 — в досье доступен лишь extract",
+            "S8–S10 Oxford/AHD/Collins US; S11–S13 Académie/Larousse/TLFi через републикацию; S14 Tournier — фрагмент, без оригинальной газетной страницы",
+            "S15 ARAR publication/15698; S16 haygirk.nla.am/upload/1941-/bargrquyk_2014.pdf; S17 ARAR Content/254387; S18 ARAR Content/371568/2023-3.pdf — нужны авторы, страницы и прямая этимологическая атрибуция"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-3ab355c94a",
+      "slug": "word-3ab355c94a",
+      "russianLemma": "казачок",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-3f598666ab",
+      "slug": "kalashnikov",
+      "russianLemma": "калашников",
+      "originKind": "unknown",
+      "themes": ["История и общество"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [
+            "Kalashnikov",
+            "сохранение прописной не исключает нарицательность; нужно смотреть синтаксис"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/kalashnikov_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [
+            "kalachnikov",
+            "kalach; kalache — более слабая поисковая атрибуция"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/kalashnikov_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "Կալաշնիկով",
+            "Կալաշնիկովի — фамильная конструкция; Կալաշնիկովներ — заявленное контекстное множественное"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/kalashnikov_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/kalashnikov_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Русский антропоним → название оружейной системы → возможная/словарно описанная апеллятивация в языках-реципиентах. Это не заимствование иностранными языками слова «калачник». Фамилия, конструкция принадлежности, название модели, бренд и нарицательное должны быть разными типами свидетельств.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [4, 5, 12]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "В en определение серии винтовок, не только одной модели; fr нарицательное оружие по Larousse; hy множественное контекстное название не доказывает нейтральную лемму во всех регистрах. Армянское старое прилагательное կալաշ нельзя отождествлять с оружейным сокращением.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "AHD даёт собственную нотацию, не проверенную IPA. Fr [kalaʃnikɔf] приписано Larousse. Hy IPA нет. Не конвертировать нотацию AHD механически в IPA.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [6, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "Рус. ш → en sh, fr ch, de sch, hy շ. Прописная и кавычки зависят от ономастического статуса; строчная не единственный критерий.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "Fr женский род сегодня/мужской прежде и kalachnikovs — по Larousse; de женский род/Kalaschnikows. Hy -ի оформляет фамилию, -ներ в Կալաշնիկովներ — контекстное предметное множественное; полной парадигмы нет.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "US военно-техническое название 1956 описано через WeaponsMan, оригинальный отчёт не вложен, и это не первая нарицательная лемма. En 1968 Etymonline / 1970 OED через RAE — конфликт датировок. Fr-FR ранняя дата не найдена, Usito 1972 — не автоматически Франция. Hy 2008 — название типа; 2018 — заявленное множественное. Приём АК на вооружение 1949 не дата иностранного слова.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [5, 6, 7, 8, 10, 11, 12]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE\nВ. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного\nhttps://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [1, 2, 3, 4, 12, 16, 17]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "Фактическая ссылка «Грамоты» содержит «Канашников» (PDF с.16).\nПравая армянская колонка итоговой таблицы PDF с.13–15 визуально обрезана. Не восстанавливать отсутствующий текст по догадке.\nРеестр S1–S16 не исчерпывает упомянутый S17: далее этот ID связывается с отчётом через WeaponsMan, но полной записи нет.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/kalashnikov_dossier.pdf",
+              "pages": [11, 13, 14, 15, 16]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S3 — русская норма/фамилия; S4 AHD; S5 Etymonline; S6 OED через RAE; S7–S9 Larousse/Académie; S11 ARLIS, S12 old.police.am, S13 Armenpress; S14–S16 Duden/Treccani/RAE",
+            "В. А. Никонов, «Из словаря русских фамилий», Русская речь, 1976, №6 — источник фамильной предыстории, не доказательство заимствования оружейного нарицательного",
+            "https://arlis.am/hy/acts/192792; https://armenpress.am/hy/article/1020891"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-48c98cb0c0",
+      "slug": "word-48c98cb0c0",
+      "russianLemma": "кафтан",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-58a686c981",
+      "slug": "word-58a686c981",
+      "russianLemma": "кефир",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-8740b5a29b",
+      "slug": "word-8740b5a29b",
+      "russianLemma": "кибитка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-8292ae52c4",
+      "slug": "word-8292ae52c4",
+      "russianLemma": "кокошник",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-65a3af16f1",
+      "slug": "word-65a3af16f1",
+      "russianLemma": "колхоз",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["kolkhoze"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-231f94eb02",
+      "slug": "word-231f94eb02",
+      "russianLemma": "комбинат",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["combinat"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-247192b178",
+      "slug": "word-247192b178",
+      "russianLemma": "комиссар",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-3521b237e1",
+      "slug": "word-3521b237e1",
+      "russianLemma": "компромат",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-531b433934",
+      "slug": "word-531b433934",
+      "russianLemma": "космонавт",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-541d983a4f",
+      "slug": "word-541d983a4f",
+      "russianLemma": "кулак",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-254b6f3c73",
+      "slug": "word-254b6f3c73",
+      "russianLemma": "кумыс",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-f357ee943b",
+      "slug": "word-f357ee943b",
+      "russianLemma": "мамонт",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-61a75998f7",
+      "slug": "word-61a75998f7",
+      "russianLemma": "маршрутка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["մարշրուտկա"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-a03d45d7b2",
+      "slug": "matryoshka",
+      "russianLemma": "матрёшка",
+      "originKind": "unknown",
+      "themes": ["Быт и культура"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [
+            "matryoshka",
+            "matreshka/matrioshka — исторические общеанглийские варианты; matryoshki/matroshki — отдельные цитатные формы"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/matryoshka_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [
+            "matriochka",
+            "matryoshka/matrioshka не подтверждены как равноправные французские нормы"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/matryoshka_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "մատրյոշկա",
+            "մատրյոշկաներ, մատրյոշկաների, մատրյոշկայի, մատրյոշկան — формы, заявленные по текстам"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/matryoshka_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [6, 7, 8, 9]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/matryoshka_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "В досье название игрушки выведено из формы имени Матрёна; латинская история имени не отменяет русского образования названия. Историю японского/иного прототипа игрушки нельзя превращать в этимологию слова.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [1, 4]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "Основное предметное значение вложенной куклы; метафоры вложенности нужно подтверждать самостоятельными контекстами. Русское оценочное «женщина» не переносится автоматически в en/fr. Армянская статья 2003 цитирует такое значение по словарю 1982, оригинал отсутствует. Russian nesting doll, poupée russe — переводные обозначения, не продолжения заимствованной формы.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [3, 6, 7, 8, 10, 11]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "US /məˈtrɔɪʃˌkə/ приписано WNW/Collins; fr /ma.tʁi.jɔʃ.ka/ — только общественный Wiktionnaire; hy академической IPA нет; de [matriˈɔʃka] относится к варианту Matrjoschka. Не унифицировать варианты.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [6, 7, 8, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "yosh / ioch / арм. յոշկ / немецкое sch / итал. sk / греч. σκ: сравнение форм, не доказательство языка-посредника. Не копировать mixed-script «маτριόσκα» из описания источника книги как греческую форму.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [7, 9, 10, 18]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "В досье en -s; fr женский род и -s; hy число/падеж/определённость подтверждаются цитируемыми текстовыми формами, но полная нормативная парадигма отсутствует. De женский род и варианты. Грамматическое освоение не равно общеупотребительности.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [6, 7, 8, 10, 11]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "Каталог 1899 противопоставлен словарной формулировке «образование XX в.»; без оригинала каталога это конфликт сообщаемых свидетельств, требующий сверки. Отсутствие слова в каталоге 1896 не доказывает рождения после 1896. OED 1948 — не US; US Russian Life 1996 — не первая дата. Париж 1900 не доказывает fr matriochka в 1900. Hy 1982 — вторичная цитата; тексты 2003/2014 — сообщаемые свидетельства.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [1, 5, 6, 12, 17]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса\nМелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница\nСиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена\nPodhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [14, 15, 16, 18, 19, 20]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "Назвать 1899 «первым вообще» и считать 1896 нижней доказанной границей нельзя.\nНаличие предполагаемого URL Merriam-Webster (S15) не означает открытую словарную статью.\nPDF и MD — одно исследование, лист досье Excel идентичен MD; это не независимые доказательства.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/matryoshka_dossier.pdf",
+              "pages": [5, 6, 13, 15, 17]
+            }
+          ],
+          "bibliography": [
+            "PDF S5–S6 — этимология; S8–S10 — каталог/история предмета; S11–S15 — en; S16–S20 — fr (S20 Квебек); S21–S23 — hy; S24–S27 — дополнительные языки и US пресса",
+            "Мелконян Л., «Փոխառություններ և օտարաբանություններ արդի հայերեն խոսքում», 2014 — в досье назван автор/название, нужна конкретная страница",
+            "Сиповская Н. В., «Матрешка: студийное творчество и народная традиция», Художественная культура, 2025, №4, с.300–353, DOI 10.51678/2226-0072-2025-4-300-353 — библиография сообщена, заново не проверена",
+            "Podhajecka, Russian Borrowings in English: A Dictionary and Corpus Study; EURALEX 2018, Russian Borrowings in Greek and Their Presence in Two Greek Dictionaries — полнота метаданных требует восстановления"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-97385ed373",
+      "slug": "word-97385ed373",
+      "russianLemma": "меньшевик",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["menchevik"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-177207df65",
+      "slug": "word-177207df65",
+      "russianLemma": "номенклатура",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-8245190229",
+      "slug": "word-8245190229",
+      "russianLemma": "перестройка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["perestroika"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["perestroïka"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["պերեստրոյկա"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-b75c142f94",
+      "slug": "pogrom",
+      "russianLemma": "погром",
+      "originKind": "unknown",
+      "themes": ["История и общество"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [
+            "pogrom",
+            "pogroms; историческое pogromen — отдельно от современной леммы"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/pogrom_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["pogrom", "pogrome"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/pogrom_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "պոգրոմ",
+            "պոգրոմի, պոգրոմների, պոգրոմները — заявленные контекстные формы"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/pogrom_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/pogrom_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Международная форма приписана русскому существительному с более глубокой славянской базой. Возможное идишское посредничество в английском сохраняется как отдельный вопрос; наличие когнатов в славянских языках не доказывает русский экспорт.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [4, 6, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "От широкого русского разрушения — к специализированному массовому насилию; en/fr затем расширяют референт на другие меньшинства. Даты событий не датируют слово. Ջարդ/ջարդեր — армянские эквиваленты, не русская заимствованная графика.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [4, 6, 7, 8, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "US варианты с первым/вторым ударением цитируются по Cambridge; fr [pɔgʀɔm] — TLFi через перепечатку. Hy IPA не установлена. Варианты качества гласных и ударения не сводить к одной реконструированной норме.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [5, 6, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "en pogrom; fr факультативное -e; hy армянское письмо; es -o. Графическое совпадение с русским не заменяет этимологического источника.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [5, 6, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "En pogroms и глагольная конверсия по AHD; fr мужской род и pogroms/pogromes; de мужской/средний род и Pogrome; hy падеж/множественное/определённость сообщены текстами, полной словарной парадигмы нет.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [5, 7, 8, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "Рус. погромил 1589 — глагол, не дата существительного. Хейм 1798 — вторичная библиографическая атрибуция, колонка не открыта. Англ. The Times 17.03.1882 — UK, не US; NYT 1882 через JTA — вторично. MW 1903 через зеркало не первая абсолютная дата. Fr pogrome 1903 по TLFi/Dagan, каталог BnF не заменяет страницу книги. Hy 2022 — современное свидетельство, не первая дата.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [4, 5, 6, 7, 8, 10, 11, 12]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu\nJohn Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата\nhttps://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [1, 2, 3, 15, 16, 17]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "Фактическая концевая ссылка «Грамоты» содержит query=Погромок (с.15), в начальном реестре указан Погром.\nДля hy тексты поддерживают употребление, а русская этимология требует более сильного источника, чем современная публицистика.\nРесурс TLFi в S11 — входная страница, не постатейная ссылка; Хейм 1798 в сносках поддержан dewiki, а не факсимиле словаря.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/pogrom_dossier.pdf",
+              "pages": [8, 10, 11, 15, 16]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S6 — русская история/YIVO; S7–S8 Cambridge/AHD; S9–S13 Académie/Larousse/TLFi и BnF; S14–S17 hy; S18–S20 Duden/Treccani/Fundéu",
+            "John Klier, Pogroms, YIVO Encyclopedia; Henri Dagan, L’oppression des juifs dans l’Europe orientale (1903) — метаданные, не вложенная первичная цитата",
+            "https://arar.sci.am/publication/346420 и https://arar.sci.am/Content/175285/file_0.pdf — формы hy; сами внешние оригиналы не получены в этом аудите"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-2c3d73adbd",
+      "slug": "word-2c3d73adbd",
+      "russianLemma": "подзол",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["podzol"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-f334a23955",
+      "slug": "word-f334a23955",
+      "russianLemma": "президиум",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-ce0f78aefa",
+      "slug": "word-ce0f78aefa",
+      "russianLemma": "пробка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["պռոբկա"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-77aecfbd2f",
+      "slug": "word-77aecfbd2f",
+      "russianLemma": "пурга",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-89a6106172",
+      "slug": "samizdat",
+      "russianLemma": "самиздат",
+      "originKind": "unknown",
+      "themes": ["История и общество"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["samizdat"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/samizdat_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [5, 6, 7]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["samizdat"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/samizdat_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [5, 6, 7]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "սամիզդատ",
+            "Սամիզդատը — определённая форма; ինքնահրատ — отдельный эквивалент"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/samizdat_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [5, 6, 7]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/samizdat_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Русский советский неологизм в досье связан с глазковским самсебяиздат и пародией на издательские сокращения. Для иностранных samizdat изучается русский экспорт; французское объяснение samoizdatel’stvo — отдельная словарная версия внутренней формы, не доказательство реального первого акта образования.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [3, 4, 8]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "Русская цепь от авторского самоиздания к неподцензурному распространению; en underground press как более широкое значение по AHD. Fr словари ограничены советско-восточноевропейской историей. Hy термин применён к армянской подпольной прессе в ретроспективных исследованиях.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [4, 5, 6, 7, 8]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "Американские произношения в досье названы приблизительными и даны «в собственной системе AHD» рядом с IPA-подобной записью: не импортировать как verified IPA. Для fr Académie подтверждает лишь произносимый конечный t, не полную IPA; для hy IPA нет.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [5, 6, 7, 11]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "en/fr samizdat; hy սամիզդատ — армянская графика. Самсебяиздат — историческая русская мотивировка, не иностранный вариант.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [5, 7, 8]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "Fr мужской род; en существительное, plural отдельно не исследован; hy определённый артикль в Սամիզդատը не даёт всей падежной парадигмы. Род hy не применяется.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [6, 7, 8, 11]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "Глазков: конкурируют 1940/1944/середина 1940-х/1952 без факсимиле титульного листа; также нужно различать самсебяиздат и самиздат. En 1965–1970 — словарный диапазон; LOC 1972 — заявленный американский документ, не первая дата. Fr первая фиксация не установлена. Hy тексты 2012–2015 описывают издания 1967–1968: даты описанных событий не даты заимствованной формы.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [3, 4, 5, 6, 7, 8, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992\nS9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014\nhttps://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [1, 2, 3, 13]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "Введение утверждает отказ от сниппетов как ключевого доказательства, но S2 БРЭ использован по индексированному фрагменту. Это различие надо сохранять.\nИз конкурирующих дат нельзя выводить доказанный диапазон 1940-х без первичной датировки; формула досье сильнее доступного основания.\nС.10–12: правая колонка таблиц выходит за границы страницы.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samizdat_dossier.pdf",
+              "pages": [1, 3, 8, 10, 11, 12]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4 — русская история; S5 AHD; S6 Dictionary.com; S7 LOC Annual Report Slavic and Central European Division 1972; S8 LOC Soviet Independent Press 1987–1992",
+            "S9 Larousse; S10 Académie, PDF выпуска от 05.12.2018 de sabelle à savoir; S11–S12 Арман Галоян, Noravank 2012 / «21-րդ ԴԱՐ» №5(63), 2015; S13 Hetq 2014",
+            "https://guides.loc.gov/european-reading-room-history/1970-1979/division-reports-1972; https://hetq.am/hy/article/32307"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-348202225e",
+      "slug": "samovar",
+      "russianLemma": "самовар",
+      "originKind": "unknown",
+      "themes": ["Быт и культура"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [
+            "samovar",
+            "samovars; историческое Samowar — не автоматически американская форма"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/samovar_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [
+            "samovar",
+            "samowars и другие старые графики — исторические, не равноправные современные нормы"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/samovar_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "սամովար",
+            "սամավար (Вайоц Дзор), սամավառ (ереванская разговорная речь); статусы раздельны"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/samovar_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [5, 6, 7, 8, 9]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/samovar_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Досье предпочитает русское сам- + вар-, но сохраняет татарскую гипотезу как историю научного мнения. Для иностранных форм непосредственный русский источник не равен доказанности глубокой этимологии. Маршрут через французский для части романских форм приписан É. Buchi; нужно проверить саму работу.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [1, 3, 4, 11]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "В en/fr — сохранение предметного значения с культурной маркировкой. В hy конкурирует ինքնաեռ; это эквивалент, не русская заимствованная форма. Обобщение о полном освоении всех регистров не доказано.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [5, 6, 7, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "В книге приведён US /ˈsæm.ə.vɑːr/ (Cambridge, S26), другие ударные варианты — Collins (S11); fr /samɔvaʀ/ — TLFi (S17). Первичные статьи заново недоступны. Для hy IPA нет; объяснение ա через аканье — гипотеза, не готовая фонетическая характеристика.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [5, 6, 8, 10, 15]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "samovar / нем. Samowar; в hy три разных написания. Графическое сравнение наблюдаемо в досье, а нормативный статус каждого написания проверяется отдельно.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [5, 6, 8, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "По досье en samovars; fr мужской род, samovars; de мужской род, Samoware. Для hy полная парадигма не получена; род не применяется. Формальная интеграция не доказывает частотность.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [5, 6, 8, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "Рус. 1740 — сообщаемое архивное свидетельство, не дата возникновения; fr 1814 по Buchi против ряда TLFi 1829/1843; англ. 1830 не US; US 21.08.1870 New York Dispatch, p.6 — заявленное прямое свидетельство, скан в пакете отсутствует. it 1818, ro 1832, de 1841, pt 1877, es 1890, ca 1932 — только атрибуции Buchi. Первая hy/tr дата не установлена.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [4, 5, 6, 8, 14, 15]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25\nÉ. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты\nAmerican Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [13, 14, 16, 17]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "PDF ссылка «Грамота» содержит query=самохвал (с.16), а не самовар.\nНКРЯ 661/521/IPM 1,7: в книге S8 нет прямого запроса/идентифицированного снимка; частотность 2/10 — редакционная оценка без методики. Не публиковать как измерение.\nДополнение S27 сообщает академическую статью «ՍԱՄՈՎԱՐ, (ռուս.) Տ. Ինքնաեռ.»; это более сильное заявленное основание, чем PDF, но скан не вложен. Не повышать статус автоматически.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/samovar_dossier.pdf",
+              "pages": [3, 11, 15, 16]
+            }
+          ],
+          "bibliography": [
+            "PDF S1–S4, S10–S18, S21–S25; workbook S26–S30 — дополнительные позиции, которых нет в PDF-реестре S1–S25",
+            "É. Buchi, Emprunt linguistique (et diatopie) : le cas des russismes français — источник маршрутов, а не самостоятельно проверенные в этом аудите исторические тексты",
+            "American Heritage samovar; Collins US samovar; TLFi; Larousse; Duden; Treccani; армянские PDF eritasard_lezvabanner, vardanyan_vayots_dzor, erewani_khosaktsakan_lezown"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-b91626a52d",
+      "slug": "word-b91626a52d",
+      "russianLemma": "сметана",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["սմետան"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-1fa93dc6ec",
+      "slug": "word-1fa93dc6ec",
+      "russianLemma": "совет",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["soviet"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-35d55fdec4",
+      "slug": "sputnik",
+      "russianLemma": "спутник",
+      "originKind": "unknown",
+      "themes": ["Наука и техника"],
+      "articleDepth": "full",
+      "publicationStatus": "provisional",
+      "researchIncluded": true,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [
+            "sputnik",
+            "Sputnik — имя/серия; статус конкретного контекста необходимо размечать"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/sputnik_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [2, 4, 5, 6, 7, 8]
+            }
+          ]
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [
+            "spoutnik",
+            "spoutnic — исторический вариант; Spoutnik — имя"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/sputnik_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [2, 4, 5, 6, 7, 8]
+            }
+          ]
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [
+            "սպուտնիկ",
+            "Սպուտնիկ — имя; разговорный статус основы опирается преимущественно на Wiktionary"
+          ],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/original_pdfs/sputnik_dossier.pdf"],
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [2, 4, 5, 6, 7, 8]
+            }
+          ]
+        }
+      ],
+      "sourceIds": ["research/original_pdfs/sputnik_dossier.pdf"],
+      "notes": [
+        {
+          "field": "origin",
+          "text": "Лексема имеет славянскую структуру; отдельное происхождение астрономического значения (метафора/калька) не установлено. Досье относит международные sputnik/spoutnik к русскому источнику, но различает название аппарата и нарицательную единицу.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [1, 4]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        },
+        {
+          "field": "semantic",
+          "text": "Для en/fr речь преимущественно о советском искусственном спутнике/серии, а не обо всех значениях русского слова. Разговорное hy «спутниковое ТВ» сообщено вторичным ресурсом. արբանյակ / историческое արբանեակ — отдельные армянские эквиваленты; русский маршрут кальки не установлен.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [5, 6, 7, 9, 10]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        },
+        {
+          "field": "phonetic",
+          "text": "US /ˈspʌt.nɪk/ приписано Cambridge; Oxford содержит другие варианты. Французская полная IPA не установлена по отчёту. Для hy нет проверенной академической IPA; произношение нельзя вывести из букв.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [4, 6, 9]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        },
+        {
+          "field": "graphic",
+          "text": "en sputnik; fr ou передаёт у, spoutnic — ранняя графика; hy армянское письмо. Заглавная/строчная буква требует семантической разметки, не автоматической нормализации.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [4, 6, 7]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        },
+        {
+          "field": "grammar",
+          "text": "По досье de der Sputnik, Sputniks; en существительное, sputniks требует цитаты для нужного нарицательного смысла. Fr мужской род по TLFi. Для hy парадигма не подтверждена.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [5, 8]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        },
+        {
+          "field": "chronology",
+          "text": "Русское нарицательное и естественно-астрономическое значения старше 1957; документы/газета 1955 касаются «искусственного спутника». Октябрь 1957 — событие международного распространения, не рождение русского слова. CNRTL spoutnic 1957 / spoutnik 1960, но Le Monde и INA сообщают Spoutnik/spoutnik в октябре 1957. Первичная газетная US цитата 9–10 октября 1957 опосредована Bibliofond; не верифицирована. Duden 1961 — включение в издание, не первая дата языка.",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [1, 3, 5, 6, 10, 11]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        },
+        {
+          "field": "sources",
+          "text": "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es\nAHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik\nS27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы",
+          "status": "pending",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [12, 13, 14, 15, 16, 17]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        },
+        {
+          "field": "issues",
+          "text": "PDF фактическая ссылка «Грамоты» ведёт на «сплетник» (с.15); в таблице реестра и workbook указан другой запрос «спутник».\nНельзя выдавать любое упоминание имени Sputnik за самостоятельное русское заимствование в каждом языке.\nS1 — пользовательский бриф, не научное доказательство. Nayiri-ссылка в сносках содержит посторонний query=čim; открытие каталога не подтверждает статью.",
+          "status": "disputed",
+          "references": [
+            {
+              "sourceId": "research/original_pdfs/sputnik_dossier.pdf",
+              "pages": [10, 15, 16]
+            }
+          ],
+          "bibliography": [
+            "PDF S2–S11 — русская семантическая история и документы; S12–S19 — en/fr; S20–S23 — слабее подтверждённая hy ветвь; S29–S31 — de/it/es",
+            "AHD Sputnik; Cambridge pronunciation; CNRTL spoutnik; INA 09.10.1957; Le Monde 10.10.1957; Duden Sputnik; Treccani sputnik",
+            "S27 — Bibliofond, вспомогательный материал, не равно оригинальной американской газете; S21 — библиография, не статья леммы"
+          ]
+        }
+      ],
+      "auditStatus": "частично подтверждено",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-d76dfced11",
+      "slug": "word-d76dfced11",
+      "russianLemma": "суп",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["սուպ"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-a174ed3be5",
+      "slug": "word-a174ed3be5",
+      "russianLemma": "тайга",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["taïga"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-eff322ff7b",
+      "slug": "word-eff322ff7b",
+      "russianLemma": "токамак",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["tokamak"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["tokamak"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["տոկամակ"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-4cba1c56da",
+      "slug": "word-4cba1c56da",
+      "russianLemma": "тройка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-8b61afee26",
+      "slug": "word-8b61afee26",
+      "russianLemma": "указ",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-f1ea69da70",
+      "slug": "word-f1ea69da70",
+      "russianLemma": "ушанка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-115140f569",
+      "slug": "word-115140f569",
+      "russianLemma": "хрущёвка",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-f4ec40292a",
+      "slug": "word-f4ec40292a",
+      "russianLemma": "царь",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": ["tsar"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": ["tsar"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": ["ցար"],
+          "attestationStatus": "pending",
+          "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-7ce1859ed1",
+      "slug": "word-7ce1859ed1",
+      "russianLemma": "чай",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-756c761675",
+      "slug": "word-756c761675",
+      "russianLemma": "чекист",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-da35791f5e",
+      "slug": "word-da35791f5e",
+      "russianLemma": "чернозём",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-fa099c5fba",
+      "slug": "word-fa099c5fba",
+      "russianLemma": "шаман",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "спорно",
+      "isDemo": false
+    },
+    {
+      "id": "WORD-d7be088fba",
+      "slug": "word-d7be088fba",
+      "russianLemma": "экраноплан",
+      "originKind": "unknown",
+      "themes": ["Тема уточняется"],
+      "articleDepth": "short",
+      "publicationStatus": "draft",
+      "researchIncluded": false,
+      "languages": [
+        {
+          "languageCode": "en-US",
+          "countryCode": "US",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "fr-FR",
+          "countryCode": "FR",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        },
+        {
+          "languageCode": "hy-AM",
+          "countryCode": "AM",
+          "reportedForms": [],
+          "attestationStatus": "unknown",
+          "sourceIds": [],
+          "references": []
+        }
+      ],
+      "sourceIds": ["research/reports/CANDIDATE_50_AUDIT.csv"],
+      "notes": [],
+      "auditStatus": "недостаточно данных",
+      "isDemo": false
+    }
+  ],
+  "sources": [
+    {
+      "id": "research/reports/CANDIDATE_50_AUDIT.csv",
+      "title": "Реестр кандидатов — NOT_VERIFIED",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/reports/CANDIDATE_50_AUDIT.csv",
+      "accessLevel": "full",
+      "notes": "Список для проверки, не подтверждённый словарь."
+    },
+    {
+      "id": "research/original_pdfs/reports/balalaika_current.md",
+      "title": "balalaika_current.md",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/reports/balalaika_current.md",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/reports/balalaika_earlier.md",
+      "title": "balalaika_earlier.md",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/reports/balalaika_earlier.md",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/dacha_dossier.pdf",
+      "title": "dacha_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/dacha_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/intelligentsia_dossier.pdf",
+      "title": "intelligentsia_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/intelligentsia_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/kalashnikov_dossier.pdf",
+      "title": "kalashnikov_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/kalashnikov_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/matryoshka_dossier.pdf",
+      "title": "matryoshka_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/matryoshka_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/pogrom_dossier.pdf",
+      "title": "pogrom_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/pogrom_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/samizdat_dossier.pdf",
+      "title": "samizdat_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/samizdat_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/samovar_dossier.pdf",
+      "title": "samovar_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/samovar_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    },
+    {
+      "id": "research/original_pdfs/sputnik_dossier.pdf",
+      "title": "sputnik_dossier.pdf",
+      "url": "https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/original_pdfs/sputnik_dossier.pdf",
+      "accessLevel": "full",
+      "notes": "Локальное досье; не независимая проверка цитируемого первоисточника."
+    }
+  ],
+  "auditCommit": "e623664711202cdc5c791f35e4c75507ed2b2d5c"
+}
