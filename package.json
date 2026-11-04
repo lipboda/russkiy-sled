@@ -8,9 +8,13 @@
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b",
     "test": "vitest run src/domain",
-    "test:e2e": "playwright test",
+    "test:e2e": "node server/run-e2e.mjs",
     "lint": "eslint .",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview --host 0.0.0.0",
+    "server": "node server/index.mjs",
+    "admin:create": "node server/manage.mjs create-owner",
+    "db:backup": "node server/manage.mjs backup",
+    "test:server": "node --test server/*.test.mjs"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",

@@ -85,9 +85,13 @@ export function Home() {
           </Link>
         </div>
         <div className="featured-grid">
-          {["samovar", "sputnik", "matryoshka"].map((slug) => (
-            <WordCard key={slug} word={words.find((w) => w.slug === slug)!} />
-          ))}
+          {words
+            .filter((w) =>
+              ["samovar", "sputnik", "matryoshka"].includes(w.slug),
+            )
+            .map((w) => (
+              <WordCard key={w.id} word={w} />
+            ))}
         </div>
       </section>
       <section className="feature-pair">

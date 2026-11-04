@@ -1,0 +1,90 @@
+.cms {
+  max-width: 1280px;
+  margin: auto;
+}
+.cms-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+}
+.cms label {
+  display: block;
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+}
+.cms input:not([type="checkbox"]),
+.cms textarea,
+.cms select {
+  display: block;
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid #c6c2b9;
+  border-radius: 4px;
+  background: #fffdf8;
+  color: #252930;
+  font: inherit;
+}
+.cms textarea {
+  resize: vertical;
+}
+.cms fieldset {
+  margin: 1rem 0;
+  padding: 1rem;
+  min-width: 0;
+  border: 1px solid #d4cfc5;
+}
+.cms legend {
+  font-weight: bold;
+}
+.cms button {
+  margin: 0.3rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d4cfc5;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cms .button {
+  background: #203a60;
+  color: white;
+}
+.cms-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.cms-item {
+  border-bottom: 1px solid #ded9cf;
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+}
+.cms-list {
+  max-height: 70vh;
+  overflow: auto;
+}
+.cms-list button {
+  display: block;
+  width: 95%;
+  text-align: left;
+  background: #fffdf8;
+}
+.cms-list small {
+  display: block;
+  color: #59616d;
+}
+.cms-list [aria-pressed="true"] {
+  border-color: #203a60;
+  background: #eeeae1;
+}
+.cms [role="status"] {
+  white-space: pre-wrap;
+}
+@media (max-width: 900px) {
+  .cms-layout {
+    grid-template-columns: 1fr;
+  }
+  .cms-list {
+    max-height: 240px;
+  }
+}

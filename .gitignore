@@ -151,3 +151,6 @@ vite.config.ts.timestamp-*
 # Browser test outputs
 test-results/
 playwright-report/
+
+# Private CMS data and backups
+.cms/
