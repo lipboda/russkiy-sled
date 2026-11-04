@@ -159,9 +159,11 @@ export function Dictionary() {
     </>
   );
 }
-export function Article() {
+export function Article({
+  previewWord,
+}: { previewWord?: (typeof words)[number] } = {}) {
   const { slug } = useParams();
-  const w = words.find((w) => w.slug === slug);
+  const w = previewWord ?? words.find((w) => w.slug === slug);
   const [language, setLanguage] = useState("");
   if (!w) return <Missing />;
   return (
@@ -180,6 +182,24 @@ export function Article() {
         <Badge /> Русский → иностранные языки
       </PageTitle>
       <Notice />
+      {w.russianStress && <p>Написание и ударение: {w.russianStress}</p>}
+      {w.shortDescription && <p className="preline">{w.shortDescription}</p>}
+      {w.culturalContext && <p className="preline">{w.culturalContext}</p>}
+      {w.checkedAt && <p>Последняя проверка: {w.checkedAt}</p>}
+      {w.scientificStatus && (
+        <Badge>
+          {
+            {
+              confirmed: "Подтверждено",
+              partial: "Частично подтверждено",
+              pending: "Требует проверки",
+              disputed: "Спорно",
+              unconfirmed: "Не подтверждено",
+              insufficient: "Недостаточно данных",
+            }[w.scientificStatus]
+          }
+        </Badge>
+      )}
       <div className="article-meta">
         <span>Тема: {w.themes.join(", ")}</span>
         <span>Происхождение: требует проверки</span>
@@ -215,9 +235,14 @@ export function Article() {
               <summary>
                 <span>{languageNames[l.languageCode]}</span>
                 <Badge>
-                  {l.reportedForms.length
-                    ? "Требует проверки"
-                    : "Материал собирается"}
+                  {!l.reportedForms.length
+                    ? "Материал собирается"
+                    : {
+                        verified: "Подтверждено",
+                        pending: "Требует проверки",
+                        disputed: "Спорно",
+                        unknown: "Недостаточно данных",
+                      }[l.attestationStatus]}
                 </Badge>
               </summary>
               <div className="language-content">
@@ -232,6 +257,23 @@ export function Article() {
                 ) : (
                   <p>Подтверждённая форма не установлена в текущем аудите.</p>
                 )}
+                {(
+                  [
+                    ["Транскрипция", l.ipa],
+                    ["Значения", l.meaning],
+                    ["Регистр", l.register],
+                    ["Частотность", l.frequency],
+                    ["Примеры", l.examples],
+                    ["Степень освоения", l.integration],
+                  ] as const
+                )
+                  .filter(([, v]) => v)
+                  .map(([label, value]) => (
+                    <p className="preline" key={label}>
+                      <strong>{label}: </strong>
+                      {value}
+                    </p>
+                  ))}
                 {l.references.map((r, i) => (
                   <SourceLink key={i} id={r.sourceId} pages={r.pages} />
                 ))}
@@ -275,7 +317,9 @@ export function Article() {
 export function Comparison() {
   const [slug, setSlug] = useState("samovar");
   const [field, setField] = useState("graphic");
-  const w = words.find((w) => w.slug === slug)!;
+  const candidates = words.filter((w) => w.researchIncluded);
+  const w = candidates.find((w) => w.slug === slug) ?? candidates[0];
+  if (!w) return <p>Пока нет опубликованных записей для сравнения.</p>;
   return (
     <>
       <PageTitle
@@ -291,7 +335,7 @@ export function Comparison() {
           Слово
           <select
             aria-label="Слово"
-            value={slug}
+            value={w.slug}
             onChange={(e) => setSlug(e.target.value)}
           >
             {words
@@ -344,7 +388,7 @@ export function Comparison() {
         </p>
         <ResearchNotes word={w} fields={[field]} />
       </div>
-      <Link className="button" to={"/dictionary/" + slug}>
+      <Link className="button" to={"/dictionary/" + w.slug}>
         Все материалы о слове ↗
       </Link>
     </>

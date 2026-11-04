@@ -20,6 +20,7 @@ import {
   Plus,
   MessageSquare,
 } from "lucide-react";
+const Admin = lazy(() => import("./pages/Admin"));
 import { Home } from "./pages/Home";
 import { Article, Comparison, Dictionary, Missing } from "./pages/Dictionary";
 const WorldMap = lazy(() =>
@@ -104,6 +105,14 @@ function Shell() {
       <div className="workspace">
         <main id="main">
           <Routes>
+            <Route
+              path="/admin"
+              element={
+                <Suspense fallback={<p>Загрузка…</p>}>
+                  <Admin />
+                </Suspense>
+              }
+            />
             <Route path="/" element={<Home />} />
             <Route path="/dictionary" element={<Dictionary />} />
             <Route path="/dictionary/:slug" element={<Article />} />
