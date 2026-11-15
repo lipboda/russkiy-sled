@@ -38,20 +38,40 @@ export function wordOfDay(date = new Date(), list = words) {
   return eligible.length ? eligible[day % eligible.length] : undefined;
 }
 
-let refreshVersion = 0;
-export async function refreshPublicCatalog() {
-  const version = ++refreshVersion;
-  const [response, metaResponse] = await Promise.all([
-    fetch("/api/content"),
-    fetch("/api/editorial"),
+export const publicLoad: { catalog: string; editorial: string } = {
+  catalog: "loading",
+  editorial: "loading",
+};
+let pending: Promise<void> | undefined;
+async function loadPublic() {
+  const results = await Promise.allSettled([
+    fetch("/api/content").then(async (r) => {
+      if (!r.ok) throw new Error();
+      return validateCatalog(await r.json());
+    }),
+    fetch("/api/editorial").then(async (r) => {
+      if (!r.ok) throw new Error();
+      return r.json();
+    }),
   ]);
-  if (!response.ok) throw new Error("Не удалось обновить публичный каталог");
-  const data: unknown = await response.json();
-  if (!metaResponse.ok) throw new Error("Не удалось загрузить публикации");
-  const meta = await metaResponse.json();
-  if (version === refreshVersion) {
-    Object.assign(editorial, meta);
+  const [data, meta] = results;
+  if (meta.status === "fulfilled") {
+    Object.assign(editorial, meta.value);
     for (const l of editorial.languages) languageNames[l.code] = l.name;
-    applyPublicCatalog(data);
-  }
+    publicLoad.editorial = "ready";
+  } else publicLoad.editorial = "error";
+  if (data.status === "fulfilled") {
+    applyPublicCatalog(data.value);
+    publicLoad.catalog = "ready";
+  } else publicLoad.catalog = "error";
+  window.dispatchEvent(new Event("catalog-updated"));
+  if (results.some((r) => r.status === "rejected"))
+    throw new Error("Не удалось обновить часть материалов");
+}
+export function refreshPublicCatalog() {
+  if (!pending)
+    pending = loadPublic().finally(() => {
+      pending = undefined;
+    });
+  return pending;
 }

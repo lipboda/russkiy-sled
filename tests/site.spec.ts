@@ -4,7 +4,7 @@ test("search, source attribution, filters and comparison", async ({ page }) => {
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "продолжение",
+    "Русский след",
   );
   await page.getByRole("textbox", { name: "Поиск по словарю" }).fill("samovar");
   await expect(page.locator(".suggestions")).toContainText("самовар");
@@ -53,13 +53,13 @@ test("map zoom and country panel", async ({ page }) => {
   expect(await map.locator(":scope > g").getAttribute("transform")).not.toBe(
     transformBefore,
   );
-  await page.getByRole("button", { name: "Армения", exact: true }).click();
+  await page.getByLabel("Выбрать страну").selectOption("051");
   await expect(page.locator(".map-panel h2")).toHaveText("Армения");
   await expect(page.locator(".map-panel")).toContainText(
     "Пока нет подтверждённых слов",
   );
   await page.getByRole("button", { name: "Закрыть панель страны" }).click();
-  await expect(page.getByText("Как читать карту")).toBeVisible();
+  await expect(page.locator(".map-panel")).toHaveCount(0);
 });
 test("editorial routes, honest daily word, form download and 404", async ({
   page,

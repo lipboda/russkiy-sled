@@ -64,7 +64,7 @@ export function SearchBox({
         <input
           aria-label="Поиск по словарю"
           value={q}
-          placeholder="Русское слово или иностранная форма"
+          placeholder="Найти слово, иностранную форму или значение…"
           aria-describedby={open && suggestions.length ? id : undefined}
           onFocus={() => setOpen(true)}
           onKeyDown={(e) => {

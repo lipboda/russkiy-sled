@@ -39,8 +39,13 @@ const names: Record<string, string> = {
   "356": "Индия",
   "392": "Япония",
 };
-const iso: Record<string, string> = Object.fromEntries(countries.map(c=>{const id=String(c.id).padStart(3,"0");return [id,countryNames.numericToAlpha2(id)||""];}));
-export function WorldMap() {
+const iso: Record<string, string> = Object.fromEntries(
+  countries.map((c) => {
+    const id = String(c.id).padStart(3, "0");
+    return [id, countryNames.numericToAlpha2(id) || ""];
+  }),
+);
+export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
   const [selected, setSelected] = useState<string | null>(null);
   const [language, setLanguage] = useState("");
   const [zoom, setZoom] = useState(1);
@@ -63,6 +68,34 @@ export function WorldMap() {
         (!language || l.languageCode === language),
     ),
   );
+  if (preview)
+    return (
+      <svg
+        className="home-map-preview"
+        viewBox="0 0 900 500"
+        aria-hidden="true"
+      >
+        <rect width="900" height="500" fill="#F8F9FB" />
+        {countries.map((c) => {
+          const id = String(c.id).padStart(3, "0");
+          const linked = verifiedWords().some((w) =>
+            w.languages.some(
+              (l) =>
+                l.attestationStatus === "verified" && l.countryCode === iso[id],
+            ),
+          );
+          return (
+            <path
+              key={id}
+              d={path(c) ?? ""}
+              fill={linked ? "#829BB6" : "#DDE3EA"}
+              stroke="white"
+              strokeWidth=".6"
+            />
+          );
+        })}
+      </svg>
+    );
   return (
     <>
       <h1 className="atlas-title">Карта русского следа</h1>
@@ -98,7 +131,9 @@ export function WorldMap() {
             className="world-map"
             viewBox="0 0 900 500"
             aria-label="Интерактивная карта стран мира"
-            onKeyDown={e=>{if(e.key==="Escape")setSelected(null);}}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setSelected(null);
+            }}
             onPointerDown={(e) => {
               drag.current = {
                 x: e.clientX,
@@ -128,7 +163,14 @@ export function WorldMap() {
               drag.current = null;
             }}
           >
-            <rect width="900" height="500" fill="#F8F9FB" onClick={()=>{if(!moved.current)setSelected(null);}} />
+            <rect
+              width="900"
+              height="500"
+              fill="#F8F9FB"
+              onClick={() => {
+                if (!moved.current) setSelected(null);
+              }}
+            />
             <g
               transform={`translate(${450 + offset.x},${250 + offset.y}) scale(${zoom}) translate(-450,-250)`}
             >
@@ -143,16 +185,20 @@ export function WorldMap() {
                       "country " +
                       (selected === id
                         ? "selected"
-                        : verifiedWords().some(w=>w.languages.some(l=>l.attestationStatus==="verified"&&l.countryCode===iso[id]))
+                        : verifiedWords().some((w) =>
+                              w.languages.some(
+                                (l) =>
+                                  l.attestationStatus === "verified" &&
+                                  l.countryCode === iso[id],
+                              ),
+                            )
                           ? "focus-country"
                           : "")
                     }
                     onClick={() => {
                       if (!moved.current) select(id, label);
                     }}
-                  >
-
-                  </path>
+                  ></path>
                 );
               })}
             </g>
@@ -180,7 +226,7 @@ export function WorldMap() {
               </select>
             </label>
             <div className="atlas-shortcuts flex flex-wrap gap-2">
-              {["840","250","051"].map((id) => (
+              {["840", "250", "051"].map((id) => (
                 <button className="chip" key={id} onClick={() => select(id)}>
                   {names[id]}
                 </button>

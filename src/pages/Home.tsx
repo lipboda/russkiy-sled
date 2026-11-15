@@ -1,157 +1,246 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Globe2, MoveRight } from "lucide-react";
-import { words, verifiedWords } from "../domain/catalog";
+import { words, publicLoad } from "../domain/catalog";
 import { editorial } from "../domain/editorial";
-import { SearchBox, WordCard } from "../components/Common";
+import { mainResearchWords } from "../domain/research";
+import { SearchBox } from "../components/Common";
+const MapPreview = lazy(() =>
+  import("./WorldMap").then((m) => ({ default: m.WorldMap })),
+);
+function Cover({ id, alt }: { id?: string; alt: string }) {
+  return id ? <img loading="lazy" src={"/api/media/" + id} alt={alt} /> : null;
+}
 export function Home() {
-  const journal = editorial.journal;
+  const forms = words
+    .filter((w) => !w.isDemo)
+    .flatMap((w) =>
+      w.languages.filter(
+        (l) =>
+          !l.hidden &&
+          !l.unpublished &&
+          l.attestationStatus === "verified" &&
+          l.reportedForms.some((f) => f.trim()),
+      ),
+    );
+  const languages = new Set(forms.map((l) => l.languageCode)),
+    countries = new Set(
+      forms.map((l) => l.countryCode).filter((c) => /^[A-Z]{2}$/.test(c)),
+    );
+  const featured = [...words]
+    .sort((a, b) => a.russianLemma.localeCompare(b.russianLemma, "ru"))
+    .slice(0, 6);
+  const daily = editorial.daily[0],
+    linked = words.find((w) => w.id === daily?.wordIds[0]);
   return (
-    <>
-      <div className="home-top">
-        <span className="eyebrow">
-          <span className="dot" /> Цифровой лингвистический проект
-        </span>
-        <span className="edition">Исследовательское издание · 2026</span>
-      </div>
-      <section className="hero">
-        <div className="hero-copy">
-          <p className="eyebrow">Русский → иностранные языки</p>
-          <h1>
-            У каждого слова
-            <br />
-            есть <em>продолжение.</em>
-          </h1>
-          <p className="hero-lede">
-            Узнайте, как русские слова пересекают границы,
-            <br className="desktop-break" /> меняют звучание и обретают новую
-            жизнь.
-          </p>
-          <SearchBox />
-          <p className="search-examples">
-            Попробуйте: <Link to="/dictionary/samovar">самовар</Link>
-            <span>·</span>
-            <Link to="/dictionary/sputnik">sputnik</Link>
-            <span>·</span>
-            <Link to="/dictionary/matryoshka">матрёшка</Link>
-          </p>
-        </div>
-        <div className="word-art" aria-hidden="true">
-          <div className="orbit orbit-one" />
-          <div className="orbit orbit-two" />
-          <div className="art-origin">
-            слово<span>РУССКИЙ ЯЗЫК</span>
-          </div>
-          <span className="art-word art-en">
-            samovar<small>EN · США</small>
-          </span>
-          <span className="art-word art-fr">
-            spoutnik<small>FR · ФРАНЦИЯ</small>
-          </span>
-          <span className="art-word art-hy">
-            սամիզդատ<small>HY · АРМЕНИЯ</small>
-          </span>
-          <p>
-            Графика форм из исследовательских досье.
-            <br />
-            Требует проверки первоисточников.
-          </p>
-        </div>
-      </section>
-      <div className="home-stats">
-        <div>
-          <strong>{words.length}</strong>
-          <span>исследовательских записей</span>
-        </div>
-        <div>
-          <strong>3</strong>
-          <span>языка в фокусе исследования</span>
-        </div>
-        <div>
-          <strong>{verifiedWords().length}</strong>
-          <span>независимо подтверждённых записей</span>
-        </div>
-        <Link to="/research">
-          О методике
-          <br />и достоверности <ArrowUpRight size={20} />
-        </Link>
-      </div>
-      <section className="section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">От материала к открытию</p>
-            <h2>Слова в исследовании</h2>
-          </div>
-          <Link className="text-link" to="/dictionary">
-            Весь словарь <MoveRight size={18} />
+    <div className="editorial-home">
+      <header className="home-intro">
+        <p className="eyebrow">Словарь · исследование · цифровой атлас</p>
+        <h1>Русский след</h1>
+        <h2>Электронный словарь русских заимствований в языках мира</h2>
+        <p>
+          Как русские слова путешествуют между языками, меняют звучание,
+          написание и значение. Исследуйте их историю, географию и особенности
+          употребления.
+        </p>
+        <SearchBox />
+        <div className="home-actions">
+          <Link className="button" to="/dictionary">
+            Открыть словарь
+          </Link>
+          <Link className="text-link" to="/research">
+            Смотреть исследование →
           </Link>
         </div>
-        <div className="featured-grid">
-          {words
-            .filter((w) =>
-              ["samovar", "sputnik", "matryoshka"].includes(w.slug),
-            )
-            .map((w) => (
-              <WordCard key={w.id} word={w} />
+      </header>
+      <dl className="home-metrics">
+        <div>
+          <dt>Опубликованных статей</dt>
+          <dd>{publicLoad.catalog === "ready" ? words.length : "—"}</dd>
+        </div>
+        <div>
+          <dt>Языков с подтверждёнными формами</dt>
+          <dd>{publicLoad.catalog === "ready" ? languages.size : "—"}</dd>
+        </div>
+        <div>
+          <dt>Стран с подтверждёнными связями</dt>
+          <dd>{publicLoad.catalog === "ready" ? countries.size : "—"}</dd>
+        </div>
+        <div>
+          <dt>Опубликованных слов основного исследования</dt>
+          <dd>
+            {publicLoad.catalog === "ready" ? mainResearchWords().length : "—"}
+          </dd>
+        </div>
+      </dl>
+      <section className="home-section">
+        <div className="home-section-heading">
+          <h2>Из словаря</h2>
+          <Link to="/dictionary">Все слова →</Link>
+        </div>
+        {publicLoad.catalog === "loading" ? (
+          <p role="status">Загружаем словарь…</p>
+        ) : publicLoad.catalog === "error" ? (
+          <p>Не удалось обновить словарь. Попробуйте открыть раздел позже.</p>
+        ) : !featured.length ? (
+          <p>Словарь формируется. Опубликованные статьи появятся здесь.</p>
+        ) : (
+          <div className="home-words">
+            {featured.map((w) => (
+              <Link
+                className="home-word"
+                key={w.id}
+                to={"/dictionary/" + w.slug}
+              >
+                <Cover id={w.coverId} alt={w.russianLemma} />
+                <p className="eyebrow">{w.themes.slice(0, 2).join(" · ")}</p>
+                <h3>{w.russianStress || w.russianLemma}</h3>
+                {w.shortDescription && (
+                  <p className="clamp">{w.shortDescription}</p>
+                )}
+                <small>
+                  {w.languages.length} языковых карточек ·{" "}
+                  {w.articleDepth === "full"
+                    ? "Подробная статья"
+                    : "Краткая карточка"}
+                </small>
+              </Link>
             ))}
-        </div>
-      </section>
-      <section className="feature-pair">
-        <div className="map-teaser">
-          <Globe2 size={110} strokeWidth={0.65} />
-          <p className="eyebrow">География слов</p>
-          <h2>Карта русского следа</h2>
-          <p>
-            Посмотрите на исследование в масштабе мира. Страны, языки и
-            подтверждённые свидетельства.
-          </p>
-          <Link className="button" to="/map">
-            Открыть карту <ArrowUpRight size={18} />
-          </Link>
-        </div>
-        <div className="day-teaser">
-          <p className="eyebrow">Слово дня</p>
-          <h2>
-            Сначала источник.
-            <br />
-            Затем — история.
-          </h2>
-          <p>
-            Первое слово дня появится после независимой проверки. А пока можно
-            исследовать материалы и открытые вопросы.
-          </p>
-          <Link className="text-link" to="/word-of-the-day">
-            Как выбирается слово дня ↗
-          </Link>
-          <Link className="text-link" to="/journey">
-            Путешествия слов ↗
-          </Link>
-        </div>
-      </section>
-      <section className="section">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">Заметки редакции</p>
-            <h2>Язык исследования</h2>
           </div>
-          <Link className="text-link" to="/journal">
-            Весь журнал ↗
+        )}
+      </section>
+      <section className="home-geography home-section">
+        <Link to="/map" aria-label="Исследовать карту мира">
+          <Suspense fallback={<div className="home-map-placeholder" />}>
+            <MapPreview preview />
+          </Suspense>
+        </Link>
+        <div>
+          <p className="eyebrow">Слова в пространстве</p>
+          <h2>География заимствований</h2>
+          <p>
+            Узнайте, в каких языках встречаются русские слова и как они
+            изменяются в новых языковых системах.
+          </p>
+          <p className="muted">
+            На карте выделяются только страны с подтверждёнными связями. Наличие
+            формы в языке не доказывает её распространение во всех странах этого
+            языка.
+          </p>
+          <Link className="text-link" to="/map">
+            Исследовать карту →
           </Link>
-        </div>
-        <div className="journal-grid">
-          {journal.map((p) => (
-            <Link
-              className="journal-card compact"
-              to={"/journal/" + p.slug}
-              key={p.slug}
-            >
-              <p className="eyebrow">{p.category}</p>
-              <h3>{p.title}</h3>
-              <p>{p.intro}</p>
-              <ArrowUpRight size={20} />
-            </Link>
-          ))}
+          <p>
+            <Link to="/journey">Путешествие слова →</Link>
+          </p>
         </div>
       </section>
-    </>
+      <section className="home-research home-section">
+        <div>
+          <p className="eyebrow">Научная рамка проекта</p>
+          <h2>Одно слово — разные языковые системы</h2>
+          <p>
+            Сравнительное исследование русских заимствований в американском
+            английском, французском и восточноармянском языках. Восемь слов
+            образуют отдельную научную выборку; общий словарь может быть шире.
+          </p>
+          <Link to="/research">Перейти к исследованию →</Link>
+        </div>
+        <ul>
+          {[
+            "Графическая адаптация",
+            "Фонетические изменения",
+            "Семантика и употребление",
+            "Грамматическое освоение",
+          ].map((label) => (
+            <li key={label}>{label}</li>
+          ))}
+        </ul>
+      </section>
+      <section className="home-section">
+        <div className="home-section-heading">
+          <h2>Слово дня</h2>
+          <Link to="/word-of-the-day">Все выпуски →</Link>
+        </div>
+        {publicLoad.editorial === "loading" ? (
+          <p>Загружаем публикации…</p>
+        ) : publicLoad.editorial === "error" ? (
+          <p>
+            Публикации временно недоступны. Остальные разделы можно продолжать
+            изучать.
+          </p>
+        ) : daily ? (
+          <article className="home-daily">
+            <Cover
+              id={
+                daily.coverId ||
+                (daily.format === "word-card" ? linked?.coverId : undefined)
+              }
+              alt={daily.title}
+            />
+            <div>
+              <p className="eyebrow">
+                {daily.date} ·{" "}
+                {daily.format === "word-card" ? "Карточка слова" : "Статья"}
+              </p>
+              <h3>
+                <Link to={"/word-of-the-day/issue/" + daily.slug}>
+                  {daily.title || linked?.russianLemma}
+                </Link>
+              </h3>
+              <p>
+                {daily.intro ||
+                  (daily.format === "word-card"
+                    ? linked?.shortDescription
+                    : "")}
+              </p>
+              <Link to={"/word-of-the-day/issue/" + daily.slug}>
+                Открыть выпуск →
+              </Link>
+            </div>
+          </article>
+        ) : (
+          <p>Новые публикации скоро появятся.</p>
+        )}
+      </section>
+      <section className="home-section">
+        <div className="home-section-heading">
+          <h2>Журнал</h2>
+          <Link to="/journal">Все статьи →</Link>
+        </div>
+        {publicLoad.editorial === "ready" && editorial.journal.length ? (
+          <div className="home-journal">
+            {editorial.journal.slice(0, 3).map((p) => (
+              <article key={p.id}>
+                <Cover id={p.coverId} alt={p.title} />
+                <p className="eyebrow">
+                  {p.category} · {p.date}
+                </p>
+                <h3>
+                  <Link to={"/journal/" + p.slug}>{p.title}</Link>
+                </h3>
+                <p className="clamp">{p.intro}</p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p>
+            {publicLoad.editorial === "error"
+              ? "Не удалось загрузить журнал. Попробуйте позже."
+              : "Редакционные материалы появятся после публикации."}
+          </p>
+        )}
+      </section>
+      <section className="home-about home-section">
+        <h2>О проекте</h2>
+        <p>
+          «Русский след» — научно-просветительский электронный ресурс о русских
+          заимствованиях в языках мира. Проект объединяет сравнительное
+          лингвистическое исследование и развивающийся многоязычный словарь.
+          Заимствования, переводы и другие соответствия различаются по типу и
+          степени подтверждённости.
+        </p>
+        <Link to="/journal/three-languages">О направлении исследования →</Link>
+      </section>
+    </div>
   );
 }
