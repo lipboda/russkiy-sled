@@ -544,66 +544,349 @@ export function applyImport(db, bundle) {
     }
     if (!plans.some((p) => ["create", "replace-seed"].includes(p.action)))
       return { ...report, imported: 0 };
-    for (const l of bundle.languages)
-      if (
-        !db
-          .prepare("SELECT code FROM language_definitions WHERE code=?")
-          .get(l.code)
-      )
-        db.prepare(
-          "INSERT INTO language_definitions(code,name,country,nativeName,officialCode) VALUES(?,?,?,?,?)",
-        ).run(l.code, l.name, l.country, l.nativeName, l.code);
-    for (const c of bundle.categories)
-      if (
-        !db
-          .prepare("SELECT id FROM categories WHERE normalized=?")
-          .get(normalizeCategory(c.nameRu))
-      )
-        db.prepare("INSERT INTO categories VALUES(?,?,?,'',0)").run(
-          "final-" + c.id,
-          c.nameRu,
-          normalizeCategory(c.nameRu),
-        );
-    for (const s of bundle.sources)
-      if (!db.prepare("SELECT id FROM sources WHERE id=?").get(s.id))
-        db.prepare("INSERT INTO sources VALUES(?,?)").run(
-          s.id,
-          JSON.stringify(s),
-        );
-    for (const p of plans.filter((p) => p.action !== "skip")) {
-      const saved = save(db, {
-        data: p.word,
-        state: "draft",
-        version: p.old?.version || 0,
-      });
-      const inputId = bundle.words.find(
-        (w) => w.russianLemma === p.word.russianLemma,
-      ).id;
-      audit(db, "import-entry", inputId, p.word.russianLemma, "draft", null, {
-        packageHash: bundle.hash,
-        targetId: saved.id,
-        version: saved.version,
-      });
-    }
+    return writeImportDrafts(db, bundle, plans, report);
+  });
+}
+function writeImportDrafts(db, bundle, plans, report) {
+  for (const l of bundle.languages)
     if (
       !db
-        .prepare(
-          "SELECT id FROM audit WHERE kind='import-package' AND entity_id=?",
-        )
-        .get(bundle.hash)
+        .prepare("SELECT code FROM language_definitions WHERE code=?")
+        .get(l.code)
     )
-      audit(
-        db,
-        "import-package",
-        bundle.hash,
-        "Финальный исходный научный пакет",
-        "archive",
-        null,
-        bundle.raw,
+      db.prepare(
+        "INSERT INTO language_definitions(code,name,country,nativeName,officialCode) VALUES(?,?,?,?,?)",
+      ).run(l.code, l.name, l.country, l.nativeName, l.code);
+  for (const c of bundle.categories)
+    if (
+      !db
+        .prepare("SELECT id FROM categories WHERE normalized=?")
+        .get(normalizeCategory(c.nameRu))
+    )
+      db.prepare("INSERT INTO categories VALUES(?,?,?,'',0)").run(
+        "final-" + c.id,
+        c.nameRu,
+        normalizeCategory(c.nameRu),
       );
-    return {
-      ...report,
-      imported: plans.filter((p) => p.action !== "skip").length,
+  for (const s of bundle.sources)
+    if (!db.prepare("SELECT id FROM sources WHERE id=?").get(s.id))
+      db.prepare("INSERT INTO sources VALUES(?,?)").run(
+        s.id,
+        JSON.stringify(s),
+      );
+  for (const p of plans.filter((p) => p.action !== "skip")) {
+    const saved = save(db, {
+      data: p.word,
+      state: "draft",
+      version: p.old?.version || 0,
+    });
+    const inputId = bundle.words.find(
+      (w) => w.russianLemma === p.word.russianLemma,
+    ).id;
+    audit(db, "import-entry", inputId, p.word.russianLemma, "draft", null, {
+      packageHash: bundle.hash,
+      targetId: saved.id,
+      version: saved.version,
+    });
+  }
+  if (
+    !db
+      .prepare(
+        "SELECT id FROM audit WHERE kind='import-package' AND entity_id=?",
+      )
+      .get(bundle.hash)
+  )
+    audit(
+      db,
+      "import-package",
+      bundle.hash,
+      "Финальный исходный научный пакет",
+      "archive",
+      null,
+      bundle.raw,
+    );
+  return {
+    ...report,
+    imported: plans.filter((p) => p.action !== "skip").length,
+  };
+}
+
+const reviewVersion = 1;
+const preservedWordFields = ["id", "slug", "coverId", "relatedWordIds"];
+const preservedCardFields = ["hidden", "unpublished", "expanded"];
+function reviewedWord(plan) {
+  const word = structuredClone(plan.word);
+  if (!plan.old) return word;
+  for (const key of preservedWordFields) {
+    delete word[key];
+    if (Object.hasOwn(plan.old.data, key)) word[key] = plan.old.data[key];
+  }
+  for (const card of word.languages) {
+    const previous = plan.old.data.languages.find(
+      (l) => l.languageCode === card.languageCode,
+    );
+    if (previous)
+      for (const key of preservedCardFields)
+        if (Object.hasOwn(previous, key)) card[key] = previous[key];
+  }
+  return word;
+}
+// Compare language cards/notes by their stable keys, not their positions in an array.
+function fieldChanges(before, after, path = "") {
+  if (canon(before) === canon(after)) return [];
+  if (path === "languages" || path === "notes") {
+    const key = path === "languages" ? "languageCode" : "field";
+    const a = new Map((before ?? []).map((v) => [v[key], v]));
+    const b = new Map((after ?? []).map((v) => [v[key], v]));
+    if (a.size !== (before ?? []).length || b.size !== (after ?? []).length)
+      return [
+        {
+          field: path,
+          operation: "replace",
+          before: before ?? null,
+          after: after ?? null,
+        },
+      ];
+    return [...new Set([...a.keys(), ...b.keys()])].flatMap((k) =>
+      fieldChanges(a.get(k), b.get(k), `${path}[${k}]`),
+    );
+  }
+  if (
+    before &&
+    after &&
+    typeof before === "object" &&
+    typeof after === "object" &&
+    !Array.isArray(before) &&
+    !Array.isArray(after)
+  ) {
+    return [...new Set([...Object.keys(before), ...Object.keys(after)])]
+      .sort()
+      .flatMap((k) =>
+        fieldChanges(before[k], after[k], path ? `${path}.${k}` : k),
+      );
+  }
+  return [
+    {
+      field: path,
+      operation:
+        before === undefined
+          ? "add"
+          : after === undefined
+            ? "remove"
+            : "replace",
+      before: before ?? null,
+      after: after ?? null,
+    },
+  ];
+}
+function consistentRead(db, fn) {
+  if (db.isTransaction) return fn();
+  db.exec("BEGIN");
+  try {
+    const result = fn();
+    db.exec("COMMIT");
+    return result;
+  } catch (e) {
+    db.exec("ROLLBACK");
+    throw e;
+  }
+}
+function reviewState(db) {
+  // Only digests leave the DB; owner credentials, sessions and media bytes are not in the plan.
+  return fingerprint(
+    [
+      "content",
+      "history",
+      "word_categories",
+      "categories",
+      "sources",
+      "language_definitions",
+      "audit",
+      "resources",
+      "media",
+      "settings",
+    ].map((table) => [
+      table,
+      db.prepare(`SELECT * FROM ${table} ORDER BY rowid`).all(),
+    ]),
+  );
+}
+export function createImportReview(db, bundle, database) {
+  return consistentRead(db, () => {
+    const { plans, report } = planImport(db, bundle);
+    const converted = plans.map((p) => {
+      if (
+        p.action === "conflict" &&
+        p.old &&
+        p.reason ===
+          "Существующая запись защищена: найдены правки, история или редакционный статус" &&
+        ["draft", "review", "published"].includes(p.old.state)
+      )
+        return { ...p, action: "update-reviewed", word: reviewedWord(p) };
+      return p.old && p.action !== "conflict"
+        ? { ...p, word: reviewedWord(p) }
+        : p;
+    });
+    const convertibleIds = new Set(
+      converted
+        .filter((p) => p.action === "update-reviewed")
+        .map((p) => p.old.id),
+    );
+    const blockingConflicts = report.conflicts.filter(
+      (c) =>
+        !converted.some(
+          (p) =>
+            convertibleIds.has(p.old?.id) && p.word.russianLemma === c.word,
+        ),
+    );
+    const entries = converted.map((p) => ({
+      inputId: bundle.words.find((w) => w.russianLemma === p.word.russianLemma)
+        .id,
+      targetId: p.old?.id || p.word.id,
+      slug: p.word.slug,
+      word: p.word.russianLemma,
+      action: p.action,
+      previousVersion: p.old?.version ?? 0,
+      previousState: p.old?.state ?? null,
+      keepsPreviousPublicSnapshot: !!p.old?.published,
+      preserved: p.old
+        ? Object.fromEntries(
+            preservedWordFields.map((k) => [k, p.old.data[k] ?? null]),
+          )
+        : {},
+      changes:
+        p.action === "skip" ? [] : fieldChanges(p.old?.data ?? {}, p.word),
+    }));
+    for (const id of new Set(entries.map((e) => e.targetId))) {
+      const matches = entries.filter((e) => e.targetId === id);
+      if (matches.length > 1)
+        blockingConflicts.push({
+          id,
+          reason:
+            "Несколько входных слов сопоставлены с одной существующей записью",
+          inputIds: matches.map((e) => e.inputId),
+        });
+    }
+    const review = {
+      reviewVersion,
+      database: resolve(database),
+      packageHash: bundle.hash,
+      stateHash: reviewState(db),
+      summary: {
+        create: converted.filter((p) => p.action === "create").length,
+        updateReviewed: converted.filter((p) => p.action === "update-reviewed")
+          .length,
+        replaceSeed: converted.filter((p) => p.action === "replace-seed")
+          .length,
+        skip: converted.filter((p) => p.action === "skip").length,
+        blocked: blockingConflicts.length,
+      },
+      policy: {
+        targetState: "draft",
+        preserve: preservedWordFields,
+        preserveLanguageControls: preservedCardFields,
+        publication: "keep previous snapshot",
+        scientificStatus: "no automatic confirmation",
+      },
+      blockingConflicts,
+      entries,
     };
+    return { ...review, id: fingerprint(review) };
   });
+}
+export function verifyImportReview(bundle, review, database, confirmation) {
+  if (!review || review.reviewVersion !== reviewVersion)
+    throw new Error("Неизвестная версия плана согласования");
+  const { id, ...payload } = review;
+  if (id !== fingerprint(payload))
+    throw new Error(
+      "План изменён или повреждён; создайте новый предварительный просмотр",
+    );
+  if (
+    review.packageHash !== bundle.hash ||
+    review.database !== resolve(database)
+  )
+    throw new Error("План относится к другому файлу или другой базе");
+  if (confirmation !== id)
+    throw new Error(
+      "Нужно явное подтверждение: введите полный код согласования из просмотренного плана",
+    );
+  if (review.blockingConflicts.length)
+    throw new Error(
+      "План содержит неразрешённые конфликты источников, идентичности или редакционного статуса",
+    );
+}
+export function applyImportReview(db, bundle, review, database, confirmation) {
+  verifyImportReview(bundle, review, database, confirmation);
+  return atomic(db, () => {
+    const receipt = db
+      .prepare(
+        "SELECT next FROM audit WHERE kind='import-review' AND entity_id=?",
+      )
+      .get(review.id);
+    if (receipt)
+      return {
+        reviewId: review.id,
+        imported: 0,
+        skip: review.entries.length,
+        repeated: true,
+      };
+    const current = createImportReview(db, bundle, database);
+    if (current.id !== review.id)
+      throw new Error(
+        "База изменилась после просмотра. Ничего не записано; создайте новый план и подтвердите его заново",
+      );
+    const base = planImport(db, bundle);
+    const plans = base.plans.map((p, i) => ({
+      ...p,
+      action: review.entries[i].action,
+      word: reviewedWord(p),
+    }));
+    const report = {
+      ...base.report,
+      conflicts: [],
+      reviewId: review.id,
+      updateReviewed: review.summary.updateReviewed,
+      mapping: review.entries.map(({ inputId, targetId, slug, action }) => ({
+        inputId,
+        targetId,
+        slug,
+        action,
+      })),
+    };
+    const result = writeImportDrafts(db, bundle, plans, report);
+    audit(
+      db,
+      "import-review",
+      review.id,
+      "Согласованное обновление финального пакета",
+      "draft",
+      null,
+      { packageHash: bundle.hash, mapping: report.mapping },
+    );
+    return result;
+  });
+}
+export function importReviewHtml(review) {
+  const escape = (v) =>
+    String(v).replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
+  const show = (v) =>
+    escape(
+      v === null
+        ? "— поле отсутствует —"
+        : typeof v === "string"
+          ? v
+          : JSON.stringify(v, null, 2),
+    );
+  return `<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'"><title>Согласование финального импорта</title><style>body{max-width:1200px;margin:2rem auto;padding:0 1rem;font:16px system-ui;color:#252930;background:#f8f9fb}summary{cursor:pointer;padding:1rem}details{border-top:1px solid #dde3ea}table{width:100%;border-collapse:collapse;table-layout:fixed}th,td{vertical-align:top;border:1px solid #dde3ea;padding:.6rem;text-align:left}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px system-ui}code{overflow-wrap:anywhere}th:first-child,td:first-child{width:24%}</style><h1>Предварительное сравнение</h1><p>База: ${escape(review.database)}</p><p>Новых: ${review.summary.create}; обновить после согласования: ${review.summary.updateReviewed}; стартовых: ${review.summary.replaceSeed}; пропущено: ${review.summary.skip}; блокирующих конфликтов: ${review.summary.blocked}.</p><p>Результат — только черновики. ID, URL, обложки, связи и предыдущие публичные снимки сохраняются. Источники и научные статусы не подтверждаются автоматически. Содержательные поля и языковые карточки заменяются по финальному файлу; удаляемые поля также показаны ниже. Изменения базы после просмотра потребуют нового плана.</p><p>Код явного подтверждения для терминала:</p><pre>${escape(review.id)}</pre>${review.blockingConflicts.length ? `<h2>Блокирующие конфликты</h2><pre>${show(review.blockingConflicts)}</pre>` : ""}${review.entries.map((e) => `<details><summary>${escape(e.word)} — ${escape(e.action)} · ${e.changes.length} изменений</summary><p>ID: ${escape(e.targetId)}; URL: ${escape(e.slug)}; прежний статус: ${escape(e.previousState ?? "новая запись")}; версия: ${e.previousVersion}</p><p>Сохраняется: <code>${show(e.preserved)}</code></p><table><thead><tr><th>Поле</th><th>Было</th><th>Станет</th></tr></thead><tbody>${e.changes.map((c) => `<tr><td>${escape(c.field)} (${escape(c.operation)})</td><td><pre>${show(c.before)}</pre></td><td><pre>${show(c.after)}</pre></td></tr>`).join("")}</tbody></table></details>`).join("")}<p>Этот файл ничего не применяет. Для записи требуется отдельная команда и ввод кода. Не редактируйте JSON-план вручную; не публикуйте его: он содержит локальные редакторские тексты.</p></html>`;
 }

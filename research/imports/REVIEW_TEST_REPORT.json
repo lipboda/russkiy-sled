@@ -1,0 +1,35 @@
+{
+  "scenario": "Synthetic MacBook fixture matching 21 protected + 7 absent; not the owner's database",
+  "baseline": {
+    "create": 7,
+    "replaceSeed": 0,
+    "skip": 0,
+    "conflicts": 21
+  },
+  "review": {
+    "create": 7,
+    "updateReviewed": 21,
+    "replaceSeed": 0,
+    "skip": 0,
+    "blocked": 0
+  },
+  "result": {
+    "imported": 28,
+    "drafts": 28,
+    "existingIdsKept": 21,
+    "newRecords": 7,
+    "historyRowsAdded": 21,
+    "publicSnapshotsPreserved": true,
+    "protectedTablesUnchanged": true,
+    "unrelatedWordsUnchanged": true,
+    "repeatImported": 0,
+    "repeatSkipped": 28,
+    "researchWords": 8,
+    "researchLanguageCodes": [
+      "en-US",
+      "fr-FR",
+      "hy-AM"
+    ],
+    "integrity": "ok"
+  }
+}
