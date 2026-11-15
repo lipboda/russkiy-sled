@@ -1,3 +1,11 @@
+import { CategoryPicker } from "../components/CategoryPicker";
+import { editorial } from "../domain/editorial";
+import {
+  Management,
+  MediaSelect,
+  SourceSelect,
+  WordSelect,
+} from "./Management";
 import { useEffect, useRef, useState } from "react";
 import {
   sources,
@@ -25,7 +33,6 @@ const editorSections = {
   main: {
     title: "Основная информация",
     keys: [
-      "id",
       "slug",
       "russianLemma",
       "russianStress",
@@ -51,12 +58,20 @@ const editorSections = {
     ],
   },
   sources: { title: "Источники статьи", keys: ["sourceIds"] },
+  examples: { title: "Примеры употребления", keys: ["languages"] },
+  related: {
+    title: "Связанные материалы",
+    keys: ["coverId", "relatedWordIds"],
+  },
+  technical: { title: "Дополнительные настройки", keys: ["id", "slug"] },
 } as const;
 const states: Record<string, string> = {
   draft: "Черновик",
   review: "На проверке",
   published: "Опубликовано",
   archived: "Архивировано",
+  unpublished: "Снято с публикации",
+  trash: "В корзине",
 };
 const options: Record<string, Record<string, string>> = {
   articleDepth: { short: "Краткая запись", full: "Подробная статья" },
@@ -79,13 +94,11 @@ const options: Record<string, Record<string, string>> = {
     disputed: "Спорно",
     unknown: "Не установлено",
   },
-  languageCode: {
-    "en-US": "Американский английский",
-    "fr-FR": "Французский",
-    "hy-AM": "Восточноармянский",
-  },
+  languageCode: languageNames,
   status: {
     verified: "Подтверждено",
+    partial: "Частично подтверждено",
+    presumed: "Предположительно",
     pending: "Требует проверки",
     disputed: "Спорно",
     unknown: "Недостаточно данных",
@@ -137,6 +150,9 @@ const labels: Record<string, string> = {
   theme: "Тема",
   citation: "Библиографическая запись",
   page: "Номер страницы",
+  hidden: "Скрыть языковую карточку",
+  coverId: "Обложка из медиатеки",
+  relatedWordIds: "Связанные словарные статьи",
 };
 options.field = {
   origin: "Этимология",
@@ -150,6 +166,7 @@ options.field = {
 };
 const templates: Record<string, Value> = {
   languages: {
+    hidden: false,
     languageCode: "en-US",
     countryCode: "US",
     reportedForms: [],
@@ -189,6 +206,12 @@ function Editor({
   locked?: boolean;
 }) {
   const label = labels[name] || name;
+  if (name === "relatedWordIds" && Array.isArray(value))
+    return <WordSelect value={value as string[]} change={change} />;
+  if (name === "sourceIds" && Array.isArray(value))
+    return <SourceSelect value={value as string[]} change={change} />;
+  if (name === "themes" && Array.isArray(value))
+    return <CategoryPicker value={value as string[]} change={change} />;
   if (Array.isArray(value))
     return (
       <fieldset>
@@ -272,9 +295,8 @@ function Editor({
                 ...(k === "languageCode"
                   ? {
                       countryCode:
-                        { "en-US": "US", "fr-FR": "FR", "hy-AM": "AM" }[
-                          String(next)
-                        ] || "",
+                        editorial.languages.find((l) => l.code === next)
+                          ?.country || "",
                     }
                   : {}),
               })
@@ -321,12 +343,27 @@ function Editor({
           value={value}
           onChange={(e) => change(Number(e.target.value))}
         />
+      ) : name === "russianLemma" ? (
+        <input
+          required
+          aria-label="Русское слово"
+          value={String(value)}
+          onChange={(e) => change(e.target.value)}
+        />
+      ) : name === "coverId" ? (
+        <MediaSelect value={String(value)} change={change} />
       ) : locked ? (
         <input value={String(value)} readOnly />
       ) : (
         <textarea
           aria-label={label}
           rows={name === "text" ? 5 : 2}
+          ref={(el) => {
+            if (el) {
+              el.style.height = "auto";
+              el.style.height = el.scrollHeight + "px";
+            }
+          }}
           value={String(value)}
           onChange={(e) => change(e.target.value)}
         />
@@ -352,6 +389,8 @@ function blank(): WordEntry {
     russianStress: "",
     shortDescription: "",
     editorialNotes: "",
+    coverId: "",
+    relatedWordIds: [],
     culturalContext: "",
     checkedAt: "",
     scientificStatus: "insufficient",
@@ -367,7 +406,7 @@ function enriched(data: WordEntry): WordEntry {
     })),
   };
 }
-export default function Admin() {
+function WordAdmin() {
   const logged = useSession();
   const setLogged = setSession;
   const [params] = useSearchParams();
@@ -386,9 +425,11 @@ export default function Admin() {
     [saving, setSaving] = useState(false),
     [theme, setTheme] = useState(""),
     [language, setLanguage] = useState(""),
+    [checked, setChecked] = useState<string[]>([]),
     [sort, setSort] = useState("name"),
-    [editorSection, setEditorSection] =
-      useState<keyof typeof editorSections>("main");
+    [editorSection, setEditorSection] = useState<keyof typeof editorSections>(
+      params.get("tab") === "languages" ? "languages" : "main",
+    );
   const blocker = useBlocker(dirty);
   const handlingNavigation = useRef(false);
   useEffect(() => {
@@ -447,6 +488,38 @@ export default function Admin() {
     setEditorSection("main");
     setHistory([]);
     setMessage("");
+  };
+  const wordAction = async (
+    action: string,
+    targets: Row[],
+    categoryIds?: string[],
+  ) => {
+    if (dirty && !confirm("Продолжить без сохранения текущей формы?")) return;
+    if (
+      !confirm(
+        "Выполнить действие для записей: " +
+          targets.map((r) => r.data.russianLemma).join(", ") +
+          "?",
+      )
+    )
+      return;
+    try {
+      await api("admin/word-actions", "POST", {
+        ids: targets.map((r) => r.id),
+        versions: Object.fromEntries(targets.map((r) => [r.id, r.version])),
+        action,
+        confirm: "CONFIRM",
+        categoryIds,
+      });
+      setRows(await api("admin/words"));
+      setDirty(false);
+      setSelected(undefined);
+      setChecked([]);
+      await refreshPublicCatalog();
+      setMessage("Операция выполнена");
+    } catch (e) {
+      setMessage((e as Error).message);
+    }
   };
   if (loading) return <p role="status">Проверка сессии…</p>;
   if (!logged)
@@ -610,10 +683,54 @@ export default function Admin() {
             </select>
           </label>
           <p>{rows.length} записей в базе</p>
+          {checked.length > 0 && (
+            <fieldset>
+              <legend>Выбрано: {checked.length}</legend>
+              {Object.entries({
+                publish: "Опубликовать выбранные",
+                archive: "Архивировать выбранные",
+                trash: "В корзину выбранные",
+              }).map(([action, title]) => (
+                <button
+                  key={action}
+                  onClick={() =>
+                    void wordAction(
+                      action,
+                      rows.filter((r) => checked.includes(r.id)),
+                    )
+                  }
+                >
+                  {title}
+                </button>
+              ))}
+              <label>
+                Назначить категорию
+                <select
+                  defaultValue=""
+                  onChange={(e) => {
+                    if (e.target.value)
+                      void wordAction(
+                        "categories",
+                        rows.filter((r) => checked.includes(r.id)),
+                        [e.target.value],
+                      );
+                  }}
+                >
+                  <option value="">Выберите категорию</option>
+                  {editorial.categories.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </fieldset>
+          )}
           <div className="cms-list">
             {rows
               .filter(
                 (r) =>
+                  r.state !== "trash" &&
                   (!filter || r.state === filter) &&
                   (!theme || r.data.themes.includes(theme)) &&
                   (!language ||
@@ -638,30 +755,97 @@ export default function Admin() {
                     ),
               )
               .map((r) => (
-                <button
-                  key={r.id}
-                  onClick={() => select(r)}
-                  aria-pressed={r.id === selected?.id}
-                >
-                  {r.data.russianLemma}
-                  <small>
-                    {states[r.state]} · v{r.version}
-                    <br />
-                    {r.data.languages.length} языковых карточек ·{" "}
-                    {r.data.articleDepth === "full" ? "Подробная" : "Краткая"}
-                    <br />
-                    {r.data.themes.join(", ")}
-                    <br />
-                    {new Date(r.updated).toLocaleDateString("ru")}
-                  </small>
-                </button>
+                <div key={r.id}>
+                  <input
+                    type="checkbox"
+                    aria-label={"Выбрать " + r.data.russianLemma}
+                    checked={checked.includes(r.id)}
+                    onChange={(e) =>
+                      setChecked(
+                        e.target.checked
+                          ? [...checked, r.id]
+                          : checked.filter((id) => id !== r.id),
+                      )
+                    }
+                  />
+                  <button
+                    key={r.id}
+                    onClick={() => select(r)}
+                    aria-pressed={r.id === selected?.id}
+                  >
+                    {r.data.russianLemma}
+                    <small>
+                      {states[r.state]} · v{r.version}
+                      <br />
+                      {r.data.languages.length} языковых карточек ·{" "}
+                      {r.data.articleDepth === "full" ? "Подробная" : "Краткая"}
+                      <br />
+                      {r.data.themes.join(", ")}
+                      <br />
+                      {new Date(r.updated).toLocaleDateString("ru")}
+                    </small>
+                  </button>
+                  <details>
+                    <summary>Действия: {r.data.russianLemma}</summary>
+                    {Object.entries({
+                      duplicate: "Дублировать",
+                      draft: "Сохранить черновик",
+                      publish: "Опубликовать",
+                      unpublish: "Снять с публикации",
+                      archive: "Архивировать",
+                      trash: "В корзину",
+                    }).map(([action, label]) => (
+                      <button
+                        key={action}
+                        onClick={() => void wordAction(action, [r])}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </details>
+                </div>
               ))}
           </div>
         </aside>
         <div>
           {selected ? (
             <>
-              <div className="cms-actions">
+              <div className="cms-actions cms-sticky">
+                <button
+                  className="button"
+                  disabled={saving}
+                  onClick={() => document.getElementById("save-word")?.click()}
+                >
+                  Сохранить
+                </button>
+                <button
+                  onClick={() => {
+                    const original = rows.find(
+                      (r) => r.id === selected.data.id,
+                    );
+                    if (confirm("Отменить введённые изменения?")) {
+                      if (original) {
+                        setSelected({
+                          ...original,
+                          data: enriched(original.data),
+                        });
+                        setDirty(false);
+                        setMessage("");
+                      } else {
+                        setSelected(undefined);
+                        setDirty(false);
+                      }
+                    }
+                  }}
+                >
+                  Отменить редактирование
+                </button>
+                <span>
+                  Последнее сохранение:{" "}
+                  {selected.updated
+                    ? new Date(selected.updated).toLocaleString("ru")
+                    : "ещё не сохранено"}
+                </span>
                 {selected.published && (
                   <Link to={"/dictionary/" + selected.data.slug}>
                     Открыть статью
@@ -745,6 +929,7 @@ export default function Admin() {
                 </p>
               </fieldset>
               <button
+                id="save-word"
                 className="button"
                 disabled={saving}
                 onClick={async () => {
@@ -845,5 +1030,47 @@ export default function Admin() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function Admin() {
+  const logged = useSession();
+  const [params] = useSearchParams();
+  const section = params.get("section") ?? "words";
+  const sections: Record<string, string> = {
+    overview: "Обзор",
+    words: "Словарь",
+    categories: "Тематические категории",
+    research: "Сравнительное исследование",
+    journal: "Журнал",
+    daily: "Слово дня",
+    sources: "Источники",
+    media: "Медиатека",
+    trash: "Корзина",
+    history: "История изменений",
+    settings: "Настройки",
+  };
+  return (
+    <>
+      {logged && (
+        <nav className="cms-navigation" aria-label="Разделы CMS">
+          {Object.entries(sections).map(([key, label]) => (
+            <Link
+              key={key}
+              aria-label={"Раздел CMS: " + label}
+              aria-current={section === key ? "page" : undefined}
+              to={"/admin?section=" + key}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      )}
+      {!logged || section === "words" ? (
+        <WordAdmin />
+      ) : (
+        <Management key={section} section={section} />
+      )}
+    </>
   );
 }

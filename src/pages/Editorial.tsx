@@ -1,92 +1,9 @@
 import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import { words, wordOfDay } from "../domain/catalog";
-import { journal } from "../data/journal";
-import {
-  Badge,
-  Notice,
-  PageTitle,
-  ResearchNotes,
-  WordCard,
-} from "../components/Common";
+import { words } from "../domain/catalog";
+export { Journal, DayWord } from "./Publications";
+import { Badge, Notice, PageTitle, ResearchNotes } from "../components/Common";
 import { Missing } from "./Dictionary";
-export function DayWord() {
-  const w = wordOfDay();
-  return (
-    <>
-      <PageTitle eyebrow="Одна история каждый день" title="Слово дня">
-        Ежедневный выбор из подтверждённых словарных статей.
-      </PageTitle>
-      {w ? (
-        <WordCard word={w} />
-      ) : (
-        <div className="paper empty">
-          <h2>Первое слово дня ещё впереди</h2>
-          <p>
-            В текущем аудите нет независимо верифицированных записей. Мы не
-            подменяем их кандидатами.
-          </p>
-          <Link className="button" to="/dictionary">
-            Изучить материалы исследования ↗
-          </Link>
-        </div>
-      )}
-    </>
-  );
-}
-export function Journal() {
-  const { slug } = useParams();
-  if (slug) {
-    const post = journal.find((p) => p.slug === slug);
-    return post ? (
-      <article className="reading">
-        <Link className="back" to="/journal">
-          ← Журнал
-        </Link>
-        <PageTitle eyebrow={post.category} title={post.title}>
-          {post.intro}
-        </PageTitle>
-        <p className="eyebrow">
-          Редакция проекта · методическая заметка · 3 ноября 2026
-        </p>
-        {post.paragraphs.map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
-        <p className="source-link">
-          Основано на PROJECT_SPEC.md и первичном аудите исследовательского
-          комплекта.
-        </p>
-        <a
-          href="https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/reports/INITIAL_RESEARCH_AUDIT.md"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Читать исходный аудит ↗
-        </a>
-      </article>
-    ) : (
-      <Missing />
-    );
-  }
-  return (
-    <>
-      <PageTitle eyebrow="Редакционные материалы" title="Журнал">
-        Как исследовать движение слов и читать словарь с вниманием к источникам.
-      </PageTitle>
-      <div className="journal-grid">
-        {journal.map((p, i) => (
-          <Link className="journal-card" to={"/journal/" + p.slug} key={p.slug}>
-            <span className="journal-number">0{i + 1}</span>
-            <p className="eyebrow">{p.category}</p>
-            <h2>{p.title}</h2>
-            <p>{p.intro}</p>
-            <span className="text-link">Читать заметку ↗</span>
-          </Link>
-        ))}
-      </div>
-    </>
-  );
-}
 export function Journey() {
   const { slug } = useParams();
   if (slug) {

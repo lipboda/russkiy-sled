@@ -158,6 +158,9 @@ function Shell() {
             <Route path="/journal" element={<Journal />} />
             <Route path="/journal/:slug" element={<Journal />} />
             <Route path="/word-of-the-day" element={<DayWord />} />
+            <Route path="/word-of-the-day/archive" element={<DayWord />} />
+            <Route path="/word-of-the-day/issue/:slug" element={<DayWord />} />
+            <Route path="/word-of-the-day/:date" element={<DayWord />} />
             <Route path="/contribute" element={<Contribution />} />
             <Route path="/report-error" element={<Contribution error />} />
             <Route path="*" element={<Missing />} />

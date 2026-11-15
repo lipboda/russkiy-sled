@@ -1,4 +1,6 @@
 import raw from "../data/catalog.json";
+import { editorial } from "./editorial";
+import { languageNames } from "./schema";
 import { validateCatalog } from "./schema";
 export * from "./schema";
 export const catalog = validateCatalog(raw);
@@ -39,8 +41,17 @@ export function wordOfDay(date = new Date(), list = words) {
 let refreshVersion = 0;
 export async function refreshPublicCatalog() {
   const version = ++refreshVersion;
-  const response = await fetch("/api/content");
+  const [response, metaResponse] = await Promise.all([
+    fetch("/api/content"),
+    fetch("/api/editorial"),
+  ]);
   if (!response.ok) throw new Error("Не удалось обновить публичный каталог");
   const data: unknown = await response.json();
-  if (version === refreshVersion) applyPublicCatalog(data);
+  if (!metaResponse.ok) throw new Error("Не удалось загрузить публикации");
+  const meta = await metaResponse.json();
+  if (version === refreshVersion) {
+    Object.assign(editorial, meta);
+    for (const l of editorial.languages) languageNames[l.code] = l.name;
+    applyPublicCatalog(data);
+  }
 }

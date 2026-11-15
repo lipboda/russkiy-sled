@@ -1,3 +1,5 @@
+import { PublishedImage } from "../components/PublishedImage";
+import { useSession } from "../domain/session";
 import { useState } from "react";
 import { Link, useSearchParams, useParams } from "react-router-dom";
 import { languageNames, words, type Language } from "../domain/catalog";
@@ -188,6 +190,7 @@ export function Article({
         <Badge /> Русский → иностранные языки
       </PageTitle>
       <Notice />
+      {w.coverId && <PublishedImage id={w.coverId} fallback={w.russianLemma} />}
       {w.russianStress && <p>Написание и ударение: {w.russianStress}</p>}
       {w.shortDescription && <p className="preline">{w.shortDescription}</p>}
       {w.editorialNotes && (
@@ -251,6 +254,8 @@ export function Article({
                     ? "Материал собирается"
                     : {
                         verified: "Подтверждено",
+                        partial: "Частично подтверждено",
+                        presumed: "Предположительно",
                         pending: "Требует проверки",
                         disputed: "Спорно",
                         unknown: "Недостаточно данных",
@@ -331,6 +336,7 @@ export function Article({
   );
 }
 export function Comparison() {
+  const logged = useSession();
   const [slug, setSlug] = useState("matryoshka");
   const [field, setField] = useState<ComparisonField>("graphic");
   const [mode, setMode] = useState("word");
@@ -350,6 +356,11 @@ export function Comparison() {
         доказательством отсутствия заимствования.
       </PageTitle>
       <Notice />
+      {logged && (
+        <Link className="button" to={"/admin?word=" + w.id + "&tab=languages"}>
+          Редактировать языковые карточки этого слова
+        </Link>
+      )}
       <p>
         Основной набор: Матрёшка → Калашников → Дача → Интеллигенция → Погром →
         Самиздат → Спутник → Самовар. Другие материалы остаются в общем словаре.
@@ -482,6 +493,8 @@ export function Comparison() {
                           {card
                             ? {
                                 verified: "Подтверждено",
+                                partial: "Частично подтверждено",
+                                presumed: "Предположительно",
                                 pending: "Требует проверки",
                                 disputed: "Спорно",
                                 unknown: "Не установлено",
@@ -498,7 +511,7 @@ export function Comparison() {
       ) : (
         <>
           <div className="comparison-grid">
-            {Object.keys(languageNames).map((code) => {
+            {["en-US", "fr-FR", "hy-AM"].map((code) => {
               const l = w.languages.find((l) => l.languageCode === code);
               if (!l)
                 return (
@@ -515,6 +528,8 @@ export function Comparison() {
                     {
                       {
                         verified: "Подтверждено",
+                        partial: "Частично подтверждено",
+                        presumed: "Предположительно",
                         pending: "Требует проверки",
                         disputed: "Спорно",
                         unknown: "Не установлено",

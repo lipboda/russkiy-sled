@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Globe2, MoveRight } from "lucide-react";
 import { words, verifiedWords } from "../domain/catalog";
-import { journal } from "../data/journal";
+import { editorial } from "../domain/editorial";
 import { SearchBox, WordCard } from "../components/Common";
 export function Home() {
+  const journal = editorial.journal;
   return (
     <>
       <div className="home-top">
