@@ -366,6 +366,7 @@ export function Article({
           "chronology",
           "issues",
           "sources",
+          "conclusion",
         ]}
       />
       <ContextLinks links={w.links} ids={[]} />
@@ -396,9 +397,43 @@ export function Comparison() {
   const [language, setLanguage] = useState<Language>("en-US");
   const [theme, setTheme] = useState("");
   const [status, setStatus] = useState("");
-  const candidates = mainResearchWords();
+  const [scope, setScope] = useState("research");
+  const candidates = scope === "research" ? mainResearchWords() : words;
+  const codes =
+    scope === "research"
+      ? ["en-US", "fr-FR", "hy-AM"]
+      : [
+          ...new Set(
+            candidates.flatMap((w) => w.languages.map((l) => l.languageCode)),
+          ),
+        ];
+  const scopeControl = (
+    <label>
+      Область сравнения
+      <select
+        value={scope}
+        onChange={(e) => {
+          setScope(e.target.value);
+          setLanguage("en-US");
+          setTheme("");
+          setStatus("");
+        }}
+      >
+        <option value="research">Основное исследование: 8 слов, 3 языка</option>
+        <option value="dictionary">
+          Общий словарь: все опубликованные формы
+        </option>
+      </select>
+    </label>
+  );
   const w = candidates.find((w) => w.slug === slug) ?? candidates[0];
-  if (!w) return <p>Пока нет опубликованных записей для сравнения.</p>;
+  if (!w)
+    return (
+      <>
+        {scopeControl}
+        <p>Пока нет опубликованных записей для сравнения.</p>
+      </>
+    );
   return (
     <>
       <PageTitle
@@ -409,14 +444,16 @@ export function Comparison() {
         доказательством отсутствия заимствования.
       </PageTitle>
       <Notice />
+      {scopeControl}
       {logged && (
         <Link className="button" to={"/admin?word=" + w.id + "&tab=languages"}>
           Редактировать языковые карточки этого слова
         </Link>
       )}
       <p>
-        Основной набор: Матрёшка → Калашников → Дача → Интеллигенция → Погром →
-        Самиздат → Спутник → Самовар. Другие материалы остаются в общем словаре.
+        {scope === "research"
+          ? "Основной набор: Матрёшка → Калашников → Дача → Интеллигенция → Погром → Самиздат → Спутник → Самовар. Другие материалы остаются в общем словаре."
+          : "Общее словарное сравнение включает опубликованные языковые формы. Их научный статус показан отдельно; это не расширение основной исследовательской выборки."}
       </p>
       <label>
         Режим сравнения
@@ -464,7 +501,7 @@ export function Comparison() {
                 value={language}
                 onChange={(e) => setLanguage(e.target.value as Language)}
               >
-                {["en-US", "fr-FR", "hy-AM"]
+                {codes
                   .map((code) => [code, languageNames[code]])
                   .map(([code, name]) => (
                     <option key={code} value={code}>
@@ -566,7 +603,10 @@ export function Comparison() {
       ) : (
         <>
           <div className="comparison-grid">
-            {["en-US", "fr-FR", "hy-AM"].map((code) => {
+            {(scope === "research"
+              ? codes
+              : w.languages.map((l) => l.languageCode)
+            ).map((code) => {
               const l = w.languages.find((l) => l.languageCode === code);
               if (!l)
                 return (

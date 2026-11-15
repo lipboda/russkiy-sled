@@ -14,6 +14,7 @@ export function applyPublicCatalog(input: unknown) {
 export const sources = catalog.sources;
 export const fieldNames: Record<string, string> = {
   origin: "Происхождение",
+  conclusion: "Сравнительный вывод",
   semantic: "Семантика",
   phonetic: "Фонетика",
   graphic: "Графика",

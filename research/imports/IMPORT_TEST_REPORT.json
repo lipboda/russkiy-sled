@@ -1,0 +1,1677 @@
+{
+  "mode": "applied-drafts",
+  "database": "temporary isolated SQLite",
+  "backup": "created before mutation; integrity checked by server tests",
+  "packageHash": "7e943d5545dcbd5c339d5afa3db50f1706b33e607dacea1969891253f8b76f70",
+  "counts": {
+    "research": 8,
+    "additional": 20,
+    "words": 28,
+    "researchCards": 24,
+    "additionalForms": 40,
+    "languages": 9,
+    "countries": 9,
+    "sources": 65,
+    "categories": 14,
+    "potentialMapLinks": 60,
+    "confirmedForms": 0
+  },
+  "create": 8,
+  "replaceSeed": 20,
+  "skip": 0,
+  "conflicts": [],
+  "mapping": [
+    {
+      "inputId": "entry-matryoshka",
+      "targetId": "WORD-a03d45d7b2",
+      "slug": "matryoshka",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-kalashnikov",
+      "targetId": "WORD-3f598666ab",
+      "slug": "kalashnikov",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-dacha",
+      "targetId": "WORD-940b1bcdc1",
+      "slug": "dacha",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-intelligentsia",
+      "targetId": "WORD-b318468e17",
+      "slug": "intelligentsia",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-pogrom",
+      "targetId": "WORD-b75c142f94",
+      "slug": "pogrom",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-samizdat",
+      "targetId": "WORD-89a6106172",
+      "slug": "samizdat",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-sputnik",
+      "targetId": "WORD-35d55fdec4",
+      "slug": "sputnik",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-samovar",
+      "targetId": "WORD-348202225e",
+      "slug": "samovar",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-babushka",
+      "targetId": "entry-babushka",
+      "slug": "babushka",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-perestroika",
+      "targetId": "WORD-8245190229",
+      "slug": "word-8245190229",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-glasnost",
+      "targetId": "WORD-a93a3b0924",
+      "slug": "word-a93a3b0924",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-ruble",
+      "targetId": "entry-ruble",
+      "slug": "ruble",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-kopeck",
+      "targetId": "entry-kopeck",
+      "slug": "kopeck",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-balalaika",
+      "targetId": "WORD-d176459bd3",
+      "slug": "balalaika",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-pelmeni",
+      "targetId": "entry-pelmeni",
+      "slug": "pelmeni",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-blini",
+      "targetId": "entry-blini",
+      "slug": "blini",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-kvass",
+      "targetId": "entry-kvass",
+      "slug": "kvass",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-troika",
+      "targetId": "WORD-4cba1c56da",
+      "slug": "word-4cba1c56da",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-apparatchik",
+      "targetId": "entry-apparatchik",
+      "slug": "apparatchik",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-bolshevik",
+      "targetId": "WORD-ad2de6554e",
+      "slug": "word-ad2de6554e",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-menshevik",
+      "targetId": "WORD-97385ed373",
+      "slug": "word-97385ed373",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-subbotnik",
+      "targetId": "entry-subbotnik",
+      "slug": "subbotnik",
+      "action": "create"
+    },
+    {
+      "inputId": "entry-gulag",
+      "targetId": "WORD-33df6fc3d1",
+      "slug": "word-33df6fc3d1",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-taiga",
+      "targetId": "WORD-a174ed3be5",
+      "slug": "word-a174ed3be5",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-vodka",
+      "targetId": "WORD-3075580f22",
+      "slug": "word-3075580f22",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-ukase",
+      "targetId": "WORD-8b61afee26",
+      "slug": "word-8b61afee26",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-cosmonaut",
+      "targetId": "WORD-531b433934",
+      "slug": "word-531b433934",
+      "action": "replace-seed"
+    },
+    {
+      "inputId": "entry-soviet",
+      "targetId": "WORD-1fa93dc6ec",
+      "slug": "word-1fa93dc6ec",
+      "action": "replace-seed"
+    }
+  ],
+  "editorialRestrictions": [
+    {
+      "id": "entry-matryoshka",
+      "word": "матрёшка",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].ipa",
+          "language": "fr-FR",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-14].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-kalashnikov",
+      "word": "калашников",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-mw-kalashnikov].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-larousse-kalashnikov].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-dacha",
+      "word": "дача",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-mw-dacha].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].ipa",
+          "language": "fr-FR",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-intelligentsia",
+      "word": "интеллигенция",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-mw-intelligentsia].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].ipa",
+          "language": "fr-FR",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-pogrom",
+      "word": "погром",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-mw-pogrom].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-larousse-pogrom].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-samizdat",
+      "word": "самиздат",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-mw-samizdat].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-larousse-samizdat].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-15].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-sputnik",
+      "word": "спутник",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].ipa",
+          "language": "fr-FR",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-samovar",
+      "word": "самовар",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-10].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-13].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "sources[final-source-verified-mw-samovar].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[0].ipa",
+          "language": "en-US",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-12].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].ipa",
+          "language": "fr-FR",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "hy-AM",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "hy-AM",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-11].verifiedAt",
+          "language": "hy-AM",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].ipa",
+          "language": "hy-AM",
+          "issue": "Нормативная IPA не установлена; поле необязательно, не восстанавливать из реконструкции"
+        }
+      ]
+    },
+    {
+      "id": "entry-babushka",
+      "word": "бабушка",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-babushka].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-perestroika",
+      "word": "перестройка",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-perestroika].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "de",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "de",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-duden-perestroika].verifiedAt",
+          "language": "de",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-larousse-perestroika].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[3].attestationStatus",
+          "language": "it",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[3].correspondenceType",
+          "language": "it",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-treccani-perestroika].verifiedAt",
+          "language": "it",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[4].attestationStatus",
+          "language": "pt",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[4].correspondenceType",
+          "language": "pt",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-priberam-perestroika].verifiedAt",
+          "language": "pt",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[5].attestationStatus",
+          "language": "ja",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[5].correspondenceType",
+          "language": "ja",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-kotobank-perestroika].verifiedAt",
+          "language": "ja",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[6].attestationStatus",
+          "language": "nl",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[6].correspondenceType",
+          "language": "nl",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-woorden-perestrojka].verifiedAt",
+          "language": "nl",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-glasnost",
+      "word": "гласность",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-glasnost].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-ruble",
+      "word": "рубль",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-ruble].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-kopeck",
+      "word": "копейка",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-kopeck].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-balalaika",
+      "word": "балалайка",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-balalaika].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "de",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "de",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-duden-balalaika].verifiedAt",
+          "language": "de",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "it",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "it",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-treccani-balalaika].verifiedAt",
+          "language": "it",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[3].attestationStatus",
+          "language": "ja",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[3].correspondenceType",
+          "language": "ja",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-kotobank-balalaika].verifiedAt",
+          "language": "ja",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[4].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[4].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-larousse-balalaika].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-pelmeni",
+      "word": "пельмени",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-pelmeni].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-blini",
+      "word": "блины",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-blin].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-kvass",
+      "word": "квас",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-kvass].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-troika",
+      "word": "тройка",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-troika].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-larousse-troika].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "it",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "it",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-treccani-troika].verifiedAt",
+          "language": "it",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[3].attestationStatus",
+          "language": "nl",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[3].correspondenceType",
+          "language": "nl",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-woorden-trojka].verifiedAt",
+          "language": "nl",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[4].attestationStatus",
+          "language": "es",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[4].correspondenceType",
+          "language": "es",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-fundeu-troika].verifiedAt",
+          "language": "es",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-apparatchik",
+      "word": "аппаратчик",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-apparatchik].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-bolshevik",
+      "word": "большевик",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-collins-bolshevik].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "de",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "de",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-duden-bolshevik].verifiedAt",
+          "language": "de",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-menshevik",
+      "word": "меньшевик",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-collins-menshevik].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "de",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "de",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-duden-menshevik].verifiedAt",
+          "language": "de",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-subbotnik",
+      "word": "субботник",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "de",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "de",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-duden-subbotnik].verifiedAt",
+          "language": "de",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-gulag",
+      "word": "ГУЛАГ",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-gulag].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-taiga",
+      "word": "тайга",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-taiga].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "fr-FR",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "fr-FR",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-larousse-taiga].verifiedAt",
+          "language": "fr-FR",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-vodka",
+      "word": "водка",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-vodka].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[1].attestationStatus",
+          "language": "it",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[1].correspondenceType",
+          "language": "it",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-treccani-vodka].verifiedAt",
+          "language": "it",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[2].attestationStatus",
+          "language": "pt",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[2].correspondenceType",
+          "language": "pt",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-priberam-vodca].verifiedAt",
+          "language": "pt",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        },
+        {
+          "field": "languages[3].attestationStatus",
+          "language": "es",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[3].correspondenceType",
+          "language": "es",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-rae-vodka].verifiedAt",
+          "language": "es",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-ukase",
+      "word": "указ",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-ukase].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-cosmonaut",
+      "word": "космонавт",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-cosmonaut].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    },
+    {
+      "id": "entry-soviet",
+      "word": "совет",
+      "editorialPublication": "Допускается CMS с оговорками; научная проверка не выполнена",
+      "scientificFields": [
+        {
+          "field": "originKind",
+          "issue": "Установить прямой/опосредованный/спорный путь; исходное описание в notes.origin"
+        },
+        {
+          "field": "languages[0].attestationStatus",
+          "language": "en-US",
+          "issue": "Проверить точное написание и значение по источникам; сейчас pending"
+        },
+        {
+          "field": "languages[0].correspondenceType",
+          "language": "en-US",
+          "issue": "Разграничить заимствование, имя, перевод, цитату; сейчас unknown"
+        },
+        {
+          "field": "sources[final-source-verified-mw-soviet].verifiedAt",
+          "language": "en-US",
+          "issue": "Зафиксировать реальную проверку источника, а не дату импорта"
+        }
+      ]
+    }
+  ],
+  "imported": 28,
+  "fileSha256": "ac4c5e719dc345dd78ffbb7e419bc62a7732685fda9baa2b21301d908cc3dc95",
+  "repeat": {
+    "imported": 0,
+    "skipped": 28
+  },
+  "databaseTotals": {
+    "before": 58,
+    "after": 66,
+    "importedDrafts": 28,
+    "publishedBefore": 58,
+    "publishedAfter": 58
+  },
+  "sqliteIntegrity": "ok"
+}
