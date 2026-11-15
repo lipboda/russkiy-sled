@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import {
-  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
   NavLink,
   Link,
   Route,
@@ -20,6 +21,9 @@ import {
   Plus,
   MessageSquare,
 } from "lucide-react";
+import { EditorToolbar } from "./components/EditorToolbar";
+import { checkSession } from "./domain/session";
+import { refreshPublicCatalog } from "./domain/catalog";
 const Admin = lazy(() => import("./pages/Admin"));
 import { Home } from "./pages/Home";
 import { Article, Comparison, Dictionary, Missing } from "./pages/Dictionary";
@@ -39,6 +43,28 @@ const navigation = [
 function Shell() {
   const [menu, setMenu] = useState(false);
   const location = useLocation();
+  const [, setCatalogVersion] = useState(0);
+  const [catalogError, setCatalogError] = useState("");
+  useEffect(() => {
+    const changed = () => setCatalogVersion((v) => v + 1);
+    window.addEventListener("catalog-updated", changed);
+    return () => window.removeEventListener("catalog-updated", changed);
+  }, []);
+  useEffect(() => {
+    const refresh = () => {
+      void checkSession();
+      void refreshPublicCatalog()
+        .then(() => setCatalogError(""))
+        .catch(() =>
+          setCatalogError(
+            "Не удалось обновить данные. Показана последняя загруженная версия; обновите страницу после восстановления связи.",
+          ),
+        );
+    };
+    refresh();
+    window.addEventListener("focus", refresh);
+    return () => window.removeEventListener("focus", refresh);
+  }, [location.pathname]);
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title =
@@ -104,6 +130,8 @@ function Shell() {
       </aside>
       <div className="workspace">
         <main id="main">
+          <EditorToolbar />
+          {catalogError && <p role="alert">{catalogError}</p>}
           <Routes>
             <Route
               path="/admin"
@@ -148,10 +176,7 @@ function Shell() {
     </>
   );
 }
+const router = createBrowserRouter([{ path: "*", element: <Shell /> }]);
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Shell />
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }

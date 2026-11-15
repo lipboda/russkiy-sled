@@ -7,6 +7,7 @@ export function applyPublicCatalog(input: unknown) {
   const next = validateCatalog(input);
   words.splice(0, words.length, ...next.words);
   sources.splice(0, sources.length, ...next.sources);
+  window.dispatchEvent(new Event("catalog-updated"));
 }
 export const sources = catalog.sources;
 export const fieldNames: Record<string, string> = {
@@ -33,4 +34,13 @@ export function wordOfDay(date = new Date(), list = words) {
     Date.parse(date.toISOString().slice(0, 10)) / 86400000,
   );
   return eligible.length ? eligible[day % eligible.length] : undefined;
+}
+
+let refreshVersion = 0;
+export async function refreshPublicCatalog() {
+  const version = ++refreshVersion;
+  const response = await fetch("/api/content");
+  if (!response.ok) throw new Error("Не удалось обновить публичный каталог");
+  const data: unknown = await response.json();
+  if (version === refreshVersion) applyPublicCatalog(data);
 }

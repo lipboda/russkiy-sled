@@ -88,3 +88,12 @@
     max-height: 240px;
   }
 }
+.cms-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.cms-sections [aria-pressed="true"] {
+  background: #203a60;
+  color: white;
+}

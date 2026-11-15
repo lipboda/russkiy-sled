@@ -1,7 +1,16 @@
-import { useEffect, useState } from "react";
-import { sources, wordSchema, type WordEntry } from "../domain/catalog";
+import { useEffect, useRef, useState } from "react";
+import {
+  sources,
+  wordSchema,
+  refreshPublicCatalog,
+  languageNames,
+  type WordEntry,
+} from "../domain/catalog";
 import { Article } from "./Dictionary";
 import "./admin.css";
+import { Link, useBlocker, useSearchParams } from "react-router-dom";
+import { wordSlug } from "../domain/slug";
+import { api, setSession, useSession } from "../domain/session";
 
 type Value = string | number | boolean | Value[] | { [key: string]: Value };
 type Row = {
@@ -12,6 +21,37 @@ type Row = {
   updated: string;
   published: boolean;
 };
+const editorSections = {
+  main: {
+    title: "Основная информация",
+    keys: [
+      "id",
+      "slug",
+      "russianLemma",
+      "russianStress",
+      "shortDescription",
+      "themes",
+      "articleDepth",
+      "researchIncluded",
+      "isDemo",
+      "editorialNotes",
+    ],
+  },
+  languages: { title: "Языковые карточки", keys: ["languages"] },
+  science: {
+    title: "Лингвистический анализ",
+    keys: [
+      "originKind",
+      "culturalContext",
+      "scientificStatus",
+      "publicationStatus",
+      "auditStatus",
+      "checkedAt",
+      "notes",
+    ],
+  },
+  sources: { title: "Источники статьи", keys: ["sourceIds"] },
+} as const;
 const states: Record<string, string> = {
   draft: "Черновик",
   review: "На проверке",
@@ -83,11 +123,20 @@ const labels: Record<string, string> = {
   status: "Достоверность утверждения",
   bibliography: "Библиография",
   ipa: "Транскрипция",
+  graphic: "Графическая адаптация",
+  phonetic: "Фонетическая адаптация",
+  semantic: "Семантическая адаптация",
+  grammar: "Грамматические характеристики",
   meaning: "Значения формы",
   register: "Регистр",
   frequency: "Частотность и основание",
   examples: "Примеры с атрибуцией",
   integration: "Степень освоения",
+  editorialNotes: "Редакционное примечание",
+  form: "Иностранная форма",
+  theme: "Тема",
+  citation: "Библиографическая запись",
+  page: "Номер страницы",
 };
 options.field = {
   origin: "Этимология",
@@ -108,6 +157,10 @@ const templates: Record<string, Value> = {
     sourceIds: [],
     references: [],
     ipa: "",
+    graphic: "",
+    phonetic: "",
+    semantic: "",
+    grammar: "",
     meaning: "",
     register: "",
     frequency: "",
@@ -161,9 +214,28 @@ function Editor({
                 change(value.map((x, j) => (i === j ? next : x)))
               }
             />
+            {name === "languages" && i > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  const next = [...value];
+                  [next[i - 1], next[i]] = [next[i], next[i - 1]];
+                  change(next);
+                }}
+              >
+                Переместить язык выше
+              </button>
+            )}
             <button
               type="button"
-              onClick={() => change(value.filter((_, j) => i !== j))}
+              onClick={() => {
+                if (
+                  confirm(
+                    "Удалить элемент? Изменение вступит в силу после сохранения.",
+                  )
+                )
+                  change(value.filter((_, j) => i !== j));
+              }}
             >
               Удалить элемент
             </button>
@@ -187,7 +259,26 @@ function Editor({
             key={k}
             name={k}
             value={v}
-            change={(next) => change({ ...value, [k]: next })}
+            change={(next) =>
+              change({
+                ...value,
+                [k]: next,
+                ...(k === "russianLemma" &&
+                !locked &&
+                (!value.slug ||
+                  value.slug === wordSlug(String(value.russianLemma)))
+                  ? { slug: wordSlug(String(next)) }
+                  : {}),
+                ...(k === "languageCode"
+                  ? {
+                      countryCode:
+                        { "en-US": "US", "fr-FR": "FR", "hy-AM": "AM" }[
+                          String(next)
+                        ] || "",
+                    }
+                  : {}),
+              })
+            }
             locked={k === "id" || (k === "slug" && locked)}
           />
         ))}
@@ -243,16 +334,6 @@ function Editor({
     </label>
   );
 }
-async function api(path: string, method = "GET", data?: unknown) {
-  const response = await fetch("/api/" + path, {
-    method,
-    headers: method === "GET" ? {} : { "Content-Type": "application/json" },
-    body: data === undefined ? undefined : JSON.stringify(data),
-  });
-  const body = await response.json();
-  if (!response.ok) throw new Error(body.error || "Ошибка сервера");
-  return body;
-}
 function blank(): WordEntry {
   return {
     id: crypto.randomUUID(),
@@ -270,6 +351,7 @@ function blank(): WordEntry {
     notes: [],
     russianStress: "",
     shortDescription: "",
+    editorialNotes: "",
     culturalContext: "",
     checkedAt: "",
     scientificStatus: "insufficient",
@@ -286,8 +368,12 @@ function enriched(data: WordEntry): WordEntry {
   };
 }
 export default function Admin() {
-  const [logged, setLogged] = useState(false),
-    [loading, setLoading] = useState(true),
+  const logged = useSession();
+  const setLogged = setSession;
+  const [params] = useSearchParams();
+  const target = params.get("word"),
+    creating = params.get("new") === "1";
+  const [loading, setLoading] = useState(true),
     [password, setPassword] = useState(""),
     [message, setMessage] = useState("");
   const [rows, setRows] = useState<Row[]>([]),
@@ -296,7 +382,28 @@ export default function Admin() {
     [filter, setFilter] = useState(""),
     [preview, setPreview] = useState(false),
     [history, setHistory] = useState<Row[]>([]),
-    [dirty, setDirty] = useState(false);
+    [dirty, setDirty] = useState(false),
+    [saving, setSaving] = useState(false),
+    [theme, setTheme] = useState(""),
+    [language, setLanguage] = useState(""),
+    [sort, setSort] = useState("name"),
+    [editorSection, setEditorSection] =
+      useState<keyof typeof editorSections>("main");
+  const blocker = useBlocker(dirty);
+  const handlingNavigation = useRef(false);
+  useEffect(() => {
+    if (blocker.state !== "blocked") handlingNavigation.current = false;
+    else if (!handlingNavigation.current) {
+      handlingNavigation.current = true;
+      if (
+        confirm(
+          "Отменить несохранённые изменения и перейти на другую страницу?",
+        )
+      )
+        blocker.proceed();
+      else blocker.reset();
+    }
+  }, [blocker]);
   useEffect(() => {
     api("auth/session")
       .then(() => setLogged(true))
@@ -306,9 +413,25 @@ export default function Admin() {
   useEffect(() => {
     if (logged)
       api("admin/words")
-        .then(setRows)
+        .then((data: Row[]) => {
+          setRows(data);
+          if (dirty) return; // Keep the unsaved form when a session is renewed.
+          const row = target ? data.find((r) => r.id === target) : undefined;
+          if (row) setSelected({ ...row, data: enriched(row.data) });
+          else if (creating)
+            setSelected({
+              id: "",
+              data: blank(),
+              version: 0,
+              state: "draft",
+              updated: "",
+              published: false,
+            });
+          else if (target)
+            setMessage("Запись не найдена. Выберите статью из списка.");
+        })
         .catch((e) => setMessage(e.message));
-  }, [logged]);
+  }, [logged, target, creating]);
   useEffect(() => {
     const warn = (e: BeforeUnloadEvent) => {
       if (dirty) e.preventDefault();
@@ -321,6 +444,7 @@ export default function Admin() {
     setSelected({ ...row, data: enriched(row.data) });
     setDirty(false);
     setPreview(false);
+    setEditorSection("main");
     setHistory([]);
     setMessage("");
   };
@@ -389,6 +513,40 @@ export default function Admin() {
         публикации.
       </p>
       <p role="status">{message}</p>
+      <section className="cms-overview" aria-label="Обзор базы">
+        <h2>Обзор</h2>
+        <p>
+          {rows.length} записей · опубликовано:{" "}
+          {rows.filter((r) => r.published).length} · черновиков:{" "}
+          {rows.filter((r) => r.state === "draft").length}
+        </p>
+        <p>
+          Языков в базе:{" "}
+          {
+            new Set(
+              rows.flatMap((r) => r.data.languages.map((l) => l.languageCode)),
+            ).size
+          }{" "}
+          · источников: {sources.length} · требуют научной проверки:{" "}
+          {rows.filter((r) => r.data.publicationStatus !== "verified").length}
+        </p>
+        <details>
+          <summary>Последние изменения</summary>
+          <ul>
+            {[...rows]
+              .sort((a, b) => b.updated.localeCompare(a.updated))
+              .slice(0, 5)
+              .map((r) => (
+                <li key={r.id}>
+                  {r.data.russianLemma} ·{" "}
+                  {new Date(r.updated).toLocaleString("ru")}
+                </li>
+              ))}
+          </ul>
+        </details>
+        <Link to="/research">Открыть сравнительное исследование</Link> ·{" "}
+        <Link to="/">Публичный сайт</Link>
+      </section>
       <div className="cms-layout">
         <aside>
           <button
@@ -421,12 +579,47 @@ export default function Admin() {
               ))}
             </select>
           </label>
+          <label>
+            Категория
+            <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+              <option value="">Все категории</option>
+              {[...new Set(rows.flatMap((r) => r.data.themes))].map((t) => (
+                <option key={t}>{t}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Язык карточки
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="">Все языки</option>
+              {Object.entries(languageNames).map(([code, name]) => (
+                <option key={code} value={code}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Сортировка записей
+            <select value={sort} onChange={(e) => setSort(e.target.value)}>
+              <option value="name">По названию</option>
+              <option value="updated">По последнему изменению</option>
+            </select>
+          </label>
           <p>{rows.length} записей в базе</p>
           <div className="cms-list">
             {rows
               .filter(
                 (r) =>
                   (!filter || r.state === filter) &&
+                  (!theme || r.data.themes.includes(theme)) &&
+                  (!language ||
+                    r.data.languages.some(
+                      (l) => l.languageCode === language,
+                    )) &&
                   [
                     r.data.russianLemma,
                     r.data.slug,
@@ -435,6 +628,14 @@ export default function Admin() {
                     .join(" ")
                     .toLowerCase()
                     .includes(query.toLowerCase()),
+              )
+              .sort((a, b) =>
+                sort === "updated"
+                  ? b.updated.localeCompare(a.updated)
+                  : a.data.russianLemma.localeCompare(
+                      b.data.russianLemma,
+                      "ru",
+                    ),
               )
               .map((r) => (
                 <button
@@ -445,6 +646,13 @@ export default function Admin() {
                   {r.data.russianLemma}
                   <small>
                     {states[r.state]} · v{r.version}
+                    <br />
+                    {r.data.languages.length} языковых карточек ·{" "}
+                    {r.data.articleDepth === "full" ? "Подробная" : "Краткая"}
+                    <br />
+                    {r.data.themes.join(", ")}
+                    <br />
+                    {new Date(r.updated).toLocaleDateString("ru")}
                   </small>
                 </button>
               ))}
@@ -454,6 +662,11 @@ export default function Admin() {
           {selected ? (
             <>
               <div className="cms-actions">
+                {selected.published && (
+                  <Link to={"/dictionary/" + selected.data.slug}>
+                    Открыть статью
+                  </Link>
+                )}
                 <h2>
                   {selected.data.russianLemma || "Новое слово"}
                   {dirty ? " *" : ""}
@@ -462,48 +675,78 @@ export default function Admin() {
                   {preview ? "К редактору" : "Предпросмотр"}
                 </button>
               </div>
-              {preview ? (
-                <Article previewWord={selected.data} />
-              ) : (
-                <Editor
-                  name="word"
-                  value={selected.data as unknown as Value}
-                  locked={selected.version > 0}
-                  change={(v) => {
-                    setSelected({
-                      ...selected,
-                      data: v as unknown as WordEntry,
-                    });
-                    setDirty(true);
-                  }}
-                />
-              )}
-              <label>
-                Редакционный статус
-                <select
-                  aria-label="Редакционный статус"
-                  value={selected.state}
-                  onChange={(e) => {
-                    setSelected({ ...selected, state: e.target.value });
-                    setDirty(true);
-                  }}
-                >
-                  {Object.entries(states).map(([k, v]) => (
-                    <option value={k} key={k}>
-                      {v}
-                    </option>
+              {!preview && (
+                <nav className="cms-sections" aria-label="Разделы редактора">
+                  {Object.entries(editorSections).map(([key, section]) => (
+                    <button
+                      key={key}
+                      aria-pressed={editorSection === key}
+                      onClick={() =>
+                        setEditorSection(key as keyof typeof editorSections)
+                      }
+                    >
+                      {section.title}
+                    </button>
                   ))}
-                </select>
-              </label>
-              <p>
-                {selected.published
-                  ? "На сайте доступна опубликованная версия."
-                  : "На сайте запись скрыта."}{" "}
-                Для снятия с публикации выберите «Архивировано» и сохраните.
-                Восстановление — выбор нового редакционного статуса.
-              </p>
+                </nav>
+              )}
+              <fieldset disabled={saving}>
+                {preview ? (
+                  <Article previewWord={selected.data} />
+                ) : (
+                  <Editor
+                    name="word"
+                    value={
+                      Object.fromEntries(
+                        Object.entries(selected.data).filter(([key]) =>
+                          (
+                            editorSections[editorSection]
+                              .keys as readonly string[]
+                          ).includes(key),
+                        ),
+                      ) as Value
+                    }
+                    locked={selected.version > 0}
+                    change={(v) => {
+                      setSelected({
+                        ...selected,
+                        data: {
+                          ...selected.data,
+                          ...(v as object),
+                        } as WordEntry,
+                      });
+                      setDirty(true);
+                    }}
+                  />
+                )}
+                <label>
+                  Редакционный статус
+                  <select
+                    aria-label="Редакционный статус"
+                    value={selected.state}
+                    onChange={(e) => {
+                      setSelected({ ...selected, state: e.target.value });
+                      setDirty(true);
+                    }}
+                  >
+                    {Object.entries(states).map(([k, v]) => (
+                      <option value={k} key={k}>
+                        {v}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <p>
+                  {selected.published
+                    ? "На сайте доступна опубликованная версия."
+                    : "На сайте запись скрыта."}{" "}
+                  Для снятия с публикации выберите «Архивировано» и сохраните.
+                  Восстановление — выбор нового редакционного статуса.
+                </p>
+              </fieldset>
               <button
                 className="button"
+                disabled={saving}
                 onClick={async () => {
                   try {
                     wordSchema.parse(selected.data);
@@ -516,24 +759,43 @@ export default function Admin() {
                       )
                     )
                       return;
+                    setSaving(true);
                     const row: Row = await api("admin/words", "PUT", selected);
                     setSelected({ ...row, data: enriched(row.data) });
-                    setRows(await api("admin/words"));
                     setDirty(false);
+                    setRows((current) => [
+                      ...current.filter((r) => r.id !== row.id),
+                      row,
+                    ]);
                     setMessage(
-                      "Версия сохранена. Публичный сайт получит изменения при обновлении страницы.",
+                      "Версия сохранена. " +
+                        (row.state === "published"
+                          ? "Опубликовано."
+                          : row.state === "archived"
+                            ? "Запись снята с публикации."
+                            : "Сохранено как черновик или на проверку."),
                     );
+                    try {
+                      await refreshPublicCatalog();
+                    } catch {
+                      setMessage(
+                        "Версия сохранена в базе. Не удалось обновить публичное представление; обновите страницу после восстановления связи.",
+                      );
+                    }
                   } catch (e) {
                     setMessage(
                       (e as Error).name === "ZodError"
                         ? "Заполните слово, URL и обязательные поля."
                         : (e as Error).message,
                     );
+                  } finally {
+                    setSaving(false);
                   }
                 }}
               >
-                Сохранить изменения
+                {saving ? "Сохранение…" : "Сохранить изменения"}
               </button>
+              {dirty && <p>Есть несохранённые изменения.</p>}
               <button
                 onClick={async () => {
                   try {

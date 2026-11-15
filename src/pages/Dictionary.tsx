@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Link, useSearchParams, useParams } from "react-router-dom";
 import { languageNames, words, type Language } from "../domain/catalog";
+import {
+  mainResearchWords,
+  comparisonFields,
+  languageComparison,
+  type ComparisonField,
+} from "../domain/research";
 import { searchWords } from "../domain/search";
 import {
   Badge,
@@ -184,6 +190,12 @@ export function Article({
       <Notice />
       {w.russianStress && <p>Написание и ударение: {w.russianStress}</p>}
       {w.shortDescription && <p className="preline">{w.shortDescription}</p>}
+      {w.editorialNotes && (
+        <aside className="paper preline">
+          <strong>Редакционное примечание: </strong>
+          {w.editorialNotes}
+        </aside>
+      )}
       {w.culturalContext && <p className="preline">{w.culturalContext}</p>}
       {w.checkedAt && <p>Последняя проверка: {w.checkedAt}</p>}
       {w.scientificStatus && (
@@ -260,6 +272,10 @@ export function Article({
                 {(
                   [
                     ["Транскрипция", l.ipa],
+                    ["Графическая адаптация", l.graphic],
+                    ["Фонетическая адаптация", l.phonetic],
+                    ["Семантическая адаптация", l.semantic],
+                    ["Грамматика", l.grammar],
                     ["Значения", l.meaning],
                     ["Регистр", l.register],
                     ["Частотность", l.frequency],
@@ -315,9 +331,13 @@ export function Article({
   );
 }
 export function Comparison() {
-  const [slug, setSlug] = useState("samovar");
-  const [field, setField] = useState("graphic");
-  const candidates = words.filter((w) => w.researchIncluded);
+  const [slug, setSlug] = useState("matryoshka");
+  const [field, setField] = useState<ComparisonField>("graphic");
+  const [mode, setMode] = useState("word");
+  const [language, setLanguage] = useState<Language>("en-US");
+  const [theme, setTheme] = useState("");
+  const [status, setStatus] = useState("");
+  const candidates = mainResearchWords();
   const w = candidates.find((w) => w.slug === slug) ?? candidates[0];
   if (!w) return <p>Пока нет опубликованных записей для сравнения.</p>;
   return (
@@ -330,6 +350,17 @@ export function Comparison() {
         доказательством отсутствия заимствования.
       </PageTitle>
       <Notice />
+      <p>
+        Основной набор: Матрёшка → Калашников → Дача → Интеллигенция → Погром →
+        Самиздат → Спутник → Самовар. Другие материалы остаются в общем словаре.
+      </p>
+      <label>
+        Режим сравнения
+        <select value={mode} onChange={(e) => setMode(e.target.value)}>
+          <option value="word">Одно слово</option>
+          <option value="set">Исследовательский набор</option>
+        </select>
+      </label>
       <div className="toolbar">
         <label>
           Слово
@@ -338,13 +369,11 @@ export function Comparison() {
             value={w.slug}
             onChange={(e) => setSlug(e.target.value)}
           >
-            {words
-              .filter((w) => w.researchIncluded)
-              .map((w) => (
-                <option key={w.id} value={w.slug}>
-                  {w.russianLemma}
-                </option>
-              ))}
+            {candidates.map((w) => (
+              <option key={w.id} value={w.slug}>
+                {w.russianLemma}
+              </option>
+            ))}
           </select>
         </label>
         <label>
@@ -352,45 +381,183 @@ export function Comparison() {
           <select
             aria-label="Параметр"
             value={field}
-            onChange={(e) => setField(e.target.value)}
+            onChange={(e) => setField(e.target.value as ComparisonField)}
           >
-            <option value="graphic">Графика</option>
-            <option value="phonetic">Фонетика</option>
-            <option value="semantic">Семантика</option>
-            <option value="grammar">Грамматика</option>
-            <option value="issues">Освоенность и ограничения</option>
+            {Object.entries(comparisonFields).map(([key, name]) => (
+              <option key={key} value={key}>
+                {name}
+              </option>
+            ))}
           </select>
         </label>
       </div>
-      <div className="comparison-grid">
-        {w.languages.map((l) => (
-          <section className="paper" key={l.languageCode}>
-            <p className="eyebrow">{l.languageCode}</p>
-            <h2>{languageNames[l.languageCode]}</h2>
-            <Badge />
-            {l.reportedForms.length ? (
-              <ul>
-                {l.reportedForms.map((f, i) => (
-                  <li key={i} lang={l.languageCode}>
-                    {f}
-                  </li>
+      {mode === "set" ? (
+        <>
+          <div className="toolbar">
+            <label>
+              Язык набора
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Language)}
+              >
+                {Object.entries(languageNames).map(([code, name]) => (
+                  <option key={code} value={code}>
+                    {name}
+                  </option>
                 ))}
-              </ul>
-            ) : (
-              <p>Подтверждённая форма не установлена.</p>
-            )}
-          </section>
-        ))}
-      </div>
-      <div className="paper">
-        <p className="eyebrow">
-          Сводный комментарий аудита · не отдельный вывод для каждого языка
-        </p>
-        <ResearchNotes word={w} fields={[field]} />
-      </div>
-      <Link className="button" to={"/dictionary/" + w.slug}>
-        Все материалы о слове ↗
-      </Link>
+              </select>
+            </label>
+            <label>
+              Тема набора
+              <select value={theme} onChange={(e) => setTheme(e.target.value)}>
+                <option value="">Все темы</option>
+                {[...new Set(candidates.flatMap((w) => w.themes))].map((t) => (
+                  <option key={t}>{t}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              Достоверность формы
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="">Все статусы</option>
+                <option value="verified">Подтверждено</option>
+                <option value="pending">Требует проверки</option>
+                <option value="disputed">Спорно</option>
+                <option value="unknown">Не установлено</option>
+              </select>
+            </label>
+          </div>
+          <div
+            className="research-table"
+            role="region"
+            aria-label="Сравнительная таблица"
+            tabIndex={0}
+          >
+            <table>
+              <caption>
+                {languageNames[language]} · {comparisonFields[field]}. Только
+                опубликованные данные.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Слово</th>
+                  <th scope="col">{comparisonFields[field]}</th>
+                  <th scope="col">Достоверность формы</th>
+                </tr>
+              </thead>
+              <tbody>
+                {candidates
+                  .filter(
+                    (entry) =>
+                      (!theme || entry.themes.includes(theme)) &&
+                      (!status ||
+                        entry.languages.find((l) => l.languageCode === language)
+                          ?.attestationStatus === status),
+                  )
+                  .map((entry) => {
+                    const card = entry.languages.find(
+                      (l) => l.languageCode === language,
+                    );
+                    return (
+                      <tr key={entry.id}>
+                        <th scope="row">
+                          <Link to={"/dictionary/" + entry.slug}>
+                            {entry.russianLemma}
+                          </Link>
+                        </th>
+                        <td className="preline">
+                          {card
+                            ? field === "sources"
+                              ? card.sourceIds.map((id) => (
+                                  <SourceLink key={id} id={id} />
+                                ))
+                              : languageComparison(card, field) ||
+                                "Не установлено для этого языка; см. сводные замечания в статье."
+                            : "Данные пока не собраны"}
+                        </td>
+                        <td>
+                          {card
+                            ? {
+                                verified: "Подтверждено",
+                                pending: "Требует проверки",
+                                disputed: "Спорно",
+                                unknown: "Не установлено",
+                              }[card.attestationStatus]
+                            : "Нет карточки"}
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="comparison-grid">
+            {Object.keys(languageNames).map((code) => {
+              const l = w.languages.find((l) => l.languageCode === code);
+              if (!l)
+                return (
+                  <section className="paper" key={code}>
+                    <h2>{languageNames[code as Language]}</h2>
+                    <p>Данные пока не собраны.</p>
+                  </section>
+                );
+              return (
+                <section className="paper" key={l.languageCode}>
+                  <p className="eyebrow">{l.languageCode}</p>
+                  <h2>{languageNames[l.languageCode]}</h2>
+                  <Badge>
+                    {
+                      {
+                        verified: "Подтверждено",
+                        pending: "Требует проверки",
+                        disputed: "Спорно",
+                        unknown: "Не установлено",
+                      }[l.attestationStatus]
+                    }
+                  </Badge>
+                  <p className="preline">
+                    {languageComparison(l, field) ||
+                      (field === "sources"
+                        ? ""
+                        : "Отдельное наблюдение для языка не установлено.")}
+                  </p>
+                  {field === "sources" &&
+                    l.sourceIds.map((id) => <SourceLink key={id} id={id} />)}
+                  {l.reportedForms.length ? (
+                    <ul>
+                      {l.reportedForms.map((f, i) => (
+                        <li key={i} lang={l.languageCode}>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>Подтверждённая форма не установлена.</p>
+                  )}
+                </section>
+              );
+            })}
+          </div>
+          <div className="paper">
+            <p className="eyebrow">
+              Сводный комментарий аудита · не отдельный вывод для каждого языка
+            </p>
+            <ResearchNotes
+              word={w}
+              fields={[field === "integration" ? "issues" : field]}
+            />
+          </div>
+          <Link className="button" to={"/dictionary/" + w.slug}>
+            Все материалы о слове ↗
+          </Link>
+        </>
+      )}
     </>
   );
 }

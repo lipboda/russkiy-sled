@@ -154,3 +154,10 @@ playwright-report/
 
 # Private CMS data and backups
 .cms/
+
+# Local databases and macOS Finder metadata
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+.DS_Store

@@ -16,6 +16,7 @@ export const wordSchema = z.object({
   russianLemma: z.string().min(1),
   russianStress: z.string().optional(),
   shortDescription: z.string().optional(),
+  editorialNotes: z.string().optional(),
   culturalContext: z.string().optional(),
   checkedAt: z.string().optional(),
   scientificStatus: z
@@ -42,6 +43,10 @@ export const wordSchema = z.object({
       countryCode: z.string(),
       reportedForms: z.array(z.string()),
       ipa: z.string().optional(),
+      graphic: z.string().optional(),
+      phonetic: z.string().optional(),
+      semantic: z.string().optional(),
+      grammar: z.string().optional(),
       meaning: z.string().optional(),
       register: z.string().optional(),
       frequency: z.string().optional(),
