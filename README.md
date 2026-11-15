@@ -1,5 +1,7 @@
 # Русский след
 
+**Второй этап CMS:** [безопасное обновление MacBook, миграция, использование и откат](CMS_STAGE2_UPDATE.md). Ветка `feat/cms-stage2`. [Аудит зависимостей](SECURITY_DEPENDENCIES.md).
+
 **Перенос на MacBook через GitHub Desktop и запуск в Safari:** [пошаговая инструкция](MACBOOK_START.md). Ветка: `release/cms-stage1-macbook`.
 
 Исследовательский словарь о переходе русских слов в иностранные языки. React 19, TypeScript, Vite, Tailwind CSS 4. Интерфейс на русском; Node.js API и постоянная SQLite-БД для словаря и CMS, без внешних API-ключей.
