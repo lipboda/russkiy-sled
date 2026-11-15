@@ -116,8 +116,9 @@ test("research set has exactly eight ordered words and filters only published la
   await expect(page.locator("tbody th")).toHaveText(expected);
   await page.getByLabel("Язык набора").selectOption("hy-AM");
   await expect(page.locator("tbody")).toContainText("մատրյոշկա");
-  await page.getByLabel("Достоверность формы").selectOption("verified");
-  await expect(page.locator("tbody tr")).toHaveCount(0);
+  await expect(page.getByLabel("Достоверность формы")).toHaveCount(0);
+  await expect(page.locator("tbody tr")).toHaveCount(8);
+  await expect(page.locator("tbody")).not.toContainText("Требует проверки");
   await page.setViewportSize({ width: 390, height: 844 });
   expect(
     await page.evaluate(

@@ -68,23 +68,47 @@ export function catalogWith(db, words) {
   });
 }
 export function publicCatalog(db) {
+  const finalPublished = !!db
+    .prepare("SELECT id FROM audit WHERE kind='final-publication' LIMIT 1")
+    .get();
+  const starters = finalPublished
+    ? validateCatalog(
+        JSON.parse(
+          readFileSync(resolve(root, "src/data/catalog.json"), "utf8"),
+        ),
+      ).words
+    : [];
   const result = catalogWith(
     db,
     db
       .prepare(
-        "SELECT id,published FROM content WHERE published IS NOT NULL ORDER BY rowid",
+        "SELECT id,published,version FROM content WHERE published IS NOT NULL ORDER BY rowid",
       )
       .all()
+      .filter((r) => {
+        if (!finalPublished || r.version !== 1) return true;
+        const w = JSON.parse(r.published),
+          starter = starters.find((s) => s.id === w.id);
+        // Presentation only: retain every stored row and all edited/substantive material.
+        return (
+          w.articleDepth !== "short" ||
+          !!w.shortDescription?.trim() ||
+          !starter ||
+          JSON.stringify(w) !== JSON.stringify(starter)
+        );
+      })
       .map((r) => ({
         ...JSON.parse(r.published),
         themes: themesFor(db, r.id, "public"),
       })),
   );
   // Hidden cards never leave the public API. Validation still examines the full record above.
-  result.words = result.words.map((w) => ({
-    ...w,
-    languages: w.languages.filter((l) => !l.hidden && !l.unpublished),
-  }));
+  result.words = result.words
+    .filter((w) => !finalPublished || !w.isDemo)
+    .map((w) => ({
+      ...w,
+      languages: w.languages.filter((l) => !l.hidden && !l.unpublished),
+    }));
   return result;
 }
 export function list(db) {

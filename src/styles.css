@@ -1748,3 +1748,156 @@ footer > span {
     padding-top: 0.3rem;
   }
 }
+
+/* Local SVG country symbols accompany language names, never the map surface. */
+.country-flag {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border: 1px solid #dde3ea;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 0.45rem;
+}
+.language-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  max-width: 100%;
+  font: inherit;
+}
+.word-languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin: 1rem 0;
+  font-size: 0.76rem;
+  color: #586579;
+}
+.word-card .word-languages {
+  font-size: 0.72rem;
+  gap: 0.4rem 0.8rem;
+}
+.word-card h3 {
+  font-size: 1.65rem;
+}
+.word-card .clamp {
+  font-size: 0.92rem;
+  color: #586579;
+}
+.scientific-context {
+  color: #586579;
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+.article-definition {
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+.stress-word {
+  font-size: 1.15rem;
+}
+.foreign-form {
+  font-family: Georgia, serif;
+  font-size: 1.7rem;
+  margin: 0.4rem 0 1.3rem;
+}
+.language-card summary {
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.language-card summary > span:last-child {
+  color: #586579;
+  font-size: 0.95rem;
+}
+.language-content {
+  max-width: 85ch;
+}
+.language-content p {
+  line-height: 1.8;
+}
+.compact-language > p {
+  line-height: 1.75;
+}
+.compact-word > .notes {
+  margin-top: 1.6rem;
+}
+.journey-languages {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.map-toolbar {
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.map-layer {
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.map-layer select {
+  max-width: 240px;
+  margin: 0;
+  padding: 0.4rem;
+}
+.map-panel h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.home-word .word-languages {
+  margin: 0.8rem 0;
+}
+.home-word .country-flag {
+  width: 21px;
+  height: 14px;
+}
+@media (max-width: 540px) {
+  .map-layer {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .map-layer select {
+    max-width: 70%;
+  }
+  .language-card summary {
+    padding: 1rem;
+  }
+  .word-languages {
+    gap: 0.5rem;
+  }
+  .word-card h3 {
+    font-size: 1.5rem;
+  }
+}
+.language-label img.country-flag {
+  width: 24px;
+  max-width: 24px;
+  min-width: 24px;
+  height: 18px;
+  object-fit: cover;
+  margin: 0.1rem 0.45rem 0.1rem 0;
+  flex: 0 0 24px;
+}
+.map-panel > a:not(.text-link) {
+  display: block;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid #e2e7ed;
+  line-height: 1.5;
+  font-size: 0.93rem;
+}
+.map-layer {
+  white-space: nowrap;
+}
+.map-panel .word-languages {
+  margin-top: 0.6rem;
+}
+.map-panel {
+  z-index: 2;
+}

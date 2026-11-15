@@ -12,8 +12,25 @@ export const mainResearchSlugs = [
   "samovar",
 ] as const;
 export function mainResearchWords(list: WordEntry[] = words) {
-  return mainResearchSlugs.flatMap((slug) =>
-    list.filter((w) => w.slug === slug && w.researchIncluded),
+  const lemmas = [
+    "матрёшка",
+    "калашников",
+    "дача",
+    "интеллигенция",
+    "погром",
+    "самиздат",
+    "спутник",
+    "самовар",
+  ];
+  const normalize = (s: string) =>
+    s.toLocaleLowerCase("ru").replaceAll("ё", "е").trim();
+  return mainResearchSlugs.flatMap((slug, index) =>
+    list.filter(
+      (w) =>
+        w.researchIncluded &&
+        (w.slug === slug ||
+          normalize(w.russianLemma) === normalize(lemmas[index])),
+    ),
   );
 }
 export const comparisonFields = {

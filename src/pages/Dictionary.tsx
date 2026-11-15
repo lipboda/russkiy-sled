@@ -1,4 +1,10 @@
 import { CompactWord, ContextLinks } from "../components/CompactWord";
+import {
+  publicCards,
+  publicProse,
+  correspondenceText,
+} from "../domain/publicPresentation";
+import { LanguageLabel } from "../components/LanguageLabel";
 import { correspondenceNames } from "../domain/universal";
 import { PublishedImage } from "../components/PublishedImage";
 import { useSession } from "../domain/session";
@@ -13,8 +19,6 @@ import {
 } from "../domain/research";
 import { searchWords } from "../domain/search";
 import {
-  Badge,
-  Notice,
   PageTitle,
   ResearchNotes,
   SearchBox,
@@ -29,7 +33,6 @@ export function Dictionary() {
   const [theme, setTheme] = useState(params.get("theme") ?? "");
   const [correspondenceType, setCorrespondenceType] = useState("");
   const [depth, setDepth] = useState("");
-  const [status, setStatus] = useState("");
   const [research, setResearch] = useState(false);
   const [sort, setSort] = useState("asc");
   const result = searchWords({
@@ -39,7 +42,6 @@ export function Dictionary() {
     theme,
     depth,
     correspondenceType,
-    status,
     research,
     sort,
   });
@@ -66,7 +68,7 @@ export function Dictionary() {
           <h2>Уточнить поиск</h2>
           <fieldset>
             <legend>Принимающий язык</legend>
-            {Object.entries(languageNames).map(([code, label]) => (
+            {Object.entries(languageNames).map(([code]) => (
               <label className="check" key={code}>
                 <input
                   type="checkbox"
@@ -79,7 +81,7 @@ export function Dictionary() {
                     )
                   }
                 />
-                {label}
+                <LanguageLabel code={code} />
               </label>
             ))}
           </fieldset>
@@ -125,15 +127,6 @@ export function Dictionary() {
               <option value="full">Подробный разбор</option>
             </select>
           </label>
-          <label>
-            Статус публикации
-            <select value={status} onChange={(e) => setStatus(e.target.value)}>
-              <option value="">Все статусы</option>
-              <option value="draft">Материал собирается</option>
-              <option value="provisional">Предварительный разбор</option>
-              <option value="verified">Подтверждённые</option>
-            </select>
-          </label>
           <label className="check">
             <input
               type="checkbox"
@@ -150,7 +143,6 @@ export function Dictionary() {
               setTheme("");
               setDepth("");
               setCorrespondenceType("");
-              setStatus("");
               setResearch(false);
               setSort("asc");
               setParams({});
@@ -208,61 +200,33 @@ export function Article({
           ← К словарю
         </Link>
         <CompactWord word={w} />
-        {w.notes.length > 0 && (
-          <details>
-            <summary>Сохранённые исследовательские материалы</summary>
-            <ResearchNotes word={w} />
-          </details>
-        )}
       </>
     );
+  const cards = publicCards(w);
   return (
     <>
       <Link className="back" to="/dictionary">
         ← К словарю
       </Link>
-      <PageTitle
-        eyebrow={
-          w.articleDepth === "full"
-            ? "Подробный исследовательский разбор"
-            : "Краткая исследовательская запись"
-        }
-        title={w.russianLemma}
-      >
-        <Badge /> Словарная статья · языковые соответствия
+      <PageTitle eyebrow="Сравнительное исследование" title={w.russianLemma}>
+        {w.russianStress && (
+          <span className="stress-word">{w.russianStress}</span>
+        )}
       </PageTitle>
-      <Notice />
       {w.coverId && <PublishedImage id={w.coverId} fallback={w.russianLemma} />}
-      {w.russianStress && <p>Написание и ударение: {w.russianStress}</p>}
-      {w.shortDescription && <p className="preline">{w.shortDescription}</p>}
-      {w.editorialNotes && (
-        <aside className="paper preline">
-          <strong>Редакционное примечание: </strong>
-          {w.editorialNotes}
-        </aside>
+      {w.shortDescription && (
+        <p className="article-definition">{w.shortDescription}</p>
       )}
-      {w.culturalContext && <p className="preline">{w.culturalContext}</p>}
-      {w.checkedAt && <p>Последняя проверка: {w.checkedAt}</p>}
-      {w.scientificStatus && (
-        <Badge>
-          {
-            {
-              confirmed: "Подтверждено",
-              partial: "Частично подтверждено",
-              pending: "Требует проверки",
-              disputed: "Спорно",
-              unconfirmed: "Не подтверждено",
-              insufficient: "Недостаточно данных",
-            }[w.scientificStatus]
-          }
-        </Badge>
-      )}
-      <div className="article-meta">
-        <span>Тема: {w.themes.join(", ")}</span>
-        <span>Происхождение: требует проверки</span>
-        <span>Аудит: 3 ноября 2026 · не дата внешней верификации</span>
-      </div>
+      <p className="eyebrow">{w.themes.join(" · ")}</p>
       <ResearchNotes word={w} fields={["origin"]} />
+      {w.culturalContext && (
+        <p className="preline">{publicProse(w.culturalContext)}</p>
+      )}
+      {publicProse(w.editorialNotes) && (
+        <p className="scientific-context preline">
+          {publicProse(w.editorialNotes)}
+        </p>
+      )}
       <section className="section">
         <div className="section-heading">
           <h2>Иностранные формы</h2>
@@ -273,85 +237,53 @@ export function Article({
               onChange={(e) => setLanguage(e.target.value)}
             >
               <option value="">Все языки</option>
-              {w.languages
-                .filter((l) => !l.hidden && !l.unpublished)
-                .map((l) => [l.languageCode, languageNames[l.languageCode]])
-                .map(([c, n]) => (
-                  <option key={c} value={c}>
-                    {n}
-                  </option>
-                ))}
+              {cards.map((l) => (
+                <option key={l.languageCode} value={l.languageCode}>
+                  {languageNames[l.languageCode]}
+                </option>
+              ))}
             </select>
           </label>
         </div>
-        <p>
-          Ниже воспроизводятся сообщения досье и реестра. Написания и их
-          нормативный статус не проверены заново.
-        </p>
-        {w.languages
-          .filter(
-            (l) =>
-              !l.hidden &&
-              !l.unpublished &&
-              (!language || l.languageCode === language),
-          )
+        {cards
+          .filter((l) => !language || l.languageCode === language)
           .map((l) => (
             <details className="language-card" key={l.languageCode} open>
               <summary>
-                <span>{languageNames[l.languageCode]}</span>
-                <Badge>
-                  {!l.reportedForms.length
-                    ? "Материал собирается"
-                    : {
-                        verified: "Подтверждено",
-                        partial: "Частично подтверждено",
-                        presumed: "Предположительно",
-                        pending: "Требует проверки",
-                        disputed: "Спорно",
-                        unknown: "Недостаточно данных",
-                      }[l.attestationStatus]}
-                </Badge>
+                <LanguageLabel code={l.languageCode} country={l.countryCode} />
+                <span>{l.reportedForms[0]}</span>
               </summary>
               <div className="language-content">
-                <p>{correspondenceNames[l.correspondenceType ?? "unknown"]}</p>
-                <ContextLinks links={l.links} ids={[]} />
-                {l.reportedForms.length ? (
-                  <ul>
-                    {l.reportedForms.map((f, i) => (
-                      <li key={i} lang={l.languageCode}>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>Подтверждённая форма не установлена в текущем аудите.</p>
+                <p className="foreign-form" lang={l.languageCode}>
+                  {l.reportedForms.join(" · ")}
+                </p>
+                {correspondenceText(l) && <p>{correspondenceText(l)}</p>}
+                {publicProse(l.comment) && (
+                  <p className="scientific-context">{publicProse(l.comment)}</p>
                 )}
                 {(
                   [
+                    ["Значение", l.meaning],
+                    ["Происхождение", l.origin],
                     ["Транскрипция", l.ipa],
                     ["Графическая адаптация", l.graphic],
                     ["Фонетическая адаптация", l.phonetic],
                     ["Семантическая адаптация", l.semantic],
-                    ["Грамматика", l.grammar],
-                    ["Значения", l.meaning],
-                    ["Регистр", l.register],
+                    ["Грамматическая адаптация", l.grammar],
+                    ["Сфера употребления", l.register],
                     ["Частотность", l.frequency],
                     ["Примеры", l.examples],
-                    ["Степень освоения", l.integration],
+                    ["Степень освоенности", l.integration],
                   ] as const
                 )
-                  .filter(([, v]) => v)
+                  .filter(([, v]) => publicProse(v))
                   .map(([label, value]) => (
                     <p className="preline" key={label}>
                       <strong>{label}: </strong>
-                      {value}
+                      {publicProse(value)}
                     </p>
                   ))}
-                {l.references.map((r, i) => (
-                  <SourceLink key={i} id={r.sourceId} pages={r.pages} />
-                ))}
-                {!l.references.length &&
-                  l.sourceIds.map((id) => <SourceLink key={id} id={id} />)}
+                <ContextLinks links={l.links} ids={l.sourceIds} />
               </div>
             </details>
           ))}
@@ -369,22 +301,15 @@ export function Article({
           "conclusion",
         ]}
       />
-      <ContextLinks links={w.links} ids={[]} />
       <section className="section">
-        <h2>Источники записи</h2>
-        <p>
-          Полные атрибуции сохранены в досье. Ссылки ведут к материалам
-          конкретной версии репозитория.
-        </p>
-        {w.sourceIds.map((id) => (
-          <SourceLink key={id} id={id} />
-        ))}
+        <h2>Источники статьи</h2>
+        <ContextLinks links={w.links} ids={w.sourceIds} />
       </section>
       <Link
-        className="button secondary"
+        className="text-link"
         to={"/report-error?word=" + encodeURIComponent(w.russianLemma)}
       >
-        Сообщить об ошибке в статье ↗
+        Сообщить об ошибке в статье →
       </Link>
     </>
   );
@@ -396,7 +321,6 @@ export function Comparison() {
   const [mode, setMode] = useState("word");
   const [language, setLanguage] = useState<Language>("en-US");
   const [theme, setTheme] = useState("");
-  const [status, setStatus] = useState("");
   const [scope, setScope] = useState("research");
   const candidates = scope === "research" ? mainResearchWords() : words;
   const codes =
@@ -416,7 +340,6 @@ export function Comparison() {
           setScope(e.target.value);
           setLanguage("en-US");
           setTheme("");
-          setStatus("");
         }}
       >
         <option value="research">Основное исследование: 8 слов, 3 языка</option>
@@ -440,10 +363,9 @@ export function Comparison() {
         eyebrow="Три языка · одна исследовательская рамка"
         title="Сравнительное исследование"
       >
-        Сопоставляйте написания и изучайте оговорки аудита. Не считайте пробелы
-        доказательством отсутствия заимствования.
+        Сопоставляйте форму, значение и способы адаптации. Словарная фиксация и
+        степень освоения рассматриваются отдельно.
       </PageTitle>
-      <Notice />
       {scopeControl}
       {logged && (
         <Link className="button" to={"/admin?word=" + w.id + "&tab=languages"}>
@@ -453,7 +375,7 @@ export function Comparison() {
       <p>
         {scope === "research"
           ? "Основной набор: Матрёшка → Калашников → Дача → Интеллигенция → Погром → Самиздат → Спутник → Самовар. Другие материалы остаются в общем словаре."
-          : "Общее словарное сравнение включает опубликованные языковые формы. Их научный статус показан отдельно; это не расширение основной исследовательской выборки."}
+          : "Общее словарное сравнение включает опубликованные языковые формы. Переводы, собственные имена и другие соответствия рассматриваются отдельно от заимствований; основная исследовательская выборка сохраняется."}
       </p>
       <label>
         Режим сравнения
@@ -519,19 +441,6 @@ export function Comparison() {
                 ))}
               </select>
             </label>
-            <label>
-              Достоверность формы
-              <select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              >
-                <option value="">Все статусы</option>
-                <option value="verified">Подтверждено</option>
-                <option value="pending">Требует проверки</option>
-                <option value="disputed">Спорно</option>
-                <option value="unknown">Не установлено</option>
-              </select>
-            </label>
           </div>
           <div
             className="research-table"
@@ -541,25 +450,19 @@ export function Comparison() {
           >
             <table>
               <caption>
-                {languageNames[language]} · {comparisonFields[field]}. Только
-                опубликованные данные.
+                <LanguageLabel code={language} /> · {comparisonFields[field]}.
+                Только опубликованные данные.
               </caption>
               <thead>
                 <tr>
                   <th scope="col">Слово</th>
                   <th scope="col">{comparisonFields[field]}</th>
-                  <th scope="col">Достоверность формы</th>
+                  <th scope="col">Иностранная форма</th>
                 </tr>
               </thead>
               <tbody>
                 {candidates
-                  .filter(
-                    (entry) =>
-                      (!theme || entry.themes.includes(theme)) &&
-                      (!status ||
-                        entry.languages.find((l) => l.languageCode === language)
-                          ?.attestationStatus === status),
-                  )
+                  .filter((entry) => !theme || entry.themes.includes(theme))
                   .map((entry) => {
                     const card = entry.languages.find(
                       (l) => l.languageCode === language,
@@ -577,22 +480,11 @@ export function Comparison() {
                               ? card.sourceIds.map((id) => (
                                   <SourceLink key={id} id={id} />
                                 ))
-                              : languageComparison(card, field) ||
+                              : publicProse(languageComparison(card, field)) ||
                                 "Не установлено для этого языка; см. сводные замечания в статье."
                             : "Данные пока не собраны"}
                         </td>
-                        <td>
-                          {card
-                            ? {
-                                verified: "Подтверждено",
-                                partial: "Частично подтверждено",
-                                presumed: "Предположительно",
-                                pending: "Требует проверки",
-                                disputed: "Спорно",
-                                unknown: "Не установлено",
-                              }[card.attestationStatus]
-                            : "Нет карточки"}
-                        </td>
+                        <td>{card?.reportedForms.join(" · ") || "—"}</td>
                       </tr>
                     );
                   })}
@@ -611,28 +503,22 @@ export function Comparison() {
               if (!l)
                 return (
                   <section className="paper" key={code}>
-                    <h2>{languageNames[code as Language]}</h2>
+                    <h2>
+                      <LanguageLabel code={code} />
+                    </h2>
                     <p>Данные пока не собраны.</p>
                   </section>
                 );
               return (
                 <section className="paper" key={l.languageCode}>
-                  <p className="eyebrow">{l.languageCode}</p>
-                  <h2>{languageNames[l.languageCode]}</h2>
-                  <Badge>
-                    {
-                      {
-                        verified: "Подтверждено",
-                        partial: "Частично подтверждено",
-                        presumed: "Предположительно",
-                        pending: "Требует проверки",
-                        disputed: "Спорно",
-                        unknown: "Не установлено",
-                      }[l.attestationStatus]
-                    }
-                  </Badge>
+                  <h2>
+                    <LanguageLabel
+                      code={l.languageCode}
+                      country={l.countryCode}
+                    />
+                  </h2>
                   <p className="preline">
-                    {languageComparison(l, field) ||
+                    {publicProse(languageComparison(l, field)) ||
                       (field === "sources"
                         ? ""
                         : "Отдельное наблюдение для языка не установлено.")}
@@ -654,15 +540,10 @@ export function Comparison() {
               );
             })}
           </div>
-          <div className="paper">
-            <p className="eyebrow">
-              Сводный комментарий аудита · не отдельный вывод для каждого языка
-            </p>
-            <ResearchNotes
-              word={w}
-              fields={[field === "integration" ? "issues" : field]}
-            />
-          </div>
+          <ResearchNotes
+            word={w}
+            fields={[field === "integration" ? "conclusion" : field]}
+          />
           <Link className="button" to={"/dictionary/" + w.slug}>
             Все материалы о слове ↗
           </Link>

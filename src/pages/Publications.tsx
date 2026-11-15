@@ -4,6 +4,7 @@ import { PublishedImage } from "../components/PublishedImage";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { editorial } from "../domain/editorial";
+import { dictionaryDayWord } from "../domain/publicPresentation";
 import { words } from "../domain/catalog";
 import { useSession } from "../domain/session";
 import type { Publication } from "../domain/publications";
@@ -82,10 +83,7 @@ function PublishedArticle({
               embedded
             />
           ) : (
-            <p>
-              Связанная словарная статья сейчас недоступна. Черновые данные не
-              показываются.
-            </p>
+            <p>Связанная словарная статья сейчас недоступна.</p>
           )}
           {post.comment && <p>{post.comment}</p>}
         </>
@@ -102,11 +100,7 @@ function PublishedArticle({
             const w = words.find((w) => w.id === id);
             return w ? (
               <p key={id}>
-                <Link to={"/dictionary/" + w.slug}>{w.russianLemma}</Link> ·
-                научный статус:{" "}
-                {w.publicationStatus === "verified"
-                  ? "Подтверждено"
-                  : "Требует проверки"}
+                <Link to={"/dictionary/" + w.slug}>{w.russianLemma}</Link>
               </p>
             ) : (
               <p key={id}>Связанная запись сейчас не опубликована.</p>
@@ -260,7 +254,12 @@ export function DayWord() {
           />
         </label>
       </div>
-      {!posts.length ? (
+      {!posts.length && !archive && !date && dictionaryDayWord(words) ? (
+        <>
+          <p className="eyebrow">Сегодня в словаре</p>
+          <CompactWord word={dictionaryDayWord(words)!} embedded />
+        </>
+      ) : !posts.length ? (
         <div className="paper empty">
           <h2>Новые публикации скоро появятся</h2>
           <p>

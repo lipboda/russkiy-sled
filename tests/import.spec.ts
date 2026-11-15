@@ -69,6 +69,10 @@ test("final content preview keeps research eight by three and compares all publi
   await expect(page.locator("main")).not.toContainText("sourceTableCells");
   await expect(page.locator("main")).not.toContainText("originalResearchCard");
   await page.goto("/map");
+  await expect(
+    page.locator(".world-map path.focus-country").first(),
+  ).toBeVisible();
+  await page.getByLabel("Слой карты").selectOption("borrowings");
   await expect(page.locator(".world-map path.focus-country")).toHaveCount(0);
   await expect(page.locator(".world-map text,.world-map title")).toHaveCount(0);
 });

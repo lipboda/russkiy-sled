@@ -1,0 +1,39 @@
+{
+  "scope": "Isolated temporary SQLite populated solely for the test; MacBook database was not accessed",
+  "before": {
+    "mappedDrafts": 28,
+    "research": 8,
+    "additional": 20
+  },
+  "first": {
+    "database": "temporary test database",
+    "backup": "consistent backup created before publication",
+    "publishedFinal": 28,
+    "main": 8,
+    "additional": 20,
+    "researchCards": 24,
+    "changed": 28,
+    "skipped": 0,
+    "conflicts": 0,
+    "publicDictionaryTotal": 28,
+    "scientificStatusesChanged": false
+  },
+  "repeat": {
+    "changed": 0,
+    "skipped": 28,
+    "extraHistoryRows": 0
+  },
+  "after": {
+    "publicDictionary": 28,
+    "languages": 9,
+    "researchCards": 24,
+    "additionalForms": 40,
+    "correspondenceLinks": 64,
+    "confirmedBorrowingLinks": 0,
+    "storedRows": 66,
+    "scientificStatusesPreserved": true,
+    "userTablesPreserved": true,
+    "integrity": "ok",
+    "backupIntegrity": "ok"
+  }
+}

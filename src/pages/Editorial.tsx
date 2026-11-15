@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { words } from "../domain/catalog";
 export { Journal, DayWord } from "./Publications";
-import { Badge, Notice, PageTitle, ResearchNotes } from "../components/Common";
+import { LanguageLabel } from "../components/LanguageLabel";
+import { publicCards, publicProse } from "../domain/publicPresentation";
+import { PageTitle, ResearchNotes } from "../components/Common";
 import { Missing } from "./Dictionary";
 export function Journey() {
   const { slug } = useParams();
@@ -16,11 +18,21 @@ export function Journey() {
         <PageTitle eyebrow="Путешествие слова" title={w.russianLemma}>
           История слова, а не вымышленная линия на карте.
         </PageTitle>
-        <Notice />
         <div className="journey-line">
           <span>Русское слово</span>
           <span>→</span>
-          <span>Маршруты и посредники требуют проверки</span>
+          <span>Языковые соответствия</span>
+        </div>
+        <div className="journey-languages">
+          {publicCards(w).map((l) => (
+            <section className="paper" key={l.languageCode}>
+              <h2>
+                <LanguageLabel code={l.languageCode} country={l.countryCode} />
+              </h2>
+              <p lang={l.languageCode}>{l.reportedForms.join(" · ")}</p>
+              {l.origin && <p>{publicProse(l.origin)}</p>}
+            </section>
+          ))}
         </div>
         <ResearchNotes word={w} fields={["origin", "chronology", "issues"]} />
         <Link className="button" to={"/dictionary/" + w.slug}>
@@ -37,7 +49,6 @@ export function Journey() {
         Реконструкция маршрутов начинается с источников. Ниже —
         исследовательские истории с сохранёнными вопросами и оговорками.
       </PageTitle>
-      <Notice />
       <div className="word-grid">
         {words
           .filter((w) => w.researchIncluded)
@@ -49,7 +60,15 @@ export function Journey() {
             >
               <p className="eyebrow">Русский → иностранные языки</p>
               <h2>{w.russianLemma} ↗</h2>
-              <Badge>Маршрут требует проверки</Badge>
+              <div className="word-languages">
+                {publicCards(w).map((l) => (
+                  <LanguageLabel
+                    key={l.languageCode}
+                    code={l.languageCode}
+                    country={l.countryCode}
+                  />
+                ))}
+              </div>
             </Link>
           ))}
       </div>

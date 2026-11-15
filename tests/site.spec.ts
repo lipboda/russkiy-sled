@@ -55,6 +55,7 @@ test("map zoom and country panel", async ({ page }) => {
   );
   await page.getByLabel("Выбрать страну").selectOption("051");
   await expect(page.locator(".map-panel h2")).toHaveText("Армения");
+  await page.getByLabel("Слой карты").selectOption("borrowings");
   await expect(page.locator(".map-panel")).toContainText(
     "Пока нет подтверждённых слов",
   );

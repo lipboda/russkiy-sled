@@ -2,6 +2,12 @@ import { useEffect, useId, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowUpRight, Search } from "lucide-react";
 import { searchWords } from "../domain/search";
+import {
+  publicCards,
+  publicProse,
+  languageCount,
+} from "../domain/publicPresentation";
+import { LanguageLabel } from "./LanguageLabel";
 import { fieldNames, sources, type WordEntry } from "../domain/catalog";
 export function Badge({
   children = "Материал собирается",
@@ -12,11 +18,11 @@ export function Badge({
 }
 export function Notice() {
   return (
-    <div className="notice">
-      <span className="dot" /> Исследовательская версия · Формы и выводы из
-      досье требуют проверки первоисточников. Отсутствие данных не означает
-      отсутствие слова в языке.
-    </div>
+    <p className="scientific-context">
+      Словарная фиксация, происхождение и степень освоения рассматриваются
+      отдельно. Отсутствие формы в источнике не доказывает её отсутствия в
+      языке.
+    </p>
   );
 }
 export function PageTitle({
@@ -99,21 +105,33 @@ export function SearchBox({
   );
 }
 export function WordCard({ word: w }: { word: WordEntry }) {
+  const cards = publicCards(w);
   return (
     <Link className="word-card" to={"/dictionary/" + w.slug}>
       <div className="flex justify-between gap-4">
         <span className="eyebrow">{w.themes[0]}</span>
         <ArrowUpRight size={18} />
       </div>
-      <h3>{w.russianLemma}</h3>
+      <h3>{w.russianStress || w.russianLemma}</h3>
+      {w.shortDescription && <p className="clamp">{w.shortDescription}</p>}
       <p className="forms-preview">
-        {w.languages.flatMap((l) => l.reportedForms.slice(0, 1)).join(" · ") ||
-          "Иностранные формы уточняются"}
+        {cards.flatMap((l) => l.reportedForms.slice(0, 1)).join(" · ")}
       </p>
+      <div className="word-languages">
+        {cards.map((l) => (
+          <LanguageLabel
+            key={l.languageCode}
+            code={l.languageCode}
+            country={l.countryCode}
+          />
+        ))}
+      </div>
       <div className="card-bottom">
-        <Badge />
+        <span>{languageCount(cards.length)}</span>
         <span>
-          {w.articleDepth === "full" ? "Подробный разбор" : "Краткая запись"}
+          {w.researchIncluded
+            ? "Сравнительное исследование"
+            : "Словарная статья"}
         </span>
       </div>
     </Link>
@@ -144,35 +162,31 @@ export function SourceLink({
 export function ResearchNotes({
   word,
   fields,
+  showSources = true,
 }: {
   word: WordEntry;
   fields?: string[];
+  showSources?: boolean;
 }) {
-  const notes = word.notes.filter((n) => !fields || fields.includes(n.field));
+  const notes = word.notes.filter(
+    (n) => (!fields || fields.includes(n.field)) && publicProse(n.text),
+  );
   return notes.length ? (
     <div className="notes">
       {notes.map((n) => (
         <section key={n.field}>
           <div className="flex flex-wrap items-center gap-3">
-            <h2>{fieldNames[n.field]}</h2>
-            <Badge>
-              {n.status === "disputed"
-                ? "Есть расхождения"
-                : "По материалам аудита"}
-            </Badge>
+            <h2>{fieldNames[n.field] || "Научное пояснение"}</h2>
           </div>
-          <p className="preline">{n.text}</p>
+          <p className="preline">{publicProse(n.text)}</p>
           <div className="source-list">
-            {n.references.map((r, i) => (
-              <SourceLink key={i} id={r.sourceId} pages={r.pages} />
-            ))}
+            {showSources &&
+              n.references.map((r, i) => (
+                <SourceLink key={i} id={r.sourceId} pages={r.pages} />
+              ))}
           </div>
         </section>
       ))}
     </div>
-  ) : (
-    <div className="empty">
-      Материал собирается. Подробный анализ и библиография ещё не подготовлены.
-    </div>
-  );
+  ) : null;
 }

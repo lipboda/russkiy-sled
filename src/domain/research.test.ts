@@ -33,3 +33,11 @@ it("generates URL slugs from stressed Russian lemmas", () => {
   expect(wordSlug("самова́р")).toBe("samovar");
   expect(wordSlug("Слово — тест!")).toBe("slovo-test");
 });
+
+it("keeps the scientific order when an imported existing word retains a custom URL", () => {
+  const list = structuredClone(catalog.words);
+  const word = list.find((w) => w.slug === "matryoshka")!;
+  word.slug = "existing-owner-url";
+  expect(mainResearchWords(list)[0].id).toBe(word.id);
+  expect(mainResearchWords(list)).toHaveLength(8);
+});

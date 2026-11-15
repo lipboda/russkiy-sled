@@ -1,5 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
+import { LanguageLabel } from "../components/LanguageLabel";
+import {
+  publicCards,
+  dictionaryDayWord,
+  languageCount,
+} from "../domain/publicPresentation";
 import { words, publicLoad } from "../domain/catalog";
 import { editorial } from "../domain/editorial";
 import { mainResearchWords } from "../domain/research";
@@ -16,10 +22,7 @@ export function Home() {
     .flatMap((w) =>
       w.languages.filter(
         (l) =>
-          !l.hidden &&
-          !l.unpublished &&
-          l.attestationStatus === "verified" &&
-          l.reportedForms.some((f) => f.trim()),
+          !l.hidden && !l.unpublished && l.reportedForms.some((f) => f.trim()),
       ),
     );
   const languages = new Set(forms.map((l) => l.languageCode)),
@@ -29,6 +32,7 @@ export function Home() {
   const featured = [...words]
     .sort((a, b) => a.russianLemma.localeCompare(b.russianLemma, "ru"))
     .slice(0, 6);
+  const dayWord = dictionaryDayWord(words);
   const daily = editorial.daily[0],
     linked = words.find((w) => w.id === daily?.wordIds[0]);
   return (
@@ -58,11 +62,11 @@ export function Home() {
           <dd>{publicLoad.catalog === "ready" ? words.length : "—"}</dd>
         </div>
         <div>
-          <dt>Языков с подтверждёнными формами</dt>
+          <dt>Представленных языков</dt>
           <dd>{publicLoad.catalog === "ready" ? languages.size : "—"}</dd>
         </div>
         <div>
-          <dt>Стран с подтверждёнными связями</dt>
+          <dt>Опорных стран</dt>
           <dd>{publicLoad.catalog === "ready" ? countries.size : "—"}</dd>
         </div>
         <div>
@@ -97,8 +101,19 @@ export function Home() {
                 {w.shortDescription && (
                   <p className="clamp">{w.shortDescription}</p>
                 )}
+                <div className="word-languages">
+                  {publicCards(w)
+                    .slice(0, 3)
+                    .map((l) => (
+                      <LanguageLabel
+                        key={l.languageCode}
+                        code={l.languageCode}
+                        country={l.countryCode}
+                      />
+                    ))}
+                </div>
                 <small>
-                  {w.languages.length} языковых карточек ·{" "}
+                  {languageCount(publicCards(w).length)} ·{" "}
                   {w.articleDepth === "full"
                     ? "Подробная статья"
                     : "Краткая карточка"}
@@ -122,9 +137,9 @@ export function Home() {
             изменяются в новых языковых системах.
           </p>
           <p className="muted">
-            На карте выделяются только страны с подтверждёнными связями. Наличие
-            формы в языке не доказывает её распространение во всех странах этого
-            языка.
+            Карта показывает словарные соответствия; подтверждённые
+            заимствования выделены отдельным слоем. Наличие формы в языке не
+            доказывает её распространение во всех странах этого языка.
           </p>
           <Link className="text-link" to="/map">
             Исследовать карту →
@@ -195,6 +210,30 @@ export function Home() {
               </p>
               <Link to={"/word-of-the-day/issue/" + daily.slug}>
                 Открыть выпуск →
+              </Link>
+            </div>
+          </article>
+        ) : dayWord ? (
+          <article className="home-daily">
+            <div>
+              <p className="eyebrow">Сегодня в словаре</p>
+              <h3>
+                <Link to={"/dictionary/" + dayWord.slug}>
+                  {dayWord.russianStress || dayWord.russianLemma}
+                </Link>
+              </h3>
+              <p>{dayWord.shortDescription}</p>
+              <div className="word-languages">
+                {publicCards(dayWord).map((l) => (
+                  <LanguageLabel
+                    key={l.languageCode}
+                    code={l.languageCode}
+                    country={l.countryCode}
+                  />
+                ))}
+              </div>
+              <Link to={"/dictionary/" + dayWord.slug}>
+                История и иностранные формы →
               </Link>
             </div>
           </article>

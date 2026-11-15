@@ -2,8 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { type WordEntry, words, languageNames } from "../domain/catalog";
 import { editorial } from "../domain/editorial";
-import { correspondenceNames } from "../domain/universal";
-import { SourceLink } from "./Common";
+import {
+  publicCards,
+  publicProse,
+  correspondenceText,
+} from "../domain/publicPresentation";
+import { LanguageLabel } from "./LanguageLabel";
+import { SourceLink, ResearchNotes } from "./Common";
 import { PublishedImage } from "./PublishedImage";
 import { useSession } from "../domain/session";
 export function ContextLinks({
@@ -44,7 +49,7 @@ export function CompactWord({
 }) {
   const [language, setLanguage] = useState("");
   const logged = useSession();
-  const cards = w.languages.filter((l) => !l.hidden && !l.unpublished),
+  const cards = publicCards(w),
     card = cards.find((l) => l.languageCode === language) ?? cards[0];
   const def = editorial.languages.find((l) => l.code === card?.languageCode);
   return (
@@ -81,7 +86,7 @@ export function CompactWord({
                 id={"tab-" + w.id + "-" + l.languageCode}
                 onClick={() => setLanguage(l.languageCode)}
               >
-                {languageNames[l.languageCode] ?? l.languageCode}
+                <LanguageLabel code={l.languageCode} country={l.countryCode} />
               </button>
             ))}
           </div>
@@ -120,37 +125,23 @@ export function CompactWord({
             {card.ipa && <p className="ipa">{card.ipa}</p>}
             {card.transliteration && <p>{card.transliteration}</p>}
             {card.meaning && <p>{card.meaning}</p>}
-            <p className="badge">
-              {correspondenceNames[card.correspondenceType ?? "unknown"]}
-            </p>
-            {card.comment && <p>{card.comment}</p>}
-            <details>
-              <summary>Достоверность и происхождение</summary>
-              <p>
-                Форма:{" "}
-                {
-                  {
-                    verified: "Подтверждено",
-                    partial: "Частично подтверждено",
-                    presumed: "Предположительно",
-                    pending: "Требует проверки",
-                    disputed: "Спорно",
-                    unknown: "Не установлено",
-                  }[card.attestationStatus]
-                }
-                . Тип соответствия и путь заимствования оцениваются независимо.
-              </p>
-            </details>
+            {card.origin && (
+              <p className="preline">{publicProse(card.origin)}</p>
+            )}
+            {correspondenceText(card) && <p>{correspondenceText(card)}</p>}
+            {publicProse(card.comment) && <p>{publicProse(card.comment)}</p>}
             <ContextLinks links={card.links} ids={card.sourceIds} />
           </div>
         </>
       )}
-      <ContextLinks links={w.links} ids={w.sourceIds} />
-      {w.editorialNotes && (
-        <aside className="paper preline">
-          <strong>Редакционное примечание: </strong>
-          {w.editorialNotes}
-        </aside>
+      <ResearchNotes word={w} fields={["origin"]} showSources={false} />
+      <ContextLinks
+        links={w.links}
+        ids={w.sourceIds.filter((id) => !card?.sourceIds.includes(id))}
+      />
+
+      {publicProse(w.editorialNotes) && (
+        <p className="preline">{publicProse(w.editorialNotes)}</p>
       )}
       {(w.relatedWordIds ?? []).map((id) => {
         const related = words.find((w) => w.id === id);

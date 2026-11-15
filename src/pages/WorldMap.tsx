@@ -11,7 +11,9 @@ const russianCountryName = (id: string) =>
   "Страна";
 import { Link } from "react-router-dom";
 import { Minus, Plus, RotateCcw, X } from "lucide-react";
-import { languageNames, verifiedWords, type Language } from "../domain/catalog";
+import { languageNames, words, sources } from "../domain/catalog";
+import { CountryFlag, LanguageLabel } from "../components/LanguageLabel";
+import { mapConnections, type MapLayer } from "../domain/mapConnections";
 
 const topology = atlas as unknown as Topology<{
   countries: GeometryCollection<{ name: string }>;
@@ -46,6 +48,7 @@ const iso: Record<string, string> = Object.fromEntries(
   }),
 );
 export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
+  const [layer, setLayer] = useState<MapLayer>("correspondences");
   const [selected, setSelected] = useState<string | null>(null);
   const [language, setLanguage] = useState("");
   const [zoom, setZoom] = useState(1);
@@ -60,14 +63,21 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
     setName(names[id] ?? label ?? "Выбранная страна");
     setLanguage("");
   }
-  const found = verifiedWords().filter((w) =>
-    w.languages.some(
-      (l) =>
-        l.attestationStatus === "verified" &&
-        l.countryCode === iso[selected ?? ""] &&
-        (!language || l.languageCode === language),
-    ),
+  const connections = mapConnections(words, sources, layer);
+  const linkedCountries = new Set(connections.map((c) => c.card.countryCode));
+  const countryConnections = connections.filter(
+    (c) => c.card.countryCode === iso[selected ?? ""],
   );
+  const availableLanguages = [
+    ...new Set(countryConnections.map((c) => c.card.languageCode)),
+  ];
+  const found = [
+    ...new Map(
+      countryConnections
+        .filter((c) => !language || c.card.languageCode === language)
+        .map((c) => [c.word.id, c.word]),
+    ).values(),
+  ];
   if (preview)
     return (
       <svg
@@ -78,12 +88,7 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
         <rect width="900" height="500" fill="#F8F9FB" />
         {countries.map((c) => {
           const id = String(c.id).padStart(3, "0");
-          const linked = verifiedWords().some((w) =>
-            w.languages.some(
-              (l) =>
-                l.attestationStatus === "verified" && l.countryCode === iso[id],
-            ),
-          );
+          const linked = linkedCountries.has(iso[id]);
           return (
             <path
               key={id}
@@ -99,7 +104,12 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
   return (
     <>
       <h1 className="atlas-title">Карта русского следа</h1>
-      <div className="map-layout">
+      <div
+        className="map-layout"
+        onKeyDown={(e) => {
+          if (e.key === "Escape") setSelected(null);
+        }}
+      >
         <section className="map-area">
           <div className="map-toolbar">
             <div className="map-controls">
@@ -120,11 +130,25 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
                 onClick={() => {
                   setZoom(1);
                   setOffset({ x: 0, y: 0 });
+                  setSelected(null);
                 }}
               >
                 <RotateCcw />
               </button>
             </div>
+            <label className="map-layer">
+              Слой карты
+              <select
+                value={layer}
+                onChange={(e) => {
+                  setLayer(e.target.value as MapLayer);
+                  setLanguage("");
+                }}
+              >
+                <option value="correspondences">Словарные соответствия</option>
+                <option value="borrowings">Подтверждённые заимствования</option>
+              </select>
+            </label>
             <span>Масштаб {zoom.toFixed(1)}×</span>
           </div>
           <svg
@@ -185,13 +209,7 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
                       "country " +
                       (selected === id
                         ? "selected"
-                        : verifiedWords().some((w) =>
-                              w.languages.some(
-                                (l) =>
-                                  l.attestationStatus === "verified" &&
-                                  l.countryCode === iso[id],
-                              ),
-                            )
+                        : linkedCountries.has(iso[id])
                           ? "focus-country"
                           : "")
                     }
@@ -234,9 +252,12 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
             </div>
           </div>
           <p className="map-credit">
-            Границы: Natural Earth, масштаб 1:110 млн (public domain),
-            world-atlas. География не обозначает доказанные маршруты
-            заимствования. Для малых стран используйте список.
+            Опорная страна обозначает язык или вариант, а не частотность и не
+            территорию исключительного употребления. Словарные соответствия
+            включают также переводы и собственные имена. Границы: Natural Earth,
+            масштаб 1:110 млн (public domain), world-atlas. География не
+            обозначает доказанные маршруты заимствования. Для малых стран
+            используйте список.
           </p>
         </section>
         {selected ? (
@@ -249,7 +270,10 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
               <X />
             </button>
             <p className="eyebrow">Выбранная страна</p>
-            <h2>{name}</h2>
+            <h2>
+              <CountryFlag country={iso[selected]} />
+              {name}
+            </h2>
             <label>
               Язык
               <select
@@ -257,23 +281,24 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
                 onChange={(e) => setLanguage(e.target.value)}
               >
                 <option value="">Все языки страны</option>
-                {Object.entries(languageNames)
-                  .filter(
-                    ([c]) =>
-                      c ===
-                      { "840": "en-US", "250": "fr-FR", "051": "hy-AM" }[
-                        selected
-                      ],
-                  )
-                  .map(([c, n]) => (
-                    <option key={c} value={c as Language}>
-                      {n}
-                    </option>
-                  ))}
+                {availableLanguages.map((c) => (
+                  <option key={c} value={c}>
+                    {languageNames[c] || c}
+                  </option>
+                ))}
               </select>
             </label>
             <strong className="map-count">{found.length}</strong>
-            <p>подтверждённых слов</p>
+            <p>
+              {layer === "borrowings"
+                ? "слов с подтверждёнными заимствованиями"
+                : "слов со словарными соответствиями"}
+            </p>
+            <div className="word-languages">
+              {availableLanguages.map((code) => (
+                <LanguageLabel key={code} code={code} country={iso[selected]} />
+              ))}
+            </div>
             {found.length ? (
               found.map((w) => (
                 <Link key={w.id} to={"/dictionary/" + w.slug}>
@@ -282,16 +307,20 @@ export function WorldMap({ preview = false }: { preview?: boolean } = {}) {
               ))
             ) : (
               <div className="empty">
-                <h3>Пока нет подтверждённых слов</h3>
+                <h3>
+                  {layer === "borrowings"
+                    ? "Пока нет подтверждённых слов"
+                    : "Нет словарных соответствий"}
+                </h3>
                 <p>
-                  {iso[selected]
-                    ? "Материалы об этой стране есть в исследовании, но требуют проверки первоисточников."
-                    : "Страна пока не входит в основной круг исследования."}
+                  {layer === "borrowings"
+                    ? "Для этого слоя нужны подтверждённые источники и установленный тип заимствования. Посмотрите также слой словарных соответствий."
+                    : "В опубликованном словаре нет материалов, привязанных к этой опорной стране."}
                 </p>
               </div>
             )}
             <Link className="text-link" to="/dictionary">
-              Изучить исследовательские записи ↗
+              Открыть словарь ↗
             </Link>
           </aside>
         ) : null}
