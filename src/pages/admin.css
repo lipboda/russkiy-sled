@@ -163,3 +163,60 @@
     grid-template-columns: 1fr;
   }
 }
+.category-options {
+  max-height: 200px;
+  overflow: auto;
+}
+.language-tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  max-width: 100%;
+  padding-bottom: 0.5rem;
+}
+.language-tabs button {
+  flex-shrink: 0;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ded9cf;
+  background: #fffdf8;
+  cursor: pointer;
+}
+.language-tabs [aria-selected="true"],
+.language-tabs [aria-pressed="true"] {
+  background: #203a60;
+  color: white;
+}
+.visual-editor {
+  border: 1px solid #ded9cf;
+  background: #fffdf8;
+}
+.visual-toolbar {
+  position: sticky;
+  top: 4rem;
+  z-index: 3;
+  padding: 0.6rem;
+  background: #f6f3eb;
+  border-bottom: 1px solid #ded9cf;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+.visual-toolbar button[aria-pressed="true"] {
+  background: #203a60;
+  color: white;
+}
+.visual-editor .tiptap {
+  min-height: 380px;
+  padding: 2rem;
+  outline-offset: -3px;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.8;
+}
+.visual-editor.is-large .tiptap {
+  min-height: 70vh;
+}
+.visual-editor img {
+  max-width: 100%;
+}

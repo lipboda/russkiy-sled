@@ -15,7 +15,7 @@ import sharp from "sharp";
 import { openStore, list, publicCatalog, save, root } from "./store.mjs";
 import { createApp } from "./index.mjs";
 import { passwordHash } from "./manage.mjs";
-import { publicResources, saveResource, projectDate } from "./stage2.mjs";
+import { publicResources, projectDate } from "./stage2.mjs";
 const seed = JSON.parse(
   readFileSync(join(root, "src/data/catalog.json"), "utf8"),
 );
@@ -69,7 +69,9 @@ test("upgrade of an actual stage-one schema backs up first and preserves owner, 
     assert.equal(list(db)[0].version, 2);
     assert.equal(publicCatalog(db).words[0].slug, seed.words[0].slug);
     assert.equal(db.prepare("SELECT COUNT(*) AS n FROM history").get().n, 1);
-    const backups = readdirSync(join(dir, "backups"));
+    const backups = readdirSync(join(dir, "backups")).filter((n) =>
+      n.startsWith("before-stage2-"),
+    );
     assert.equal(backups.length, 1);
     const backup = new DatabaseSync(join(dir, "backups", backups[0]), {
       readOnly: true,
@@ -93,7 +95,12 @@ test("upgrade of an actual stage-one schema backs up first and preserves owner, 
     assert.equal(publicResources(db, "journal").length, 3);
     db.close();
     db = openStore(path);
-    assert.equal(readdirSync(join(dir, "backups")).length, 1);
+    assert.equal(
+      readdirSync(join(dir, "backups")).filter((n) =>
+        n.startsWith("before-stage2-"),
+      ).length,
+      1,
+    );
     assert.equal(list(db).length, 58);
   } finally {
     db.close();
@@ -298,16 +305,33 @@ test("journal, daily archives and scheduling honor timezone and retain published
       projectDate(db, new Date("2026-01-01T18:00:00Z")),
       "2026-01-02",
     );
-    const daily = saveResource(db, "daily", {
-      data: make("daily-one", "2026-01-01"),
-      state: "published",
-      version: 0,
-    });
-    saveResource(db, "daily", {
-      data: make("daily-two", "2026-01-02"),
-      state: "scheduled",
-      version: 0,
-    });
+    // Legacy stage-two snapshots retain their original calendar dates and schedules.
+    const legacy = (id, date, state) => {
+      const data = {
+        ...make(id, date),
+        intro: "",
+        author: "",
+        category: "",
+        publishAt: "",
+        coverId: "",
+        wordIds: [],
+        sourceIds: [],
+        origin: "",
+        adaptation: "",
+        examples: "",
+      };
+      db.prepare("INSERT INTO resources VALUES(?,?,?,?,?,1,?,NULL)").run(
+        "daily",
+        id,
+        JSON.stringify(data),
+        JSON.stringify(data),
+        state,
+        new Date().toISOString(),
+      );
+      return { id };
+    };
+    const daily = legacy("daily-one", "2026-01-01", "published");
+    legacy("daily-two", "2026-01-02", "scheduled");
     assert.equal(
       publicResources(db, "daily", new Date("2026-01-01T16:00:00Z")).length,
       1,
@@ -316,22 +340,14 @@ test("journal, daily archives and scheduling honor timezone and retain published
       publicResources(db, "daily", new Date("2026-01-01T18:00:00Z")).length,
       2,
     );
-    assert.throws(
-      () =>
-        saveResource(db, "daily", {
-          data: make("duplicate-date", "2026-01-02"),
-          state: "published",
-          version: 0,
-        }),
-      /активный выпуск/,
-    );
-    saveResource(db, "daily", {
-      data: make("draft-date", "2026-01-02"),
-      state: "draft",
-      version: 0,
-    });
+    // Stage three permits more than one publication on the same day.
+    legacy("same-date", "2026-01-02", "published");
     assert.equal(
-      publicResources(db, "daily", new Date("2026-01-01T18:00:00Z"))[1].id,
+      publicResources(db, "daily", new Date("2026-01-01T18:00:00Z")).length,
+      3,
+    );
+    assert.equal(
+      publicResources(db, "daily", new Date("2026-01-01T18:00:00Z")).at(-1).id,
       daily.id,
     );
     const source = {

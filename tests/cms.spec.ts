@@ -18,6 +18,12 @@ test("owner edits real dictionary, previews, publishes, archives and restores a 
     .getByLabel("Русское слово", { exact: true })
     .fill("Тестовое слово");
   await page
+    .getByLabel("Краткое определение или описание", { exact: true })
+    .fill("Описание тестовой карточки.");
+  await page
+    .getByText("Адрес и дополнительные настройки", { exact: true })
+    .click();
+  await page
     .getByLabel("URL (после создания неизменяемый)", { exact: true })
     .fill("cms-browser-test");
   await page

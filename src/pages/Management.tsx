@@ -1,3 +1,4 @@
+import { DailyEditor } from "./DailyEditor";
 import { localDateTime, publicationInstant } from "../domain/timezone";
 import { useEffect, useRef, useState } from "react";
 import { Link, useBlocker, useSearchParams } from "react-router-dom";
@@ -169,6 +170,13 @@ function useUnsaved(dirty: boolean) {
   }, [dirty]);
 }
 export function Management({ section }: { section: string }) {
+  return section === "daily" ? (
+    <DailyEditor />
+  ) : (
+    <LegacyManagement section={section} />
+  );
+}
+function LegacyManagement({ section }: { section: string }) {
   const [params] = useSearchParams();
   const [rows, setRows] = useState<ResourceRow[]>([]),
     [allWords, setWords] = useState<WordRow[]>([]),

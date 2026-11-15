@@ -1,3 +1,7 @@
+import { backup } from "node:sqlite";
+import { mkdtempSync, rmSync, chmodSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { createServer } from "node:http";
 import {
   randomBytes,
@@ -188,6 +192,24 @@ export function createApp({
         .get(digest(token));
       if (!session || session.expires <= Date.now())
         fail(401, "Требуется вход");
+      if (url.pathname === "/api/admin/backup" && req.method === "POST") {
+        const folder = mkdtempSync(join(tmpdir(), "cms-download-")),
+          target = join(folder, "backup.sqlite");
+        try {
+          await backup(db, target);
+          chmodSync(target, 0o600);
+          const data = readFileSync(target);
+          res.writeHead(200, {
+            "Content-Type": "application/octet-stream",
+            "Content-Disposition":
+              'attachment; filename="russkiy-sled-backup.sqlite"',
+          });
+          res.end(data);
+        } finally {
+          rmSync(folder, { recursive: true, force: true });
+        }
+        return;
+      }
       if (url.pathname === "/api/auth/session" && req.method === "GET") {
         send(200, { ok: true });
         return;

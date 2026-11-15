@@ -73,7 +73,7 @@ test("editorial routes, honest daily word, form download and 404", async ({
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   }
   await expect(
-    page.getByRole("heading", { name: "Первое слово дня ещё впереди" }),
+    page.getByRole("heading", { name: "Новые публикации скоро появятся" }),
   ).toBeVisible();
   await page.goto("/contribute");
   await page.getByLabel("Русское слово").fill("Тест");

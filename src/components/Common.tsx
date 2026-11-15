@@ -127,6 +127,13 @@ export function SourceLink({
   pages?: number[];
 }) {
   const s = sources.find((s) => s.id === id);
+  if (s && !s.url)
+    return (
+      <span className="source-link">
+        {s.citation || s.title}
+        {pages.length ? " · с. " + pages.join(", ") : ""}
+      </span>
+    );
   return s ? (
     <a className="source-link" href={s.url} target="_blank" rel="noreferrer">
       {s.title}

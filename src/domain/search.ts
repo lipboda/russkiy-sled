@@ -12,6 +12,7 @@ export type Filters = {
   mode?: "any" | "all";
   theme?: string;
   depth?: string;
+  correspondenceType?: string;
   status?: string;
   research?: boolean;
   sort?: string;
@@ -23,7 +24,11 @@ export function searchWords(filters: Filters = {}, list: WordEntry[] = words) {
     text: normalize(
       [
         w.russianLemma,
+        w.shortDescription ?? "",
         ...w.themes,
+        ...w.languages
+          .filter((l) => !l.hidden && !l.unpublished)
+          .flatMap((l) => [l.meaning ?? "", l.transliteration ?? ""]),
         ...w.languages.flatMap((l) => l.reportedForms),
       ].join(" "),
     ),
@@ -43,6 +48,13 @@ export function searchWords(filters: Filters = {}, list: WordEntry[] = words) {
       (!filters.depth || w.articleDepth === filters.depth) &&
       (!filters.status || w.publicationStatus === filters.status) &&
       (!filters.research || w.researchIncluded) &&
+      (!filters.correspondenceType ||
+        w.languages.some(
+          (l) =>
+            !l.hidden &&
+            !l.unpublished &&
+            l.correspondenceType === filters.correspondenceType,
+        )) &&
       (!filters.languages?.length ||
         (filters.mode === "all"
           ? filters.languages.every((code) =>

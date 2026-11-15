@@ -1,3 +1,5 @@
+import { resolveLinks } from "./stage3.mjs";
+import { validateDocument, documentText } from "../src/domain/universal.ts";
 import { randomUUID } from "node:crypto";
 import { chmodSync, mkdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -169,7 +171,10 @@ export function publicResources(db, kind, now = new Date()) {
     )
     .map(({ data }) => data)
     .sort(
-      (a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title),
+      (a, b) =>
+        (b.publishedAt || b.publishAt || b.date).localeCompare(
+          a.publishedAt || a.publishAt || a.date,
+        ) || b.id.localeCompare(a.id),
     );
 }
 export function sourceList(db) {
@@ -254,7 +259,9 @@ export function saveResource(db, kind, input) {
   return atomic(db, () => {
     if (!["journal", "daily"].includes(kind))
       throw new Error("Неизвестный тип материала");
-    const data = publicationSchema.parse(input.data);
+    const data = resolveLinks(db, publicationSchema.parse(input.data));
+    if (data.richDocument)
+      data.richDocument = validateDocument(data.richDocument);
     const states = [
       "draft",
       "review",
@@ -269,6 +276,7 @@ export function saveResource(db, kind, input) {
     const old = db
       .prepare("SELECT * FROM resources WHERE kind=? AND id=?")
       .get(kind, data.id);
+    if (kind === "daily" && !old && !data.format) data.format = "article";
     if ((old?.version ?? 0) !== input.version)
       throw new Error(
         "Материал изменён. Обновите список, сохранив свои правки.",
@@ -282,9 +290,10 @@ export function saveResource(db, kind, input) {
     )
       throw new Error("Такой URL уже используется");
     if (
-      !/^\d{4}-\d{2}-\d{2}$/.test(data.date) ||
-      Number.isNaN(Date.parse(data.date)) ||
-      new Date(data.date).toISOString().slice(0, 10) !== data.date
+      data.date &&
+      (!/^\d{4}-\d{2}-\d{2}$/.test(data.date) ||
+        Number.isNaN(Date.parse(data.date)) ||
+        new Date(data.date).toISOString().slice(0, 10) !== data.date)
     )
       throw new Error("Некорректная дата");
     if (
@@ -307,27 +316,60 @@ export function saveResource(db, kind, input) {
       !db.prepare("SELECT id FROM media WHERE id=?").get(data.coverId)
     )
       throw new Error("Обложка не найдена");
-    if (kind === "daily" && ["published", "scheduled"].includes(input.state)) {
-      for (const r of resourceList(db, kind))
-        if (r.id !== data.id) {
-          const snapshots = [
-            ["published", "scheduled"].includes(r.state) ? r.data : null,
-            r.published
-              ? JSON.parse(
-                  db
-                    .prepare(
-                      "SELECT published FROM resources WHERE kind=? AND id=?",
-                    )
-                    .get(kind, r.id).published,
-                )
-              : null,
-          ];
-          if (
-            !["trash", "archived", "unpublished"].includes(r.state) &&
-            snapshots.some((s) => s?.date === data.date)
-          )
-            throw new Error("На эту дату уже есть активный выпуск");
-        }
+    if (["published", "scheduled"].includes(input.state)) {
+      if (kind === "daily" && data.format === "word-card") {
+        if (data.wordIds.length !== 1)
+          throw new Error("Выберите одно словарное слово");
+        const linked = db
+          .prepare("SELECT published FROM content WHERE id=?")
+          .get(data.wordIds[0]);
+        if (!linked?.published)
+          throw new Error(
+            "Сначала явно опубликуйте связанную словарную статью либо сохраните выпуск как черновик",
+          );
+        if (!data.title) data.title = JSON.parse(linked.published).russianLemma;
+      }
+      if (!data.title.trim()) throw new Error("Для публикации нужен заголовок");
+      if (
+        kind === "daily" &&
+        data.format === "article" &&
+        !(
+          data.richDocument ? documentText(data.richDocument) : data.body
+        ).trim()
+      )
+        throw new Error("Для публикации статьи нужен основной текст");
+    }
+    if (kind === "daily" && data.format) {
+      const previous = old ? JSON.parse(old.data) : null;
+      const now = new Date();
+      const priorSnapshot = old?.published ? JSON.parse(old.published) : null;
+      const previousInstant =
+        previous?.publishedAt || priorSnapshot?.publishedAt;
+      if (previousInstant && new Date(previousInstant) <= now)
+        data.publishedAt = previousInstant;
+      else if (["published", "scheduled"].includes(input.state)) {
+        if (
+          input.state === "scheduled" &&
+          (!data.publishAt || new Date(data.publishAt) <= now)
+        )
+          throw new Error("Выберите будущее время публикации");
+        data.publishedAt =
+          input.state === "scheduled"
+            ? new Date(data.publishAt).toISOString()
+            : now.toISOString();
+      } else delete data.publishedAt;
+      const legacy = priorSnapshot && !previousInstant ? priorSnapshot : null;
+      if (legacy?.date) {
+        data.date = legacy.date;
+        data.publishAt = legacy.publishAt ?? "";
+        delete data.publishedAt;
+      } else {
+        if (data.publishedAt)
+          data.date = projectDate(db, new Date(data.publishedAt));
+        else data.date = "";
+        if (input.state === "published")
+          data.publishAt = data.publishedAt ?? "";
+      }
     }
     const row = {
       ...data,

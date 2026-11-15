@@ -50,11 +50,15 @@ test("stage 2A category workflow, single-line editor, duplicate, trash and resto
     .getByLabel("Русское слово", { exact: true })
     .fill("Тест категорий");
   await page
+    .getByLabel("Краткое определение или описание", { exact: true })
+    .fill("Описание тестовой карточки.");
+  await page
+    .getByText("Адрес и дополнительные настройки", { exact: true })
+    .click();
+  await page
     .getByLabel("URL (после создания неизменяемый)", { exact: true })
     .fill("test-category-stage-two");
-  await page
-    .getByText("Выбрать или создать категорию", { exact: true })
-    .click();
+
   await page.getByLabel("Тестовая категория CMS", { exact: true }).check();
   await page
     .getByRole("combobox", { name: "Редакционный статус", exact: true })
@@ -78,7 +82,7 @@ test("stage 2A category workflow, single-line editor, duplicate, trash and resto
   await expect(page.getByRole("status")).toHaveText("Изменения сохранены");
   await page.goto("/dictionary/test-category-stage-two");
   await expect(
-    page.getByText("Тема: Переименованная категория CMS", { exact: true }),
+    page.getByText("Переименованная категория CMS", { exact: true }),
   ).toBeVisible();
   await page
     .getByRole("link", { name: "Редактировать статью", exact: true })
@@ -187,44 +191,48 @@ test("stage 2B editable journal migration, Markdown preview, media, daily archiv
     }),
   ).toBeVisible();
   await section(page, "Слово дня");
-  for (const [suffix, date] of [
-    ["one", "2020-01-01"],
-    ["two", "2020-01-02"],
-  ]) {
+  for (const suffix of ["one", "two"]) {
     await page
-      .getByRole("button", { name: "Создать выпуск", exact: true })
+      .getByRole("button", { name: "Создать статью", exact: true })
       .click();
     await page
-      .getByLabel("Заголовок *", { exact: true })
+      .getByLabel("Заголовок публикации", { exact: true })
       .fill("Выпуск для теста " + suffix);
     await page
-      .getByLabel("URL *", { exact: true })
-      .fill("stage-two-daily-" + suffix);
-    await page.getByLabel("Дата выпуска *", { exact: true }).fill(date);
-    await page
-      .getByLabel("Основной текст (Markdown)", { exact: true })
+      .getByRole("textbox", { name: "Основной текст статьи", exact: true })
       .fill("Редакционный выпуск для теста, без научных утверждений.");
-    await savePublication(page);
+    await page
+      .getByText("Дополнительные настройки публикации", { exact: true })
+      .click();
+    await page
+      .getByLabel("URL публикации", { exact: true })
+      .fill("stage-two-daily-" + suffix);
+    page.once("dialog", (d) => d.accept());
+    await page
+      .getByRole("button", { name: "Опубликовать", exact: true })
+      .click();
+    await expect(page.getByRole("status")).toHaveText("Изменения сохранены");
   }
   await page
-    .getByRole("button", { name: "Создать выпуск", exact: true })
+    .getByRole("button", { name: "Создать статью", exact: true })
     .click();
   await page
-    .getByLabel("Заголовок *", { exact: true })
+    .getByLabel("Заголовок публикации", { exact: true })
     .fill("Будущий выпуск для теста");
   await page
-    .getByLabel("URL *", { exact: true })
-    .fill("stage-two-daily-future");
-  await page.getByLabel("Дата выпуска *", { exact: true }).fill("2099-01-01");
-  await savePublication(page, "scheduled");
-  await page.getByLabel("Месяц календаря", { exact: true }).fill("2020-01");
-  await expect(page.locator(".cms-calendar")).toContainText(
-    "Выпуск для теста one",
-  );
-  await publicPage.goto("http://127.0.0.1:5173/word-of-the-day");
-  await expect(
-    publicPage.getByText(/Последний опубликованный выпуск от 2020-01-02/),
-  ).toBeVisible();
+    .getByRole("textbox", { name: "Основной текст статьи", exact: true })
+    .fill("Будущий редакционный текст");
+  await page
+    .getByText("Дополнительные настройки публикации", { exact: true })
+    .click();
+  await page
+    .getByLabel("Время публикации", { exact: true })
+    .fill("2099-01-01T12:00");
+  page.once("dialog", (d) => d.accept());
+  await page
+    .getByRole("button", { name: "Запланировать", exact: true })
+    .click();
+  await expect(page.getByRole("status")).toHaveText("Изменения сохранены");
   await publicPage.goto("http://127.0.0.1:5173/word-of-the-day/archive");
   await expect(
     publicPage.getByRole("link", { name: "Выпуск для теста one", exact: true }),
@@ -283,10 +291,8 @@ test("stage 2C shared sources, hidden language cards, comparison edit links and 
     .getByLabel("Транскрипция", { exact: true })
     .first()
     .fill("Тестовый ввод /ʃ/ — не научный факт");
-  await page
-    .getByLabel("Скрыть языковую карточку", { exact: true })
-    .nth(1)
-    .check();
+  await page.getByRole("button", { name: "Французский", exact: true }).click();
+  await page.getByLabel("Скрыть языковую карточку", { exact: true }).check();
   page.once("dialog", (d) => d.accept());
   await page
     .getByRole("button", { name: "Сохранить изменения", exact: true })

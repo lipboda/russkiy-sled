@@ -1,3 +1,4 @@
+import { stage3Api } from "./stage3-api.mjs";
 import { randomUUID } from "node:crypto";
 import sharp from "sharp";
 import { z } from "zod";
@@ -47,6 +48,7 @@ function touchCategoryWords(db, id) {
   }
 }
 export async function stage2Api(db, path, method, input, send) {
+  if (stage3Api(db, path, method, input, send)) return true;
   if (path === "/api/admin/editorial" && method === "GET") {
     send(200, {
       ...editorialData(db),
@@ -408,7 +410,7 @@ export async function stage2Api(db, path, method, input, send) {
     )
       throw new Error("Страна используемого языка неизменяема");
     db.prepare(
-      "INSERT INTO language_definitions VALUES(?,?,?) ON CONFLICT(code) DO UPDATE SET name=excluded.name,country=excluded.country",
+      "INSERT INTO language_definitions(code,name,country) VALUES(?,?,?) ON CONFLICT(code) DO UPDATE SET name=excluded.name,country=excluded.country",
     ).run(data.code, data.name, data.country);
     send(200, { ok: true });
     return true;

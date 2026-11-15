@@ -1,5 +1,7 @@
 # Русский след
 
+**Третий этап:** [обновление MacBook и работа в редакторе](CMS_STAGE3_UPDATE.md), [отчёт](CMS_STAGE3_REPORT.md). Ветка `feat/cms-stage3-editor`.
+
 **Второй этап CMS:** [безопасное обновление MacBook, миграция, использование и откат](CMS_STAGE2_UPDATE.md). Ветка `feat/cms-stage2`. [Аудит зависимостей](SECURITY_DEPENDENCIES.md).
 
 **Перенос на MacBook через GitHub Desktop и запуск в Safari:** [пошаговая инструкция](MACBOOK_START.md). Ветка: `release/cms-stage1-macbook`.

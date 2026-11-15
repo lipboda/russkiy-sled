@@ -1,3 +1,5 @@
+import { RichDocument } from "../components/RichDocument";
+import { CompactWord, ContextLinks } from "../components/CompactWord";
 import { PublishedImage } from "../components/PublishedImage";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -17,10 +19,7 @@ function PublishedArticle({
 }) {
   const logged = useSession();
   const link = kind === "journal" ? "/journal" : "/word-of-the-day/archive";
-  const releases =
-    kind === "daily"
-      ? [...editorial.daily].sort((a, b) => a.date.localeCompare(b.date))
-      : [];
+  const releases = kind === "daily" ? [...editorial.daily].reverse() : [];
   const index = releases.findIndex((p) => p.id === post.id);
   return (
     <article className="reading">
@@ -37,7 +36,14 @@ function PublishedArticle({
         {post.intro}
       </PageTitle>
       <p>
-        {post.author} · <time dateTime={post.date}>{post.date}</time>
+        {post.author} ·{" "}
+        <time dateTime={post.publishedAt ?? post.date}>
+          {post.publishedAt
+            ? new Date(post.publishedAt).toLocaleString("ru", {
+                timeZone: editorial.timezone,
+              })
+            : post.date}
+        </time>
       </p>
       {logged && (
         <Link
@@ -68,7 +74,27 @@ function PublishedArticle({
           <Markdown text={post.examples} />
         </>
       )}
-      <Markdown text={post.body} />
+      {post.format === "word-card" ? (
+        <>
+          {words.find((w) => w.id === post.wordIds[0]) ? (
+            <CompactWord
+              word={words.find((w) => w.id === post.wordIds[0])!}
+              embedded
+            />
+          ) : (
+            <p>
+              Связанная словарная статья сейчас недоступна. Черновые данные не
+              показываются.
+            </p>
+          )}
+          {post.comment && <p>{post.comment}</p>}
+        </>
+      ) : post.richDocument ? (
+        <RichDocument value={post.richDocument} />
+      ) : (
+        <Markdown text={post.body} />
+      )}
+      <ContextLinks links={post.links} ids={[]} />
       {post.wordIds.length > 0 && (
         <section>
           <h2>Связанные словарные статьи</h2>
@@ -179,86 +205,109 @@ export function Journal() {
 }
 export function DayWord() {
   const { date, slug } = useParams();
+  const logged = useSession();
   const [query, setQuery] = useState(""),
     [month, setMonth] = useState("");
-  if (date || slug) {
-    const post = editorial.daily.find((p) =>
-      slug ? p.slug === slug : p.date === date,
-    );
+  const releases = editorial.daily;
+  if (slug) {
+    const post = releases.find((p) => p.slug === slug);
     return post ? <PublishedArticle post={post} kind="daily" /> : <Missing />;
   }
-  const current = new Intl.DateTimeFormat("en-CA", {
-    timeZone: editorial.timezone,
-  }).format(new Date());
-  const latest =
-    editorial.daily.find((p) => p.date === current) ?? editorial.daily[0];
-  const archive = window.location.pathname.endsWith("/archive");
-  if (!archive)
-    return (
-      <>
-        <PageTitle eyebrow="Одна история каждый день" title="Слово дня">
-          Редакционные выпуски с источниками и ссылками на словарь.
-        </PageTitle>
-        <Link className="button secondary" to="/word-of-the-day/archive">
-          Архив «Слово дня»
-        </Link>
-        {latest ? (
-          <>
-            <p>
-              {latest.date === current
-                ? "Сегодняшний выпуск"
-                : "Последний опубликованный выпуск от " +
-                  latest.date +
-                  ". На сегодня выпуск не назначен."}
-            </p>
-            <PublishedArticle post={latest} kind="daily" />
-          </>
-        ) : (
-          <div className="paper empty">
-            <h2>Первое слово дня ещё впереди</h2>
-            <p>
-              Опубликованных редакционных выпусков пока нет. Непроверенные
-              сведения не подставляются автоматически.
-            </p>
-            <Link to="/dictionary">Изучить материалы исследования ↗</Link>
-          </div>
-        )}
-      </>
-    );
-  const posts = editorial.daily.filter(
+  const posts = releases.filter(
     (p) =>
+      (!date || p.date === date) &&
       (p.title + " " + p.intro + " " + p.body)
         .toLowerCase()
         .includes(query.toLowerCase()) &&
       (!month || p.date.startsWith(month)),
   );
+  if (date && posts.length === 1)
+    return <PublishedArticle post={posts[0]} kind="daily" />;
+  const archive = window.location.pathname.endsWith("/archive");
   return (
     <>
-      <PageTitle eyebrow="Все предыдущие выпуски" title="Архив «Слово дня»">
-        Выпуски сохраняются после наступления новой даты.
+      <PageTitle
+        eyebrow="Познавательные статьи и карточки слов"
+        title={
+          date
+            ? "Публикации за " + date
+            : archive
+              ? "Архив «Слово дня»"
+              : "Слово дня"
+        }
+      >
+        Самостоятельные публикации о словах и языковых соответствиях.
       </PageTitle>
-      <label>
-        Поиск по архиву
-        <input value={query} onChange={(e) => setQuery(e.target.value)} />
-      </label>
-      <label>
-        Месяц и год
-        <input
-          type="month"
-          value={month}
-          onChange={(e) => setMonth(e.target.value)}
-        />
-      </label>
-      {posts.map((p) => (
-        <article className="paper" key={p.id}>
-          <time>{p.date}</time>
-          <h2>
-            <Link to={"/word-of-the-day/issue/" + p.slug}>{p.title}</Link>
-          </h2>
-          <p>{p.intro}</p>
-        </article>
-      ))}
-      {!posts.length && <p>Выпуски не найдены.</p>}
+      {logged && (
+        <Link className="button" to="/admin?section=daily">
+          Добавить новую публикацию
+        </Link>
+      )}
+      <Link to={archive ? "/word-of-the-day" : "/word-of-the-day/archive"}>
+        {archive ? "Последние публикации" : "Архив «Слово дня»"}
+      </Link>
+      <div className="toolbar">
+        <label>
+          Поиск по архиву
+          <input value={query} onChange={(e) => setQuery(e.target.value)} />
+        </label>
+        <label>
+          Месяц и год
+          <input
+            type="month"
+            value={month}
+            onChange={(e) => setMonth(e.target.value)}
+          />
+        </label>
+      </div>
+      {!posts.length ? (
+        <div className="paper empty">
+          <h2>Новые публикации скоро появятся</h2>
+          <p>
+            {releases.length
+              ? "По выбранным условиям ничего не найдено."
+              : "Опубликованных материалов пока нет."}
+          </p>
+        </div>
+      ) : (
+        posts.map((post, index) => (
+          <article
+            className={
+              "paper daily-feed-item " +
+              (!archive && index === 0 ? "latest-publication" : "")
+            }
+            key={post.id}
+          >
+            <p className="eyebrow">
+              {post.date} ·{" "}
+              {post.format === "word-card" ? "Карточка слова" : "Статья"}
+              {!archive && index === 0 ? " · Последняя публикация" : ""}
+            </p>
+            <h2>
+              <Link to={"/word-of-the-day/issue/" + post.slug}>
+                {post.title}
+              </Link>
+            </h2>
+            {post.coverId && (
+              <PublishedImage id={post.coverId} fallback={post.title} />
+            )}
+            <p>
+              {post.intro ||
+                (post.richDocument ? undefined : post.body.slice(0, 200))}
+            </p>
+            {post.format === "word-card" &&
+              words.find((w) => w.id === post.wordIds[0]) && (
+                <CompactWord
+                  word={words.find((w) => w.id === post.wordIds[0])!}
+                  embedded
+                />
+              )}
+            <Link to={"/word-of-the-day/issue/" + post.slug}>
+              Открыть публикацию ↗
+            </Link>
+          </article>
+        ))
+      )}
     </>
   );
 }

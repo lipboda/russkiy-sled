@@ -1408,3 +1408,69 @@ footer > span {
   margin-left: 0;
   padding-left: 1rem;
 }
+.compact-word {
+  max-width: 850px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border: 1px solid #ded9cf;
+  background: #fffdf8;
+  overflow-wrap: anywhere;
+}
+.compact-definition {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+.compact-language {
+  padding: 1.2rem 0;
+}
+.compact-word .category-tags a {
+  padding: 0.3rem 0.7rem;
+  background: #eeeae1;
+  border-radius: 4px;
+}
+.rich-document {
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.rich-document img {
+  max-width: 100%;
+}
+.rich-document table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+.rich-document th,
+.rich-document td {
+  border: 1px solid #ded9cf;
+  padding: 0.6rem;
+}
+.daily-feed-item {
+  margin: 1.5rem 0;
+}
+.language-tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 1rem 0;
+  padding-bottom: 0.5rem;
+}
+.language-tabs button {
+  flex-shrink: 0;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ded9cf;
+  background: #fffdf8;
+  cursor: pointer;
+}
+.language-tabs [aria-selected="true"] {
+  background: #203a60;
+  color: white;
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.8rem 0;
+}

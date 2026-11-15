@@ -1,79 +1,109 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { editorial } from "../domain/editorial";
 import { api } from "../domain/session";
 import { refreshPublicCatalog } from "../domain/catalog";
+const normalize = (v: string) =>
+  v.trim().replace(/\s+/g, " ").toLocaleLowerCase("ru").replace(/ё/g, "е");
 export function CategoryPicker({
   value,
   change,
 }: {
   value: string[];
-  change: (v: string[]) => void;
+  change: (value: string[]) => void;
 }) {
   const [query, setQuery] = useState(""),
-    [error, setError] = useState("");
+    [error, setError] = useState(""),
+    [busy, setBusy] = useState(false);
+  const latest = useRef(value);
+  latest.current = value;
+  async function create() {
+    if (!query.trim() || busy) return;
+    setBusy(true);
+    setError("");
+    try {
+      const result = await api("admin/categories/ensure", "POST", {
+        name: query,
+      });
+      await refreshPublicCatalog();
+      change([
+        ...latest.current.filter(
+          (t) => normalize(t) !== normalize(result.name),
+        ),
+        result.name,
+      ]);
+      setQuery("");
+    } catch (e) {
+      setError("Не удалось добавить тему: " + (e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
   return (
     <fieldset>
-      <legend>Тематические категории</legend>
+      <legend>Темы слова</legend>
       <div className="category-tags">
         {value.map((t) => (
           <button
             type="button"
             key={t}
-            onClick={() => change(value.filter((x) => x !== t))}
             aria-label={"Убрать категорию " + t}
+            onClick={() => change(value.filter((v) => v !== t))}
           >
             {t} ×
           </button>
         ))}
       </div>
-      <details>
+      <details open>
         <summary>Выбрать или создать категорию</summary>
         <label>
-          Поиск категории
-          <input value={query} onChange={(e) => setQuery(e.target.value)} />
-        </label>
-        {editorial.categories
-          .filter((c) => c.name.toLowerCase().includes(query.toLowerCase()))
-          .map((c) => (
-            <label key={c.id}>
-              <input
-                type="checkbox"
-                checked={value.includes(c.name)}
-                onChange={(e) =>
-                  change(
-                    e.target.checked
-                      ? [...value, c.name]
-                      : value.filter((v) => v !== c.name),
-                  )
-                }
-              />
-              {c.name}
-            </label>
-          ))}
-        {query.trim() && (
-          <button
-            type="button"
-            onClick={async () => {
-              try {
-                await api("admin/categories", "PUT", {
-                  id: crypto.randomUUID(),
-                  name: query.trim(),
-                  description: "",
-                  sort: 0,
-                });
-                await refreshPublicCatalog();
-                change([...new Set([...value, query.trim()])]);
-                setQuery("");
-              } catch (e) {
-                setError((e as Error).message);
+          Добавить тему…
+          <input
+            aria-label="Добавить тему"
+            placeholder="Добавить тему…"
+            value={query}
+            disabled={busy}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                void create();
               }
             }}
-          >
-            Создать категорию «{query}»
-          </button>
-        )}
-        {error && <p role="alert">{error}</p>}
+          />
+        </label>
+        <button
+          type="button"
+          disabled={!query.trim() || busy}
+          onClick={() => void create()}
+        >
+          {busy ? "Добавление…" : "Создать тему"}
+        </button>
+        <div className="category-options">
+          {editorial.categories
+            .filter((c) => normalize(c.name).includes(normalize(query)))
+            .map((c) => (
+              <label key={c.id}>
+                <input
+                  type="checkbox"
+                  checked={value.some(
+                    (t) => normalize(t) === normalize(c.name),
+                  )}
+                  onChange={(e) =>
+                    change(
+                      e.target.checked
+                        ? [...value, c.name]
+                        : value.filter(
+                            (t) => normalize(t) !== normalize(c.name),
+                          ),
+                    )
+                  }
+                />
+                {c.name}
+              </label>
+            ))}
+        </div>
       </details>
+      {error && <p role="alert">{error}</p>}
     </fieldset>
   );
 }

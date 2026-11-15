@@ -1,3 +1,5 @@
+import { CompactWord, ContextLinks } from "../components/CompactWord";
+import { correspondenceNames } from "../domain/universal";
 import { PublishedImage } from "../components/PublishedImage";
 import { useSession } from "../domain/session";
 import { useState } from "react";
@@ -24,7 +26,8 @@ export function Dictionary() {
   const query = params.get("q") ?? "";
   const [languages, setLanguages] = useState<Language[]>([]);
   const [mode, setMode] = useState<"any" | "all">("any");
-  const [theme, setTheme] = useState("");
+  const [theme, setTheme] = useState(params.get("theme") ?? "");
+  const [correspondenceType, setCorrespondenceType] = useState("");
   const [depth, setDepth] = useState("");
   const [status, setStatus] = useState("");
   const [research, setResearch] = useState(false);
@@ -35,6 +38,7 @@ export function Dictionary() {
     mode,
     theme,
     depth,
+    correspondenceType,
     status,
     research,
     sort,
@@ -48,7 +52,11 @@ export function Dictionary() {
         Слова, пересекающие границы. Формы, источники и вопросы, на которые ещё
         предстоит ответить.
       </PageTitle>
-      <Notice />
+      <p className="notice">
+        Общий словарь включает заимствования, переводы и другие языковые
+        соответствия. Тип соответствия и достоверность формы указываются
+        отдельно.
+      </p>
       <SearchBox
         initial={query}
         onChange={(v) => setParams(v ? { q: v } : {}, { replace: true })}
@@ -95,6 +103,21 @@ export function Dictionary() {
             </select>
           </label>
           <label>
+            Тип соответствия
+            <select
+              aria-label="Тип соответствия"
+              value={correspondenceType}
+              onChange={(e) => setCorrespondenceType(e.target.value)}
+            >
+              <option value="">Все типы</option>
+              {Object.entries(correspondenceNames).map(([id, name]) => (
+                <option key={id} value={id}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
             Полнота статьи
             <select value={depth} onChange={(e) => setDepth(e.target.value)}>
               <option value="">Любая</option>
@@ -126,6 +149,7 @@ export function Dictionary() {
               setMode("any");
               setTheme("");
               setDepth("");
+              setCorrespondenceType("");
               setStatus("");
               setResearch(false);
               setSort("asc");
@@ -174,6 +198,24 @@ export function Article({
   const w = previewWord ?? words.find((w) => w.slug === slug);
   const [language, setLanguage] = useState("");
   if (!w) return <Missing />;
+  if (
+    (w.format ?? (w.articleDepth === "short" ? "compact" : "detailed")) ===
+    "compact"
+  )
+    return (
+      <>
+        <Link className="back" to="/dictionary">
+          ← К словарю
+        </Link>
+        <CompactWord word={w} />
+        {w.notes.length > 0 && (
+          <details>
+            <summary>Сохранённые исследовательские материалы</summary>
+            <ResearchNotes word={w} />
+          </details>
+        )}
+      </>
+    );
   return (
     <>
       <Link className="back" to="/dictionary">
@@ -187,7 +229,7 @@ export function Article({
         }
         title={w.russianLemma}
       >
-        <Badge /> Русский → иностранные языки
+        <Badge /> Словарная статья · языковые соответствия
       </PageTitle>
       <Notice />
       {w.coverId && <PublishedImage id={w.coverId} fallback={w.russianLemma} />}
@@ -231,11 +273,14 @@ export function Article({
               onChange={(e) => setLanguage(e.target.value)}
             >
               <option value="">Все языки</option>
-              {Object.entries(languageNames).map(([c, n]) => (
-                <option key={c} value={c}>
-                  {n}
-                </option>
-              ))}
+              {w.languages
+                .filter((l) => !l.hidden && !l.unpublished)
+                .map((l) => [l.languageCode, languageNames[l.languageCode]])
+                .map(([c, n]) => (
+                  <option key={c} value={c}>
+                    {n}
+                  </option>
+                ))}
             </select>
           </label>
         </div>
@@ -244,7 +289,12 @@ export function Article({
           нормативный статус не проверены заново.
         </p>
         {w.languages
-          .filter((l) => !language || l.languageCode === language)
+          .filter(
+            (l) =>
+              !l.hidden &&
+              !l.unpublished &&
+              (!language || l.languageCode === language),
+          )
           .map((l) => (
             <details className="language-card" key={l.languageCode} open>
               <summary>
@@ -263,6 +313,8 @@ export function Article({
                 </Badge>
               </summary>
               <div className="language-content">
+                <p>{correspondenceNames[l.correspondenceType ?? "unknown"]}</p>
+                <ContextLinks links={l.links} ids={[]} />
                 {l.reportedForms.length ? (
                   <ul>
                     {l.reportedForms.map((f, i) => (
@@ -316,6 +368,7 @@ export function Article({
           "sources",
         ]}
       />
+      <ContextLinks links={w.links} ids={[]} />
       <section className="section">
         <h2>Источники записи</h2>
         <p>
@@ -411,11 +464,13 @@ export function Comparison() {
                 value={language}
                 onChange={(e) => setLanguage(e.target.value as Language)}
               >
-                {Object.entries(languageNames).map(([code, name]) => (
-                  <option key={code} value={code}>
-                    {name}
-                  </option>
-                ))}
+                {["en-US", "fr-FR", "hy-AM"]
+                  .map((code) => [code, languageNames[code]])
+                  .map(([code, name]) => (
+                    <option key={code} value={code}>
+                      {name}
+                    </option>
+                  ))}
               </select>
             </label>
             <label>

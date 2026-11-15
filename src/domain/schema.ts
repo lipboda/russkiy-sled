@@ -1,3 +1,4 @@
+import { correspondenceNames } from "./universal.ts";
 import { z } from "zod";
 export const languageNames: Record<string, string> = {
   "en-US": "Американский английский",
@@ -17,12 +18,23 @@ const status = z.enum([
   "disputed",
   "unknown",
 ]);
+const links = z.array(
+  z.object({
+    sourceId: z.string().optional(),
+    url: z.string().default(""),
+    title: z.string().max(500).optional(),
+    comment: z.string().max(5000).optional(),
+  }),
+);
 export const wordSchema = z.object({
   id: z.string(),
   slug: z.string().min(1),
   russianLemma: z.string().trim().min(1),
   russianStress: z.string().optional(),
   shortDescription: z.string().optional(),
+  format: z.enum(["compact", "detailed"]).optional(),
+  partOfSpeech: z.string().optional(),
+  links: links.optional(),
   editorialNotes: z.string().optional(),
   coverId: z.string().optional(),
   relatedWordIds: z.array(z.string()).optional(),
@@ -48,8 +60,25 @@ export const wordSchema = z.object({
   sourceIds: z.array(z.string()),
   languages: z.array(
     z.object({
-      languageCode: z.string().min(2).max(35),
+      languageCode: z.string().min(2).max(100),
       hidden: z.boolean().optional(),
+      unpublished: z.boolean().optional(),
+      expanded: z.boolean().optional(),
+      correspondenceType: z
+        .enum(
+          Object.keys(correspondenceNames) as [
+            keyof typeof correspondenceNames,
+            ...(keyof typeof correspondenceNames)[],
+          ],
+        )
+        .optional(),
+      transliteration: z.string().optional(),
+      comment: z.string().optional(),
+      origin: z.string().optional(),
+      firstAttested: z.string().optional(),
+      borrowingPath: z.string().optional(),
+      intermediary: z.string().optional(),
+      links: links.optional(),
       countryCode: z.string(),
       reportedForms: z.array(z.string()),
       ipa: z.string().optional(),
@@ -81,11 +110,16 @@ export const sourceSchema = z.object({
   id: z.string().min(1).max(300),
   title: z.string().trim().min(1),
   url: z
-    .url()
-    .refine(
-      (v) => ["http:", "https:"].includes(new URL(v).protocol),
-      "Только HTTP/HTTPS",
-    ),
+    .union([
+      z.literal(""),
+      z
+        .url()
+        .refine(
+          (v) => ["http:", "https:"].includes(new URL(v).protocol),
+          "Только HTTP/HTTPS",
+        ),
+    ])
+    .optional(),
   author: z.string().optional(),
   sourceType: z.string().optional(),
   year: z.string().optional(),
@@ -133,7 +167,11 @@ export function validateCatalog(input: unknown) {
           (data.languageDefinitions ?? []).map((l) => [l.code, l.country]),
         ),
       };
-      if (countries[l.languageCode] !== l.countryCode)
+      if (
+        !(l.languageCode in countries) ||
+        (["en-US", "fr-FR", "hy-AM"].includes(l.languageCode) &&
+          countries[l.languageCode] !== l.countryCode)
+      )
         throw new Error("Язык и страна не соответствуют друг другу");
     }
     for (const n of w.notes)
@@ -166,7 +204,8 @@ export function validateCatalog(input: unknown) {
       );
     for (const l of w.languages)
       if (
-        l.attestationStatus === "verified" &&
+        (l.attestationStatus === "verified" ||
+          l.correspondenceType === "borrowed") &&
         (!l.reportedForms.length ||
           !l.sourceIds.length ||
           !l.sourceIds.every(
@@ -174,6 +213,16 @@ export function validateCatalog(input: unknown) {
           ))
       )
         throw new Error("Подтверждённая форма требует проверенного источника");
+    if (
+      w.languages.some(
+        (l) =>
+          l.correspondenceType === "borrowed" &&
+          l.attestationStatus !== "verified",
+      )
+    )
+      throw new Error(
+        "Подтверждённое заимствование требует подтверждённой формы и источников",
+      );
     if (
       w.publicationStatus === "verified" &&
       (w.isDemo ||

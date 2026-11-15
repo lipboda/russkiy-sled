@@ -1,3 +1,4 @@
+import { migrateStage3, resolveLinks } from "./stage3.mjs";
 import { DatabaseSync } from "node:sqlite";
 import { mkdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -49,6 +50,7 @@ export function openStore(path = process.env.CMS_DB_PATH || defaultDb) {
     }
   }
   migrateStage2(db, path, root);
+  migrateStage3(db, path);
   return db;
 }
 export function catalogWith(db, words) {
@@ -81,7 +83,7 @@ export function publicCatalog(db) {
   // Hidden cards never leave the public API. Validation still examines the full record above.
   result.words = result.words.map((w) => ({
     ...w,
-    languages: w.languages.filter((l) => !l.hidden),
+    languages: w.languages.filter((l) => !l.hidden && !l.unpublished),
   }));
   return result;
 }
@@ -122,6 +124,13 @@ export function save(db, { data, state, version }) {
       e.status = 409;
       throw e;
     }
+    data = resolveLinks(db, structuredClone(data));
+    if (
+      state === "published" &&
+      data.format === "compact" &&
+      !(data.shortDescription ?? "").trim()
+    )
+      throw new Error("Для публикации краткой карточки добавьте описание");
     const others = list(db)
       .filter((r) => r.id !== data.id)
       .map((r) => r.data);

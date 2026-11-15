@@ -1,3 +1,4 @@
+import { WordForm } from "../components/WordForm";
 import { CategoryPicker } from "../components/CategoryPicker";
 import { editorial } from "../domain/editorial";
 import {
@@ -117,7 +118,7 @@ const labels: Record<string, string> = {
   originKind: "Происхождение",
   themes: "Тематические категории",
   articleDepth: "Полнота статьи",
-  publicationStatus: "Научный допуск к карте и слову дня",
+  publicationStatus: "Научное подтверждение форм для карты",
   researchIncluded: "Включено в сравнение",
   isDemo: "Демонстрационная запись",
   auditStatus: "Статус аудита",
@@ -388,6 +389,7 @@ function blank(): WordEntry {
     notes: [],
     russianStress: "",
     shortDescription: "",
+    format: "compact",
     editorialNotes: "",
     coverId: "",
     relatedWordIds: [],
@@ -400,6 +402,8 @@ function enriched(data: WordEntry): WordEntry {
   return {
     ...blank(),
     ...data,
+    format:
+      data.format ?? (data.articleDepth === "full" ? "detailed" : undefined),
     languages: data.languages.map((l) => ({
       ...(templates.languages as object),
       ...l,
@@ -426,10 +430,7 @@ function WordAdmin() {
     [theme, setTheme] = useState(""),
     [language, setLanguage] = useState(""),
     [checked, setChecked] = useState<string[]>([]),
-    [sort, setSort] = useState("name"),
-    [editorSection, setEditorSection] = useState<keyof typeof editorSections>(
-      params.get("tab") === "languages" ? "languages" : "main",
-    );
+    [sort, setSort] = useState("name");
   const blocker = useBlocker(dirty);
   const handlingNavigation = useRef(false);
   useEffect(() => {
@@ -480,12 +481,13 @@ function WordAdmin() {
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
   }, [dirty]);
+  const saveIntent = useRef<string | undefined>(undefined);
   const select = (row: Row) => {
     if (dirty && !confirm("Отменить несохранённые изменения?")) return;
     setSelected({ ...row, data: enriched(row.data) });
     setDirty(false);
     setPreview(false);
-    setEditorSection("main");
+
     setHistory([]);
     setMessage("");
   };
@@ -819,6 +821,26 @@ function WordAdmin() {
                   Сохранить
                 </button>
                 <button
+                  type="button"
+                  disabled={saving}
+                  onClick={() => {
+                    saveIntent.current = "draft";
+                    document.getElementById("save-word")?.click();
+                  }}
+                >
+                  Сохранить черновик
+                </button>
+                <button
+                  type="button"
+                  disabled={saving}
+                  onClick={() => {
+                    saveIntent.current = "published";
+                    document.getElementById("save-word")?.click();
+                  }}
+                >
+                  Опубликовать
+                </button>
+                <button
                   onClick={() => {
                     const original = rows.find(
                       (r) => r.id === selected.data.id,
@@ -859,48 +881,97 @@ function WordAdmin() {
                   {preview ? "К редактору" : "Предпросмотр"}
                 </button>
               </div>
-              {!preview && (
-                <nav className="cms-sections" aria-label="Разделы редактора">
-                  {Object.entries(editorSections).map(([key, section]) => (
-                    <button
-                      key={key}
-                      aria-pressed={editorSection === key}
-                      onClick={() =>
-                        setEditorSection(key as keyof typeof editorSections)
-                      }
-                    >
-                      {section.title}
-                    </button>
-                  ))}
-                </nav>
-              )}
               <fieldset disabled={saving}>
                 {preview ? (
                   <Article previewWord={selected.data} />
                 ) : (
-                  <Editor
-                    name="word"
-                    value={
-                      Object.fromEntries(
-                        Object.entries(selected.data).filter(([key]) =>
-                          (
-                            editorSections[editorSection]
-                              .keys as readonly string[]
-                          ).includes(key),
-                        ),
-                      ) as Value
-                    }
+                  <WordForm
+                    key={selected.data.id}
+                    word={selected.data}
                     locked={selected.version > 0}
-                    change={(v) => {
-                      setSelected({
-                        ...selected,
-                        data: {
-                          ...selected.data,
-                          ...(v as object),
-                        } as WordEntry,
-                      });
+                    initialTab={
+                      params.get("tab") === "languages"
+                        ? "languages"
+                        : undefined
+                    }
+                    initialLanguage={params.get("language") ?? undefined}
+                    change={(next) => {
+                      setSelected((current) =>
+                        current
+                          ? {
+                              ...current,
+                              data:
+                                typeof next === "function"
+                                  ? next(current.data)
+                                  : next,
+                            }
+                          : current,
+                      );
                       setDirty(true);
                     }}
+                    advanced={
+                      <Editor
+                        name="word"
+                        value={
+                          Object.fromEntries(
+                            Object.entries(selected.data).filter(([key]) =>
+                              (
+                                editorSections.science.keys as readonly string[]
+                              ).includes(key),
+                            ),
+                          ) as Value
+                        }
+                        change={(v) => {
+                          setSelected((current) =>
+                            current
+                              ? {
+                                  ...current,
+                                  data: { ...current.data, ...(v as object) },
+                                }
+                              : current,
+                          );
+                          setDirty(true);
+                        }}
+                      />
+                    }
+                    media={
+                      <>
+                        <label>
+                          Обложка
+                          <MediaSelect
+                            value={selected.data.coverId ?? ""}
+                            change={(id) => {
+                              setSelected((current) =>
+                                current
+                                  ? {
+                                      ...current,
+                                      data: { ...current.data, coverId: id },
+                                    }
+                                  : current,
+                              );
+                              setDirty(true);
+                            }}
+                          />
+                        </label>
+                        <WordSelect
+                          value={selected.data.relatedWordIds ?? []}
+                          change={(ids) => {
+                            setSelected((current) =>
+                              current
+                                ? {
+                                    ...current,
+                                    data: {
+                                      ...current.data,
+                                      relatedWordIds: ids,
+                                    },
+                                  }
+                                : current,
+                            );
+                            setDirty(true);
+                          }}
+                        />
+                      </>
+                    }
                   />
                 )}
                 <label>
@@ -934,18 +1005,23 @@ function WordAdmin() {
                 disabled={saving}
                 onClick={async () => {
                   try {
+                    const desiredState = saveIntent.current ?? selected.state;
+                    saveIntent.current = undefined;
                     wordSchema.parse(selected.data);
                     if (
-                      ["published", "archived"].includes(selected.state) &&
+                      ["published", "archived"].includes(desiredState) &&
                       !confirm(
-                        selected.state === "published"
+                        desiredState === "published"
                           ? "Опубликовать эту версию на сайте?"
                           : "Снять запись с публикации?",
                       )
                     )
                       return;
                     setSaving(true);
-                    const row: Row = await api("admin/words", "PUT", selected);
+                    const row: Row = await api("admin/words", "PUT", {
+                      ...selected,
+                      state: desiredState,
+                    });
                     setSelected({ ...row, data: enriched(row.data) });
                     setDirty(false);
                     setRows((current) => [
