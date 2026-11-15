@@ -1474,3 +1474,19 @@ footer > span {
   gap: 0.4rem;
   margin: 0.8rem 0;
 }
+/* Spacious scientific atlas; the canvas keeps its full extent when the panel opens. */
+.workspace:has(.atlas-title) main{padding:16px;max-width:none;}
+.atlas-title{font-size:1.15rem;margin:0 0 .5rem;}
+.map-layout{display:block;position:relative;max-width:none;}
+.map-area{padding:0;background:#F8F9FB;border:1px solid #e7ebf0;overflow:hidden;}
+.map-toolbar{padding:.5rem .75rem;margin:0;}
+.world-map{display:block;width:100%;height:auto;max-height:calc(100vh - 180px);background:#F8F9FB;}
+.country{fill:#DDE3EA;stroke:#fff;stroke-width:.55;vector-effect:non-scaling-stroke;transition:fill .18s;}
+.country:hover{fill:#b9c7d5;}
+.country.focus-country{fill:#829BB6;}
+.country.selected,.country.selected:hover{fill:#24466B;}
+.map-panel{position:absolute;right:12px;top:64px;width:min(290px,38%);max-height:calc(100% - 100px);overflow:auto;background:#fffdf8;border:1px solid #e1e6ec;padding:1.2rem;box-shadow:0 4px 18px #24466b0d;}
+.country-choices{padding:.5rem .75rem;margin:0;}
+.atlas-shortcuts{display:none;}
+.map-credit{font-size:.7rem;margin:.4rem .75rem;}
+@media(max-width:700px){.map-panel{position:relative;top:auto;right:auto;width:100%;max-height:none;margin-top:.7rem;}.workspace:has(.atlas-title) main{padding:8px;}.world-map{max-height:none;}}

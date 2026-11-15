@@ -12,7 +12,7 @@ const russianCountryName = (id: string) =>
 import { Link } from "react-router-dom";
 import { Minus, Plus, RotateCcw, X } from "lucide-react";
 import { languageNames, verifiedWords, type Language } from "../domain/catalog";
-import { PageTitle } from "../components/Common";
+
 const topology = atlas as unknown as Topology<{
   countries: GeometryCollection<{ name: string }>;
 }>;
@@ -39,12 +39,7 @@ const names: Record<string, string> = {
   "356": "Индия",
   "392": "Япония",
 };
-const iso: Record<string, string> = { "840": "US", "250": "FR", "051": "AM" };
-const centers: Record<string, [number, number]> = {
-  "840": [-100, 39],
-  "250": [2, 47],
-  "051": [45, 40],
-};
+const iso: Record<string, string> = Object.fromEntries(countries.map(c=>{const id=String(c.id).padStart(3,"0");return [id,countryNames.numericToAlpha2(id)||""];}));
 export function WorldMap() {
   const [selected, setSelected] = useState<string | null>(null);
   const [language, setLanguage] = useState("");
@@ -70,10 +65,7 @@ export function WorldMap() {
   );
   return (
     <>
-      <PageTitle eyebrow="География исследования" title="Карта русского следа">
-        Выберите страну, чтобы увидеть подтверждённые записи. Масштабируйте
-        карту кнопками и перемещайте её перетаскиванием.
-      </PageTitle>
+      <h1 className="atlas-title">Карта русского следа</h1>
       <div className="map-layout">
         <section className="map-area">
           <div className="map-toolbar">
@@ -106,6 +98,7 @@ export function WorldMap() {
             className="world-map"
             viewBox="0 0 900 500"
             aria-label="Интерактивная карта стран мира"
+            onKeyDown={e=>{if(e.key==="Escape")setSelected(null);}}
             onPointerDown={(e) => {
               drag.current = {
                 x: e.clientX,
@@ -135,7 +128,7 @@ export function WorldMap() {
               drag.current = null;
             }}
           >
-            <rect width="900" height="500" fill="#e9eff0" />
+            <rect width="900" height="500" fill="#F8F9FB" onClick={()=>{if(!moved.current)setSelected(null);}} />
             <g
               transform={`translate(${450 + offset.x},${250 + offset.y}) scale(${zoom}) translate(-450,-250)`}
             >
@@ -150,7 +143,7 @@ export function WorldMap() {
                       "country " +
                       (selected === id
                         ? "selected"
-                        : iso[id]
+                        : verifiedWords().some(w=>w.languages.some(l=>l.attestationStatus==="verified"&&l.countryCode===iso[id]))
                           ? "focus-country"
                           : "")
                     }
@@ -158,30 +151,8 @@ export function WorldMap() {
                       if (!moved.current) select(id, label);
                     }}
                   >
-                    <title>{label}</title>
+
                   </path>
-                );
-              })}
-              {Object.entries(centers).map(([id, center]) => {
-                const p = projection(center)!;
-                return (
-                  <g
-                    className="map-marker"
-                    key={id}
-                    transform={`translate(${p[0]},${p[1]})`}
-                    onClick={() => {
-                      if (!moved.current) select(id);
-                    }}
-                  >
-                    <circle r={7 / Math.sqrt(zoom)} />
-                    <text
-                      y={-13 / Math.sqrt(zoom)}
-                      textAnchor="middle"
-                      fontSize={13 / Math.sqrt(zoom)}
-                    >
-                      {names[id]}
-                    </text>
-                  </g>
                 );
               })}
             </g>
@@ -208,8 +179,8 @@ export function WorldMap() {
                 })}
               </select>
             </label>
-            <div className="flex flex-wrap gap-2">
-              {Object.keys(iso).map((id) => (
+            <div className="atlas-shortcuts flex flex-wrap gap-2">
+              {["840","250","051"].map((id) => (
                 <button className="chip" key={id} onClick={() => select(id)}>
                   {names[id]}
                 </button>
@@ -277,20 +248,7 @@ export function WorldMap() {
               Изучить исследовательские записи ↗
             </Link>
           </aside>
-        ) : (
-          <aside className="map-panel">
-            <p className="eyebrow">Как читать карту</p>
-            <h2>Слова и границы</h2>
-            <p>
-              Три выделенные страны — основное направление исследования.
-              Выберите страну на карте или в списке.
-            </p>
-            <p>
-              Карта показывает только подтверждённые заимствования. Кандидаты не
-              включаются в счётчики.
-            </p>
-          </aside>
-        )}
+        ) : null}
       </div>
     </>
   );
