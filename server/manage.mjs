@@ -1,6 +1,6 @@
 import { randomBytes, scryptSync } from "node:crypto";
-import { backup } from "node:sqlite";
-import { openStore } from "./store.mjs";
+import { backup, DatabaseSync } from "node:sqlite";
+import { openStore, defaultDb } from "./store.mjs";
 import { chmodSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 export function passwordHash(password) {
@@ -21,7 +21,13 @@ export function passwordHash(password) {
   );
 }
 if (process.argv[1] === new URL(import.meta.url).pathname) {
-  const db = openStore();
+  // A backup must never upgrade the database it is meant to protect.
+  const db =
+    process.argv[2] === "backup"
+      ? new DatabaseSync(process.env.CMS_DB_PATH || defaultDb, {
+          readOnly: true,
+        })
+      : openStore();
   try {
     if (process.argv[2] === "create-owner") {
       if (db.prepare("SELECT id FROM owner").get())

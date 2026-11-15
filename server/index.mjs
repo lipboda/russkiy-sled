@@ -10,6 +10,7 @@ import { resolve, extname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { openStore, publicCatalog, list, save, root } from "./store.mjs";
 
+import { editorialData, stage2Api } from "./stage2-api.mjs";
 const digest = (token) => createHash("sha256").update(token).digest("hex");
 export function createApp({
   db = openStore(),
@@ -84,19 +85,48 @@ export function createApp({
       )
         fail(403, "Недопустимый источник запроса");
       const body = async () => {
-        let data = "",
-          bytes = 0;
+        const chunks = [];
+        let bytes = 0;
         for await (const chunk of req) {
           bytes += chunk.length;
-          if (bytes > 1024 * 1024) fail(413, "Запрос превышает 1 МБ");
-          data += chunk;
+          if (bytes > 8 * 1024 * 1024) fail(413, "Запрос превышает 8 МБ");
+          chunks.push(chunk);
         }
+        const data = Buffer.concat(chunks).toString("utf8");
         try {
           return JSON.parse(data);
         } catch {
           fail(400, "Некорректный JSON");
         }
       };
+      if (url.pathname === "/api/editorial" && req.method === "GET") {
+        send(200, editorialData(db));
+        return;
+      }
+      const metadataMatch = url.pathname.match(
+        /^\/api\/media-meta\/([a-zA-Z0-9_-]+)$/,
+      );
+      if (metadataMatch && req.method === "GET") {
+        const row = db
+          .prepare("SELECT data FROM media WHERE id=?")
+          .get(metadataMatch[1]);
+        if (!row) fail(404, "Изображение не найдено");
+        send(200, JSON.parse(row.data));
+        return;
+      }
+      const mediaMatch = url.pathname.match(/^\/api\/media\/([a-zA-Z0-9_-]+)$/);
+      if (mediaMatch && req.method === "GET") {
+        const row = db
+          .prepare("SELECT data,bytes FROM media WHERE id=?")
+          .get(mediaMatch[1]);
+        if (!row) fail(404, "Изображение не найдено");
+        res.writeHead(200, {
+          "Content-Type": "image/webp",
+          "Content-Security-Policy": "default-src 'none'",
+        });
+        res.end(row.bytes);
+        return;
+      }
       if (url.pathname === "/api/content" && req.method === "GET") {
         send(200, publicCatalog(db));
         return;
@@ -178,6 +208,16 @@ export function createApp({
           return;
         }
       }
+      if (
+        await stage2Api(
+          db,
+          url.pathname,
+          req.method,
+          ["GET", "HEAD"].includes(req.method) ? undefined : await body(),
+          send,
+        )
+      )
+        return;
       const match = url.pathname.match(
         /^\/api\/admin\/words\/([a-zA-Z0-9_-]+)\/history$/,
       );
@@ -199,8 +239,8 @@ export function createApp({
         error:
           e.name === "ZodError"
             ? "Проверьте обязательные поля и статусы записи"
-            : e.message.startsWith("SQLITE")
-              ? "Ошибка хранилища"
+            : e.code?.includes("SQLITE")
+              ? "Ошибка хранилища: проверьте уникальность названия и доступность базы"
               : e.message,
       });
     }

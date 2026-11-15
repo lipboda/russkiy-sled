@@ -1,5 +1,5 @@
 import { z } from "zod";
-export const languageNames = {
+export const languageNames: Record<string, string> = {
   "en-US": "Американский английский",
   "fr-FR": "Французский",
   "hy-AM": "Восточноармянский",
@@ -9,14 +9,23 @@ const reference = z.object({
   sourceId: z.string(),
   pages: z.array(z.number().int().positive()),
 });
-const status = z.enum(["verified", "pending", "disputed", "unknown"]);
+const status = z.enum([
+  "verified",
+  "partial",
+  "presumed",
+  "pending",
+  "disputed",
+  "unknown",
+]);
 export const wordSchema = z.object({
   id: z.string(),
   slug: z.string().min(1),
-  russianLemma: z.string().min(1),
+  russianLemma: z.string().trim().min(1),
   russianStress: z.string().optional(),
   shortDescription: z.string().optional(),
   editorialNotes: z.string().optional(),
+  coverId: z.string().optional(),
+  relatedWordIds: z.array(z.string()).optional(),
   culturalContext: z.string().optional(),
   checkedAt: z.string().optional(),
   scientificStatus: z
@@ -39,7 +48,8 @@ export const wordSchema = z.object({
   sourceIds: z.array(z.string()),
   languages: z.array(
     z.object({
-      languageCode: z.enum(["en-US", "fr-FR", "hy-AM"]),
+      languageCode: z.string().min(2).max(35),
+      hidden: z.boolean().optional(),
       countryCode: z.string(),
       reportedForms: z.array(z.string()),
       ipa: z.string().optional(),
@@ -68,9 +78,21 @@ export const wordSchema = z.object({
   ),
 });
 export const sourceSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  url: z.url(),
+  id: z.string().min(1).max(300),
+  title: z.string().trim().min(1),
+  url: z
+    .url()
+    .refine(
+      (v) => ["http:", "https:"].includes(new URL(v).protocol),
+      "Только HTTP/HTTPS",
+    ),
+  author: z.string().optional(),
+  sourceType: z.string().optional(),
+  year: z.string().optional(),
+  publisher: z.string().optional(),
+  doi: z.string().optional(),
+  accessedAt: z.string().optional(),
+  citation: z.string().optional(),
   accessLevel: z.enum(["full", "section", "abstract", "bibliography"]),
   notes: z.string(),
   verifiedAt: z.string().optional(),
@@ -83,6 +105,11 @@ export function validateCatalog(input: unknown) {
       words: z.array(wordSchema),
       sources: z.array(sourceSchema),
       auditCommit: z.string(),
+      languageDefinitions: z
+        .array(
+          z.object({ code: z.string(), name: z.string(), country: z.string() }),
+        )
+        .optional(),
     })
     .parse(input);
   const ids = new Set(data.sources.map((s) => s.id));
@@ -98,7 +125,14 @@ export function validateCatalog(input: unknown) {
     )
       throw new Error("Повтор языка");
     for (const l of w.languages) {
-      const countries = { "en-US": "US", "fr-FR": "FR", "hy-AM": "AM" };
+      const countries: Record<string, string> = {
+        "en-US": "US",
+        "fr-FR": "FR",
+        "hy-AM": "AM",
+        ...Object.fromEntries(
+          (data.languageDefinitions ?? []).map((l) => [l.code, l.country]),
+        ),
+      };
       if (countries[l.languageCode] !== l.countryCode)
         throw new Error("Язык и страна не соответствуют друг другу");
     }
@@ -142,7 +176,10 @@ export function validateCatalog(input: unknown) {
         throw new Error("Подтверждённая форма требует проверенного источника");
     if (
       w.publicationStatus === "verified" &&
-      (w.isDemo || !w.languages.some((l) => l.attestationStatus === "verified"))
+      (w.isDemo ||
+        !w.languages.some(
+          (l) => !l.hidden && l.attestationStatus === "verified",
+        ))
     )
       throw new Error("Недопустимая публикация");
   }

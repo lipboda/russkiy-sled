@@ -2,6 +2,14 @@ import { DatabaseSync } from "node:sqlite";
 import { mkdirSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  migrateStage2,
+  atomic,
+  syncCategories,
+  themesFor,
+  sourceList,
+  audit,
+} from "./stage2.mjs";
 import { validateCatalog } from "../src/domain/schema.ts";
 
 export const root = fileURLToPath(new URL("../", import.meta.url));
@@ -40,24 +48,42 @@ export function openStore(path = process.env.CMS_DB_PATH || defaultDb) {
       throw e;
     }
   }
+  migrateStage2(db, path, root);
   return db;
 }
-export function catalogWith(_db, words) {
+export function catalogWith(db, words) {
   const seed = JSON.parse(
     readFileSync(resolve(root, "src/data/catalog.json"), "utf8"),
   );
-  return validateCatalog({ ...seed, words });
+  const defs = db.prepare("SELECT * FROM language_definitions").all();
+  return validateCatalog({
+    ...seed,
+    sources: sourceList(db),
+    words,
+    ...(defs.some((l) => !["en-US", "fr-FR", "hy-AM"].includes(l.code))
+      ? { languageDefinitions: defs }
+      : {}),
+  });
 }
 export function publicCatalog(db) {
-  return catalogWith(
+  const result = catalogWith(
     db,
     db
       .prepare(
-        "SELECT published FROM content WHERE published IS NOT NULL ORDER BY rowid",
+        "SELECT id,published FROM content WHERE published IS NOT NULL ORDER BY rowid",
       )
       .all()
-      .map((r) => JSON.parse(r.published)),
+      .map((r) => ({
+        ...JSON.parse(r.published),
+        themes: themesFor(db, r.id, "public"),
+      })),
   );
+  // Hidden cards never leave the public API. Validation still examines the full record above.
+  result.words = result.words.map((w) => ({
+    ...w,
+    languages: w.languages.filter((l) => !l.hidden),
+  }));
+  return result;
 }
 export function list(db) {
   return db
@@ -65,12 +91,21 @@ export function list(db) {
     .all()
     .map((row) => ({
       ...row,
-      data: JSON.parse(row.data),
+      data: { ...JSON.parse(row.data), themes: themesFor(db, row.id, "draft") },
       published: row.published !== null,
     }));
 }
 export function save(db, { data, state, version }) {
-  if (!["draft", "review", "published", "archived"].includes(state))
+  if (
+    ![
+      "draft",
+      "review",
+      "published",
+      "archived",
+      "unpublished",
+      "trash",
+    ].includes(state)
+  )
     throw new Error("Недопустимый редакционный статус");
   if (
     !data ||
@@ -78,8 +113,7 @@ export function save(db, { data, state, version }) {
     !/^[a-zA-Z0-9_-]{1,100}$/.test(data.id)
   )
     throw new Error("Некорректный ID");
-  db.exec("BEGIN IMMEDIATE");
-  try {
+  return atomic(db, () => {
     const old = db.prepare("SELECT * FROM content WHERE id=?").get(data.id);
     if ((old?.version ?? 0) !== version) {
       const e = new Error(
@@ -105,19 +139,35 @@ export function save(db, { data, state, version }) {
       db.prepare(
         "INSERT INTO history(content_id,data,state,version,updated) VALUES (?,?,?,?,?)",
       ).run(old.id, old.data, old.state, old.version, old.updated);
+    if (
+      validated.coverId &&
+      !db.prepare("SELECT id FROM media WHERE id=?").get(validated.coverId)
+    )
+      throw new Error("Изображение не найдено");
+    for (const id of validated.relatedWordIds ?? [])
+      if (!db.prepare("SELECT id FROM content WHERE id=?").get(id))
+        throw new Error("Связанное слово не найдено");
     const snapshot =
       state === "published"
         ? json
-        : state === "archived"
+        : ["archived", "unpublished", "trash"].includes(state)
           ? null
           : (old?.published ?? null);
     db.prepare(
       `INSERT INTO content VALUES (?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data,published=excluded.published,state=excluded.state,version=excluded.version,updated=excluded.updated`,
     ).run(data.id, json, snapshot, state, version + 1, date);
-    db.exec("COMMIT");
+    syncCategories(db, data.id, validated.themes, "draft");
+    if (state === "published")
+      syncCategories(db, data.id, validated.themes, "public");
+    audit(
+      db,
+      "word",
+      data.id,
+      validated.russianLemma,
+      state,
+      old ? JSON.parse(old.data) : null,
+      validated,
+    );
     return list(db).find((r) => r.id === data.id);
-  } catch (e) {
-    db.exec("ROLLBACK");
-    throw e;
-  }
+  });
 }
