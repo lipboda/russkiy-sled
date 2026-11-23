@@ -1,0 +1,302 @@
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -1,6 +1,6 @@
+ import { lazy, Suspense, useEffect, useState } from "react";
+ import {
+-  createBrowserRouter,
++  createHashRouter,
+   RouterProvider,
+   NavLink,
+   Link,
+@@ -21,10 +21,8 @@
+   Plus,
+   MessageSquare,
+ } from "lucide-react";
+-import { EditorToolbar } from "./components/EditorToolbar";
+ import { checkSession } from "./domain/session";
+ import { refreshPublicCatalog } from "./domain/catalog";
+-const Admin = lazy(() => import("./pages/Admin"));
+ import { Home } from "./pages/Home";
+ import { Article, Comparison, Dictionary, Missing } from "./pages/Dictionary";
+ const WorldMap = lazy(() =>
+@@ -74,7 +72,7 @@
+   }, [location.pathname]);
+   return (
+     <>
+-      <a className="skip-link" href="#main">
++      <a className="skip-link" href={"#"+location.pathname+location.search} onClick={e=>{e.preventDefault();const main=document.getElementById("main");if(main){main.tabIndex=-1;main.focus();main.scrollIntoView();}}}>
+         К содержимому
+       </a>
+       <header className="mobile-header">
+@@ -130,17 +128,8 @@
+       </aside>
+       <div className="workspace">
+         <main id="main">
+-          <EditorToolbar />
+           {catalogError && <p role="alert">{catalogError}</p>}
+           <Routes>
+-            <Route
+-              path="/admin"
+-              element={
+-                <Suspense fallback={<p>Загрузка…</p>}>
+-                  <Admin />
+-                </Suspense>
+-              }
+-            />
+             <Route path="/" element={<Home />} />
+             <Route path="/dictionary" element={<Dictionary />} />
+             <Route path="/dictionary/:slug" element={<Article />} />
+@@ -179,7 +168,7 @@
+     </>
+   );
+ }
+-const router = createBrowserRouter([{ path: "*", element: <Shell /> }]);
++const router = createHashRouter([{ path: "*", element: <Shell /> }]);
+ export default function App() {
+   return <RouterProvider router={router} />;
+ }
+--- a/src/components/CompactWord.tsx
++++ b/src/components/CompactWord.tsx
+@@ -23,7 +23,7 @@
+       {(links ?? []).map((l, i) => (
+         <p key={i}>
+           {l.url ? (
+-            <a href={l.url} target="_blank" rel="noreferrer">
++            <a href={l.url.startsWith("/")?"#"+l.url:l.url} target={l.url.startsWith("/")?undefined:"_blank"} rel="noreferrer">
+               {l.title || l.url} ↗
+             </a>
+           ) : l.sourceId ? (
+--- a/src/components/LanguageLabel.tsx
++++ b/src/components/LanguageLabel.tsx
+@@ -22,7 +22,7 @@
+   return /^(US|FR|AM|DE|IT|ES|PT|JP|NL)$/.test(country) ? (
+     <img
+       className="country-flag"
+-      src={`/flags/${country.toLowerCase()}.svg`}
++      src={`./flags/${country.toLowerCase()}.svg`}
+       alt=""
+       aria-hidden="true"
+       width="24"
+--- a/src/components/Markdown.tsx
++++ b/src/components/Markdown.tsx
+@@ -1,5 +1,7 @@
+ import ReactMarkdown from "react-markdown";
+ import remarkGfm from "remark-gfm";
++const auditUrl="https://github.com/lipboda/russkiy-sled/blob/f3bcc2dad9330096769e52b0405d44a1bcb99c39/research/reports/INITIAL_RESEARCH_AUDIT.md";
++const localHref=(href?:string)=>href===auditUrl?"./sources/audit.html":href?.startsWith("/")?"#"+href:href;
+ export function Markdown({ text }: { text: string }) {
+   return (
+     <div className="markdown">
+@@ -8,7 +10,7 @@
+         skipHtml
+         components={{
+           a: ({ href, children }) => (
+-            <a href={href} rel="noreferrer" target="_blank">
++            <a href={localHref(href)} rel="noreferrer" target={href?.startsWith("/")?undefined:"_blank"}>
+               {children}
+             </a>
+           ),
+--- a/src/components/PublishedImage.tsx
++++ b/src/components/PublishedImage.tsx
+@@ -1,40 +1 @@
+-import { useEffect, useState } from "react";
+-import type { Media } from "../domain/publications";
+-export function PublishedImage({
+-  id,
+-  fallback,
+-}: {
+-  id: string;
+-  fallback: string;
+-}) {
+-  const [meta, setMeta] = useState<Media>();
+-  useEffect(() => {
+-    let active = true;
+-    void fetch("/api/media-meta/" + id)
+-      .then((r) => {
+-        if (!r.ok) throw new Error();
+-        return r.json();
+-      })
+-      .then((data) => {
+-        if (active) setMeta(data);
+-      })
+-      .catch(() => {});
+-    return () => {
+-      active = false;
+-    };
+-  }, [id]);
+-  return (
+-    <figure>
+-      <img
+-        className="publication-cover"
+-        src={"/api/media/" + id}
+-        alt={meta?.alt ?? fallback}
+-      />
+-      {meta && (
+-        <figcaption>
+-          {[meta.caption, meta.credit, meta.source].filter(Boolean).join(" · ")}
+-        </figcaption>
+-      )}
+-    </figure>
+-  );
+-}
++export function PublishedImage({id,fallback}:{id:string;fallback:string}) { return <figure><img className="publication-cover" src={"./media/"+id} alt={fallback}/></figure>; }
+--- a/src/domain/catalog.ts
++++ b/src/domain/catalog.ts
+@@ -1,4 +1,5 @@
+-import raw from "../data/catalog.json";
++import raw from "../offline/catalog.json";
++import offlineEditorial from "../offline/editorial.json";
+ import { editorial } from "./editorial";
+ import { languageNames } from "./schema";
+ import { validateCatalog } from "./schema";
+@@ -43,36 +44,8 @@
+   catalog: "loading",
+   editorial: "loading",
+ };
+-let pending: Promise<void> | undefined;
+-async function loadPublic() {
+-  const results = await Promise.allSettled([
+-    fetch("/api/content").then(async (r) => {
+-      if (!r.ok) throw new Error();
+-      return validateCatalog(await r.json());
+-    }),
+-    fetch("/api/editorial").then(async (r) => {
+-      if (!r.ok) throw new Error();
+-      return r.json();
+-    }),
+-  ]);
+-  const [data, meta] = results;
+-  if (meta.status === "fulfilled") {
+-    Object.assign(editorial, meta.value);
+-    for (const l of editorial.languages) languageNames[l.code] = l.name;
+-    publicLoad.editorial = "ready";
+-  } else publicLoad.editorial = "error";
+-  if (data.status === "fulfilled") {
+-    applyPublicCatalog(data.value);
+-    publicLoad.catalog = "ready";
+-  } else publicLoad.catalog = "error";
+-  window.dispatchEvent(new Event("catalog-updated"));
+-  if (results.some((r) => r.status === "rejected"))
+-    throw new Error("Не удалось обновить часть материалов");
+-}
+-export function refreshPublicCatalog() {
+-  if (!pending)
+-    pending = loadPublic().finally(() => {
+-      pending = undefined;
+-    });
+-  return pending;
+-}
++Object.assign(editorial, offlineEditorial);
++for (const l of editorial.languages) languageNames[l.code] = l.name;
++publicLoad.catalog = "ready";
++publicLoad.editorial = "ready";
++export function refreshPublicCatalog() { return Promise.resolve(); }
+--- a/src/domain/publicPresentation.ts
++++ b/src/domain/publicPresentation.ts
+@@ -41,7 +41,7 @@
+   );
+ }
+ 
+-export function dictionaryDayWord(list: WordEntry[], date = new Date()) {
++export function dictionaryDayWord(list: WordEntry[], date = new Date("2026-11-16T12:00:00Z")) {
+   const eligible = list.filter(
+     (w) => !w.isDemo && w.shortDescription?.trim() && publicCards(w).length,
+   );
+--- a/src/domain/session.ts
++++ b/src/domain/session.ts
+@@ -1,38 +1,5 @@
+-import { useSyncExternalStore } from "react";
+-
+-let logged = false;
+-const listeners = new Set<() => void>();
+-export function setSession(value: boolean) {
+-  logged = value;
+-  listeners.forEach((listener) => listener());
+-}
+-export function useSession() {
+-  return useSyncExternalStore(
+-    (listener) => {
+-      listeners.add(listener);
+-      return () => {
+-        listeners.delete(listener);
+-      };
+-    },
+-    () => logged,
+-  );
+-}
+-export async function api(path: string, method = "GET", data?: unknown) {
+-  const response = await fetch("/api/" + path, {
+-    method,
+-    headers: method === "GET" ? {} : { "Content-Type": "application/json" },
+-    body: data === undefined ? undefined : JSON.stringify(data),
+-  });
+-  if (response.status === 401) setSession(false);
+-  const body = await response.json();
+-  if (!response.ok) throw new Error(body.error || "Ошибка сервера");
+-  return body;
+-}
+-export async function checkSession() {
+-  try {
+-    await api("auth/session");
+-    setSession(true);
+-  } catch {
+-    setSession(false);
+-  }
+-}
++// The expert edition contains public pages only, with no credentials or server API.
++export function useSession() { return false; }
++export function setSession(_value:boolean) { void _value; }
++export async function checkSession() { return; }
++export async function api(_path:string,_method="GET",_data?:unknown):Promise<Awaited<ReturnType<Response["json"]>>> { void _path; void _method; void _data; throw new Error("Редактирование доступно в основной CMS, а не в автономной копии."); }
+--- a/src/main.tsx
++++ b/src/main.tsx
+@@ -2,10 +2,6 @@
+ import ReactDOM from "react-dom/client";
+ import App from "./App";
+ import "./styles.css";
+-import { words, sources } from "./domain/catalog";
+-// Public pages never use the bundled seed as a fallback for unavailable published data.
+-words.splice(0);
+-sources.splice(0);
+ ReactDOM.createRoot(document.getElementById("root")!).render(
+   <React.StrictMode>
+     <App />
+--- a/src/pages/Home.tsx
++++ b/src/pages/Home.tsx
+@@ -14,7 +14,7 @@
+   import("./WorldMap").then((m) => ({ default: m.WorldMap })),
+ );
+ function Cover({ id, alt }: { id?: string; alt: string }) {
+-  return id ? <img loading="lazy" src={"/api/media/" + id} alt={alt} /> : null;
++  return id ? <img loading="lazy" src={"./media/" + id} alt={alt} /> : null;
+ }
+ export function Home() {
+   const forms = words
+--- a/src/pages/Publications.tsx
++++ b/src/pages/Publications.tsx
+@@ -2,7 +2,7 @@
+ import { CompactWord, ContextLinks } from "../components/CompactWord";
+ import { PublishedImage } from "../components/PublishedImage";
+ import { useState } from "react";
+-import { Link, useParams } from "react-router-dom";
++import { Link, useParams, useLocation } from "react-router-dom";
+ import { editorial } from "../domain/editorial";
+ import { dictionaryDayWord } from "../domain/publicPresentation";
+ import { words } from "../domain/catalog";
+@@ -198,6 +198,7 @@
+   );
+ }
+ export function DayWord() {
++  const currentLocation=useLocation();
+   const { date, slug } = useParams();
+   const logged = useSession();
+   const [query, setQuery] = useState(""),
+@@ -217,7 +218,7 @@
+   );
+   if (date && posts.length === 1)
+     return <PublishedArticle post={posts[0]} kind="daily" />;
+-  const archive = window.location.pathname.endsWith("/archive");
++  const archive = currentLocation.pathname.endsWith("/archive");
+   return (
+     <>
+       <PageTitle
